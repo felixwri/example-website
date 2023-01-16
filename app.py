@@ -9,7 +9,7 @@ def home():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     print(request.method)
-    return render_template('home.html', page_name="menu")
+    return render_template('menu.html', page_name="menu")
 
 if __name__ == '__main__':
     app.debug = True
