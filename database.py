@@ -1,3 +1,4 @@
+
 import psycopg2
 
 # connection details of the database
@@ -10,10 +11,9 @@ def create_table():
     try:
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute(f"CREATE TABLE IF NOT EXISTS test_table (name VARCHAR(32), surname VARCHAR(32))")
+        cursor.execute(f"CREATE TABLE IF NOT EXISTS mains_table (name text, price real, description text)")
 
-        cursor.execute(f"INSERT INTO test_table (name, surname) VALUES('alex', 'lock')")
-        cursor.execute(f"INSERT INTO test_table (name, surname) VALUES('james', 'smith')")
+        cursor.execute(f"INSERT INTO mains_table (name, price, description) VALUES('Manti', 15.00, 'Small dumplings with yogurt and red souce on top.')")
 
         print(f"Inserted row(s) into test_table")
 
