@@ -1,0 +1,7 @@
+.jumbotron {
+    min-height: 700px; /* adjust as needed */
+    width: 100%; /* or a fixed width in pixels */
+    background-size: 100% 100%;
+    background-position:left top;
+    background-repeat: no-repeat;
+}

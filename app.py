@@ -15,6 +15,7 @@ def menu():
     return render_template('menu.html', page_name="menu")
 
 
+
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('templates/css', path)    
@@ -23,6 +24,10 @@ def send_css(path):
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('templates/js', path)  
+
+@app.route('/images/<path:filename>')
+def send_img(filename):
+    return send_from_directory('templates/images', filename)
 
 if __name__ == '__main__':
     app.debug = True
