@@ -43,12 +43,34 @@
 
 <div class="jumbotron jumbotron-fluid" style="background-image: url({{ url_for('send_img', filename='mexicanwrap.jpg') }});">
     <div class="container text-center"  style="position: relative;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 150%);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 180%);">
             <h1 class="display-4" style="font-family: 'Montserrat', sans-serif;">Oaxaca</h1>
             <p class="lead" style="font-family: 'Montserrat', sans-serif;">Mexican Food</p>
         </div>
     </div>
 </div>
+<style>
+    @media screen and (max-width: 767px) {
+        .jumbotron {
+            background-size: cover;
+        }
+    }
+</style>
+
+
+
+<!--The map was generated using https://www.embed-map.com/-->
+<div class="d-flex justify-content-center">
+    <div style="max-width:100%; overflow:hidden; color:red; width:1000px; height:500px;">
+        <div id="my-map-canvas" style="height:100%; width:100%; max-width:100%;">
+            <iframe style="height:100%; width:100%; border:0;" frameborder="0" 
+            src="https://www.google.com/maps/embed/v1/place?q=Egham+TW20+0EX,+UK&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+        </div>
+        <a class="googlecoder" rel="nofollow" href="https://kbj9qpmy.com/bp" id="make-map-infor-mation">Broadband Providers</a>
+        <style>#my-map-canvas img{max-height:none; max-width:none!important; background:none!important;}</style>
+    </div>
+</div>
+
 
   
   
