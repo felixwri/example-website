@@ -7,6 +7,14 @@
     background-color: black;
 }
 
---bs-blue: rgb(r, g, b);
 
 
+img {
+    display: block;
+    transition: opacity .3s linear;
+  }
+  
+  img:hover {
+    opacity: .5;
+    cursor: pointer;
+  }
