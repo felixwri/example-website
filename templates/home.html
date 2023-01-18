@@ -1,106 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oaxaca</title>
-    
-    <link rel="stylesheet" href="{{url_for('send_css', path='style.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oaxaca</title>
+        <link rel="stylesheet" href="{{url_for('send_css', path='home.css')}}" />
+        <!-- <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous"
+        /> -->
+    </head>
+    <body>
+        <nav>
+            <div id="nav-left">
+                <div id="nav-title">Oaxaca</div>
+            </div>
+            <div id="nav-right">
+                <div class="nav-page">About Us</div>
+                <div class="nav-page">Order</div>
+                <div class="nav-page">Login</div>
+            </div>
+            <div id="mobile-nav-right">
+                <svg
+                    id="burger-menu"
+                    onclick="toggleMobileNav()"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="48"
+                    width="48"
+                    viewBox="0 0 48 48"
+                >
+                    <path
+                        d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
+                    />
+                </svg>
+                <div id="mobile-nav-menu" data-open="false">
+                    <svg
+                        onclick="toggleMobileNav()"
+                        class="mobile-nav-page"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="48"
+                        width="48"
+                        viewBox="0 0 48 48"
+                    >
+                        <path
+                            d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                        />
+                    </svg>
+                    <div class="mobile-nav-page">About Us</div>
+                    <div class="mobile-nav-page">Order</div>
+                    <div class="mobile-nav-page">Login</div>
+                </div>
+            </div>
+            <script>
+                function toggleMobileNav() {
+                    let menu = document.getElementById("mobile-nav-menu");
+                    if (menu.dataset.open === "true") {
+                        menu.style.right = "-12rem";
+                        menu.dataset.open = "false";
+                    } else {
+                        menu.style.right = "0rem";
+                        menu.dataset.open = "true";
+                    }
+                }
+            </script>
+        </nav>
 
-</head>
-<body style="background-color: #292b2c;" >
-    
-<!--NavBar-->
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-
-    <div class="container">
-        <a href="#" class="navbar-brand">Oaxaca</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navmenu">
-
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>  
-                </li>
-
-                <li class="nav-item">
-                    <a href="/menu" class="nav-link">Menu</a>  
-                </li>
-
-            </ul>
+        <div
+            class="jumbotron jumbotron-fluid"
+            style="background-image: url({{ url_for('send_img', filename='mexicanwrap.jpg') }}); filter: brightness(70%);"
+        >
+            <div class="container text-center" style="position: relative">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 180%)">
+                    <h1 class="display-4" style="font-family: 'Montserrat', sans-serif">Oaxaca</h1>
+                    <p class="lead" style="font-family: 'Montserrat', sans-serif">Mexican Food</p>
+                    <a
+                        style="
+                            font-size: 100px;
+                            color: white;
+                            background-color: transparent;
+                            border: none;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, 170%);
+                        "
+                        href="#location"
+                        class="btn btn-primary"
+                        >&#10225;</a
+                    >
+                </div>
+            </div>
         </div>
-    </div>
-    
-</nav>
-
-<!--EyeCatch-->
-
-
-
-<div class="jumbotron jumbotron-fluid" style="background-image: url({{ url_for('send_img', filename='mexicanwrap.jpg') }}); filter: brightness(70%);">
-    <div class="container text-center"  style="position: relative;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 180%);">
-            <h1 class="display-4" style="font-family: 'Montserrat', sans-serif;">Oaxaca</h1>
-            <p class="lead" style="font-family: 'Montserrat', sans-serif;">Mexican Food</p>
-            <a style=" font-size: 100px; color:white; background-color: transparent;  border: none;position: absolute; top: 50%; left: 50%; transform: translate(-50%, 170%);"
-            href="#location" class="btn btn-primary">&#10225;</a>
-        </div>
-    </div>
-</div>
-<style>
-    @media screen and (max-width: 767px) {
-        .jumbotron {
-            background-size: cover;
-        }
-    }
-</style>
-
-
-
-<section id="location">
-<h2 class= " text-center subheading" > FIND US</h2>
-
-<!--The map was generated using https://www.embed-map.com/-->
-<div class="d-flex justify-content-center">
-    <div style="max-width:100%; overflow:hidden; color:red; width:1000px; height:500px;">
-        <div id="my-map-canvas" style="height:100%; width:100%; max-width:100%;">
-            <iframe style="height:100%; width:100%; border:0;" frameborder="0" 
-            src="https://www.google.com/maps/embed/v1/place?q=Egham+TW20+0EX,+UK&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
-        </div>
-        <a class="googlecoder" rel="nofollow" href="https://kbj9qpmy.com/bp" id="make-map-infor-mation">Broadband Providers</a>
-        <style>#my-map-canvas img{max-height:none; max-width:none!important; background:none!important;}</style>
-    </div>
-</div>
-</section>
-
-
-  
-  
-  
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-
-<p> ajsjsa</p>
-
-
-<script>    
-$(document).ready(function(){
-    $('.navbar-toggler').click(function(){
-        $('.collapse').collapse('toggle');
-    });
-});
-</script>
-</body>
+        <!-- <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+            integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            $(document).ready(function () {
+                $(".navbar-toggler").click(function () {
+                    $(".collapse").collapse("toggle");
+                });
+            });
+        </script> -->
+    </body>
 </html>
