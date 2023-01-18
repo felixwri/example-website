@@ -4,5 +4,9 @@
     background-size: 100% 100%;
     background-position:left top;
     background-repeat: no-repeat;
+    background-color: black;
 }
+
+--bs-blue: rgb(r, g, b);
+
 
