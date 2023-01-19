@@ -13,7 +13,7 @@ def create_table():
         cursor.execute(f"DROP TABLE IF EXISTS mains_table")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute(f"CREATE TABLE IF NOT EXISTS mains_table (id integer, name text, price real, description text)")
+        cursor.execute(f"CREATE TABLE IF NOT EXISTS mains_table (id serial PRIMARY KEY, name text, price real, description text)")
 
         print(f"Table created.")
 
@@ -29,11 +29,11 @@ def create_table():
 
 
 
-def add_items(id, name, price, description):
+def add_items(name, price, description):
 
     cursor = connection.cursor()
     try:
-        cursor.execute(f"INSERT INTO mains_table (id, name, price, description) VALUES (%s, %s, %s, %s)", (id, name, price, description))
+        cursor.execute(f"INSERT INTO mains_table (name, price, description) VALUES (%s, %s, %s)", (name, price, description))
         
         connection.commit()
 
@@ -71,14 +71,19 @@ def update_price(price, id):
         print(e)
 
         connection.rollback() 
-    
+
+def print_items():
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT * FROM mains_table;")
+        print(cursor.fetchall())
+    except Exception as e:
+        print(f"Error while printing items - {e}")
+
 create_table()
-add_items(1, 'MEXICAN PAELLA', 15.00, 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
-add_items(2, 'SEAFOOD PAELLA', 15.00, 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
-add_items(3, 'MEAT PAELLA', 15.00, 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
-add_items(4, 'BEEF CARNITAS ENCHILADA', 14.50, 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
-add_items(5, 'POBLANO CHICKEN', 14.50, 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
-
-
-
-
+add_items('MEXICAN PAELLA', 15.00, 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
+add_items('SEAFOOD PAELLA', 15.00, 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
+add_items('MEAT PAELLA', 15.00, 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
+add_items('BEEF CARNITAS ENCHILADA', 14.50, 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
+add_items('POBLANO CHICKEN', 14.50, 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
+print_items()
