@@ -98,10 +98,10 @@ nav {
     /* adjust as needed */
     width: 100%;
     /* or a fixed width in pixels */
-    background-size: 100% 100%;
+    object-fit: cover;
     background-position: left top;
     background-repeat: no-repeat;
-    background-color: black;
+    background-color: #FF6422;
 }
 
 .subheading {
@@ -114,3 +114,38 @@ nav {
         background-size: cover;
     }
 }
+
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .font{
+    font-family: Arial;
+    color: white;
+    
+  }
+
+  .button {
+    background-color: #FF6422; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .centerButton {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
