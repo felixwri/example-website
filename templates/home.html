@@ -48,18 +48,7 @@
                     <div class="mobile-nav-page">Login</div>
                 </div>
             </div>
-            <script>
-                function toggleMobileNav() {
-                    let menu = document.getElementById("mobile-nav-menu");
-                    if (menu.dataset.open === "true") {
-                        menu.style.right = "-12rem";
-                        menu.dataset.open = "false";
-                    } else {
-                        menu.style.right = "0rem";
-                        menu.dataset.open = "true";
-                    }
-                }
-            </script>
+            <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
 
         <div
@@ -69,7 +58,7 @@
             "
         >
             <div class="centered">
-                <h1 class="font">Mexican Resturant</h1>
+                <h1 class="font">We are a <i>not real</i> Mexican Resturant</h1>
             </div>
 
             <div class="vertical-center">
@@ -77,9 +66,15 @@
             </div>
         </div>
 
-        <section class="location">
-            <div class="jumbotron">
-                <p>We are based in London</p>
+        <section class="jumbotron">
+            <div class="location">
+                <div id="location-vector"></div>
+                <div id="location-explanation">
+                    <h1 id="location-title">Find Us</h1>
+                    <p>We have 25 stores based in and around London</p>
+                    <p>Find your closest store</p>
+                    <button id="location-button">Maps</button>
+                </div>
             </div>
         </section>
     </body>
