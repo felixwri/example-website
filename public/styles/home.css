@@ -15,12 +15,19 @@ body {
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
 
     height: 6rem;
+
+    z-index: 10;
 }
 
 #nav-title {
@@ -94,11 +101,11 @@ nav {
 /* END OF NAV */
 
 .jumbotron {
-    min-height: 700px;
+    height: 100vh;
     /* adjust as needed */
     width: 100%;
     /* or a fixed width in pixels */
-    object-fit: cover;
+    background-size: cover;
     background-position: left top;
     background-repeat: no-repeat;
     background-color: #FF6422;
@@ -121,31 +128,35 @@ nav {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .font{
+.font {
     font-family: Arial;
-    color: white;
-    
-  }
+    color: black;
 
-  .button {
-    background-color: #FF6422; /* Green */
+}
+
+.button {
+    background-color: #FF6422;
+    /* Green */
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
 
-  .centerButton {
+    cursor: pointer;
+}
+
+.centerButton {
     margin: 0;
     position: absolute;
     top: 60%;
     left: 50%;
-    
+
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
+}
