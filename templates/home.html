@@ -14,11 +14,11 @@
             </div>
             <div id="nav-right">
                 <div id="nav-hidden-menu">
-                    <div id="nav-revealed-menu">Menu</div>
+                    <a href="/menu" id="nav-revealed-menu" class="link">Menu</a>
                 </div>
-                <div class="nav-page">About Us</div>
-                <div class="nav-page">Order</div>
-                <div class="nav-page">Login</div>
+                <a href="/about" class="nav-page link">About Us</a>
+                <a href="/order" class="nav-page link">Order</a>
+                <a href="/login" class="nav-page link">Login</a>
             </div>
             <div id="mobile-nav-right">
                 <svg
@@ -46,9 +46,10 @@
                             d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
                         />
                     </svg>
-                    <div class="mobile-nav-page">About Us</div>
-                    <div class="mobile-nav-page">Order</div>
-                    <div class="mobile-nav-page">Login</div>
+                    <a href="/menu" class="mobile-nav-page link">Menu</a>
+                    <a href="/about" class="mobile-nav-page link">About Us</a>
+                    <a href="/order" class="mobile-nav-page link">Order</a>
+                    <a href="/login" class="mobile-nav-page link">Login</a>
                 </div>
             </div>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
