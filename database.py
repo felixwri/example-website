@@ -4,86 +4,6 @@ import bcrypt
 
 # connection details of the database
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
-def create_users_tabel():
-        # create a cursor for navigating the postgres database
-    cursor = connection.cursor()
-
-    try:
-        # delete the table to not have any duplication of data
-        cursor.execute(f"DROP TABLE IF EXISTS users_table")
-        # any postgres sql statement can be run by the execute method
-        # the result is stored in the cursor object
-        cursor.execute(f"CREATE TABLE IF NOT EXISTS users_table (id serial PRIMARY KEY, username VARCHAR(252) UNIQUE, password VARCHAR(252))")
-
-        print(f"Table created.")
-
-        # any executed commands need to be commited otherwise they will not be saved
-        connection.commit()
-
-        cursor.close()
-        
-
-    except Exception as e:
-        print("Failed to build the users_table")
-        print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
-        connection.rollback()
-
-def add_user(username, password):
-
-    cursor = connection.cursor()
-
-    try:
-        #Hash the password
-        encrypted_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        #Convert the hashed password to bytes from string to use it in check_password function
-        encrypted_password = encrypted_password.decode()
-        #Add the hashed password and the username details to the database    
-        cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
-
-        connection.commit()
-        cursor.close()
-
-    except Exception as e:
-        print("Failed to insert into users_table")
-        print(e)
-            
-        connection.rollback()
-
-def check_password(username, password):
-    
-    cursor = connection.cursor()
-
-    #Access the users password
-    cursor.execute(f"SELECT password FROM users_table WHERE username = %s", (username,))
-        
-    result = cursor.fetchone()
-
-    #Check if the user exists
-    if result:
-        #Get the hashed password
-        encrypted_password = result[0]
-        #Check the password if it is correct or not
-        if bcrypt.checkpw(password.encode(), encrypted_password.encode()):
-            return True
-        else:
-           return False
-
-    else:
-        return False
-    
-
-
-
-def print_users():
-    cursor = connection.cursor()
-    try:
-        cursor.execute("SELECT * FROM users_table;")
-        print(cursor.fetchall())
-        
-        cursor.close()
-    except Exception as e:
-        print(f"Error while printing users - {e}")
 
 def create_mains_table():
     # create a cursor for navigating the postgres database
@@ -199,22 +119,27 @@ def print_items():
 
 create_mains_table()
 
-add_items('MEXICAN PAELLA', 'Main', 15.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
-add_items('SEAFOOD PAELLA', 'Main', 15.00, 200, False, 'Prawns, Nuts', 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
-add_items('MEAT PAELLA', 'Main', 15.00, 400, False, 'None', 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
-add_items('BEEF CARNITAS ENCHILADA', 'Main', 14.50, 410, False, 'None', 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
-add_items('POBLANO CHICKEN', 'Main', 14.50, 350, False, 'None', 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
+
+#Starters
+add_items('TORTILLA CHIPS & SALSAS','Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')
+add_items('TORTILLA CHIPS & GUACAMOLE', 'Starters', 6.00, 200, True,'None', 'Our famous guacamole is freshly made every day using fresh ingredients.')
+add_items('NACHOS', 'Starters', 7.00, 306, True, 'Cheese, jalepenos', 'Tortilla chips topped with jack cheese, roasted salsa, jalapeño cream cheese, sour cream and our famous guacamole.')
+add_items('SOUTHWEST SPRING ROLLS','Starters', 7.00, 239, True, 'Cheese', 'Chipotle Mexican chicken, peppers & jack cheese folded in a flour tortilla, deep fried & served with our famous guacamole.')
+add_items('GRILLED CHICKEN WINGS', 'Starters', 7.50, 312, False, 'None', 'Grilled chicken with Lousiana Hot souce.')
+#Mains
+add_items('MEXICAN PAELLA', 'Mains', 15.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
+add_items('SEAFOOD PAELLA', 'Mains', 15.00, 200, False, 'Prawns, Nuts', 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
+add_items('MEAT PAELLA', 'Mains', 15.00, 400, False, 'None', 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
+add_items('BEEF CARNITAS ENCHILADA', 'Mains', 14.50, 410, False, 'None', 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
+add_items('POBLANO CHICKEN', 'Mains', 14.50, 350, False, 'None', 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
+add_items('MEX BURGER', 'Mains', 14.50, 600, False, 'Cheese', 'Beef burger folded in a flour tortilla with jack cheese, poblano chilli peppers & Chilli con Carne, served with pico de gallo, sour cream, our famous guacamole & Mexican rice.')
+#Desserts
+add_items('ICE CREAM', 'Desserts', 4.00, 145, False, 'Milk', 'Two scoops, choose from vanilla, strawberry, chocolate or toffee.')
+add_items('BUNUELOS', 'Desserts', 6.00, 212, False, 'None', 'Fried dough ball dusted with cinnamon sugar served with Dulce de Leche & chocolate fudge sauce.')
+add_items('CHOCOLATE BROWNIE', 'Dessert', 6.00, 200, False, 'Milk', 'Warm chocolate fudge brownie served with vanilla ice cream.')
+add_items('CHURROS', 'Desserts', 6.50, 256, False, 'Milk', 'Mexican doughnut fried and dusted with cinnamon sugar with a side of Dulce de Leche & vanilla ice cream.')
+add_items('BANANA CHIMICHANGA', 'Desserts', 6.50, 200, False, 'Milk', 'A cinnamon flour tortilla filled with banana, deep fried and served with Dulce de Leche & vanilla ice cream.')
 
 print_items()
-
-create_users_tabel()
-
-add_user("admin", "@dmin123")
-
-check_password("admin", "@dmin123")
-check_password("admin", "admin123")
-check_password("yo", "123")
-
-print_users()
 
 connection.close()
