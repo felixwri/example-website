@@ -196,25 +196,3 @@ def get_items():
 def print_items():
     print(get_items())
 
-
-create_mains_table()
-
-add_items('MEXICAN PAELLA', 'Main', 15.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
-add_items('SEAFOOD PAELLA', 'Main', 15.00, 200, False, 'Prawns, Nuts', 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
-add_items('MEAT PAELLA', 'Main', 15.00, 400, False, 'None', 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
-add_items('BEEF CARNITAS ENCHILADA', 'Main', 14.50, 410, False, 'None', 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
-add_items('POBLANO CHICKEN', 'Main', 14.50, 350, False, 'None', 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
-
-print_items()
-
-create_users_tabel()
-
-add_user("admin", "@dmin123")
-
-check_password("admin", "@dmin123")
-check_password("admin", "admin123")
-check_password("yo", "123")
-
-print_users()
-
-connection.close()

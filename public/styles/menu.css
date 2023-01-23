@@ -1,19 +1,131 @@
 main {
-    padding: 10rem 20vw 0rem 20vw;
+    margin-top: 16rem;
+    margin-bottom: 12rem;
 }
 
 .menu-item {
     padding: 1rem;
-    border-left: 10px solid var(--primary);
+}
+
+.food-section {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 1rem;
+}
+
+section {
+    margin: 4rem 10vw 1rem 10vw;
 }
 
 .menu-name {
     font-size: 1.2rem;
-    color: var(--primary);
-    padding: 1rem 0rem;
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
 .menu-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    padding: 1rem 0rem;
+}
+
+.menu-description {
+    padding: 1rem 0rem;
+    font-size: 0.9rem;
+    min-height: 6rem;
+}
+
+.menu-extras {
+    font-size: 0.8rem;
+    color: rgb(100, 100, 100);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-extras>div {
+    margin-left: 2rem;
+}
+
+.menu-veg {
+    color: var(--dark-green);
+    font-weight: bold;
+}
+
+.section-title {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem 0rem;
+    font-size: 1.8rem;
+    border-bottom: 3px solid black;
+}
+
+#quick-select-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+
+    padding: 0.5rem 10vw;
+}
+
+.quick-select {
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.quick-select:hover {
+    background-color: white;
+    color: black;
+}
+
+#filters {
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: 8rem;
+    border: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#filters:hover {
+    background-color: white;
+    color: black;
+}
+
+#start-order {
+    position: fixed;
+
+    bottom: 5rem;
+    right: 10vw;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 1.2rem;
+    padding: 1rem;
+
+    width: 10rem;
+    color: white;
+
+    cursor: pointer;
+
+    background-color: var(--primary);
+    transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+#start-order:hover {
+    background-color: var(--primary-highlight);
+    width: 15rem;
 }

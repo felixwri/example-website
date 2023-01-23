@@ -11,72 +11,127 @@
     </head>
     <body>
         <nav>
-            <div id="nav-left">
-                <div id="nav-title">Oaxaca</div>
-            </div>
-            <div id="nav-right">
-                <div class="nav-page">About Us</div>
-                <div class="nav-page">Order</div>
-                <div class="nav-page">Login</div>
-            </div>
-            <div id="mobile-nav-right">
-                <svg
-                    id="burger-menu"
-                    onclick="toggleMobileNav()"
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="48"
-                    width="48"
-                    viewBox="0 0 48 48"
-                >
-                    <path
-                        d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
-                    />
-                </svg>
-                <div id="mobile-nav-menu" data-open="false">
+            <div class="nav-display">
+                <div id="nav-left">
+                    <div id="nav-title">Oaxaca</div>
+                </div>
+                <div id="nav-right">
+                    <div class="nav-page">About Us</div>
+                    <div class="nav-page">Order</div>
+                    <div class="nav-page">Login</div>
+                </div>
+                <div id="mobile-nav-right">
                     <svg
+                        id="burger-menu"
                         onclick="toggleMobileNav()"
-                        class="mobile-nav-page"
                         xmlns="http://www.w3.org/2000/svg"
                         height="48"
                         width="48"
                         viewBox="0 0 48 48"
                     >
                         <path
-                            d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
                         />
                     </svg>
-                    <div class="mobile-nav-page">About Us</div>
-                    <div class="mobile-nav-page">Order</div>
-                    <div class="mobile-nav-page">Login</div>
+                    <div id="mobile-nav-menu" data-open="false">
+                        <svg
+                            onclick="toggleMobileNav()"
+                            class="mobile-nav-page"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            />
+                        </svg>
+                        <div class="mobile-nav-page">About Us</div>
+                        <div class="mobile-nav-page">Order</div>
+                        <div class="mobile-nav-page">Login</div>
+                    </div>
                 </div>
+            </div>
+            <div id="quick-select-container">
+                <div class="quick-select">Starters</div>
+                <div class="quick-select">Mains</div>
+                <div class="quick-select">Desserts</div>
+                <div class="quick-select">Drinks</div>
+                <div id="filters">Filters</div>
             </div>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
+
         <main>
-            <h2>Starters</h2>
             <section id="starters">
-                {% for item in menu_items %} {% if item.type == "starter"%}
-                <div class="menu-item">
-                    <div class="menu-title">
-                        <div class="menu-name">{{ item.name }}</div>
-                        <div class="menu-price">£{{ item.price }}</div>
+                <h2 class="section-title">Starters</h2>
+                <div class="food-section">
+                    {% for item in menu_items %} {% if item.type == "Starters"%}
+                    <div class="menu-item">
+                        <div class="menu-title">
+                            <div class="menu-name">{{ item.name.lower() }}</div>
+                            <div class="menu-price">£{{ item.price }}</div>
+                        </div>
+                        <div class="menu-description">{{ item.description }}</div>
+                        <div class="menu-extras">
+                            {% if item.allergies != "None" %}
+                            <div class="menu-alg">{{ item.allergies }}</div>
+                            {% endif %} {% if item.vegetarian == True %}
+                            <div class="menu-veg">Veg</div>
+                            {% endif %}
+                            <div class="menu-cal">{{ item.calories }}kcal</div>
+                        </div>
                     </div>
-                    <div class="menu-description">{{ item.description }}</div>
+                    {% endif%} {% endfor %}
                 </div>
-                {% endif%} {% endfor %}
             </section>
-            <h2>Mains</h2>
+
             <section id="mains">
-                {% for item in menu_items %} {% if item.type == "main"%}
-                <div class="menu-item">
-                    <div class="menu-title">
-                        <div class="menu-name">{{ item.name }}</div>
-                        <div class="menu-price">£{{ item.price }}</div>
+                <h2 class="section-title">Mains</h2>
+                <div class="food-section">
+                    {% for item in menu_items %} {% if item.type == "Mains"%}
+                    <div class="menu-item">
+                        <div class="menu-title">
+                            <div class="menu-name">{{ item.name.lower() }}</div>
+                            <div class="menu-price">£{{ item.price }}</div>
+                        </div>
+                        <div class="menu-description">{{ item.description }}</div>
+                        <div class="menu-extras">
+                            {% if item.allergies != "None" %}
+                            <div class="menu-alg">{{ item.allergies }}</div>
+                            {% endif %} {% if item.vegetarian == True %}
+                            <div class="menu-veg">Veg</div>
+                            {% endif %}
+                            <div class="menu-cal">{{ item.calories }}kcal</div>
+                        </div>
                     </div>
-                    <div class="menu-description">{{ item.description }}</div>
+                    {% endif%} {% endfor %}
                 </div>
-                {% endif%} {% endfor %}
+            </section>
+
+            <section id="desserts">
+                <h2 class="section-title">Desserts</h2>
+                <div class="food-section">
+                    {% for item in menu_items %} {% if item.type == "Desserts"%}
+                    <div class="menu-item">
+                        <div class="menu-title">
+                            <div class="menu-name">{{ item.name.lower() }}</div>
+                            <div class="menu-price">£{{ item.price }}</div>
+                        </div>
+                        <div class="menu-description">{{ item.description }}</div>
+                        <div class="menu-extras">
+                            {% if item.allergies != "None" %}
+                            <div class="menu-alg">{{ item.allergies }}</div>
+                            {% endif %} {% if item.vegetarian == True %}
+                            <div class="menu-veg">Veg</div>
+                            {% endif %}
+                            <div class="menu-cal">{{ item.calories }}kcal</div>
+                        </div>
+                    </div>
+                    {% endif%} {% endfor %}
+                </div>
             </section>
         </main>
+        <button id="start-order"><div>Want to order?</div></button>
     </body>
 </html>

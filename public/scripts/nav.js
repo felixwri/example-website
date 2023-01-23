@@ -9,31 +9,34 @@ function toggleMobileNav() {
     }
 }
 
-// determines if the nav bar is expanded or not
-let navExpandedToggle = true;
-// is the menu button in the nav showing or not
-let navMenuButtonToggle = false;
+let navSettings = {
+    navExpandedToggle: true,
+    navExpandTrigger: 100,
+    navMenuButtonToggle: false,
+    navExapandable: true,
+    navPopMenu: true,
+};
+if (!document.getElementById("nav-revealed-menu")) navSettings.navPopMenu = false;
 
 window.addEventListener("scroll", () => {
-    console.log("fired");
-    dyncamicNavbar();
-    dynamicMenuButton();
+    if (navSettings.navExapandable) dyncamicNavbar();
+    if (navSettings.navPopMenu) dynamicMenuButton();
 });
 
 function dyncamicNavbar() {
-    const navExpandTrigger = 100;
+    const navExpandTrigger = navSettings.navExpandTrigger;
     const y = window.scrollY;
     let nav = document.querySelector("nav");
     let navTitle = document.querySelector("#nav-title");
 
-    if (y > navExpandTrigger && navExpandedToggle) {
+    if (y > navExpandTrigger && navSettings.navExpandedToggle) {
         nav.style.height = "4.5rem";
         navTitle.style.fontSize = "2rem";
-        navExpandedToggle = false;
-    } else if (y < navExpandTrigger && !navExpandedToggle) {
+        navSettings.navExpandedToggle = false;
+    } else if (y < navExpandTrigger && !navSettings.navExpandedToggle) {
         nav.style.height = "8rem";
         navTitle.style.fontSize = "2.5rem";
-        navExpandedToggle = true;
+        navSettings.navExpandedToggle = true;
     }
 }
 
@@ -42,11 +45,11 @@ function dynamicMenuButton() {
     const y = window.scrollY;
     let menu = document.querySelector("#nav-revealed-menu");
 
-    if (y > menuTrigger && navMenuButtonToggle) {
+    if (y > menuTrigger && navSettings.navMenuButtonToggle) {
         menu.style.left = "0%";
-        navMenuButtonToggle = false;
-    } else if (y < menuTrigger && !navMenuButtonToggle) {
+        navSettings.navMenuButtonToggle = false;
+    } else if (y < menuTrigger && !navSettings.navMenuButtonToggle) {
         menu.style.left = "100%";
-        navMenuButtonToggle = true;
+        navSettings.navMenuButtonToggle = true;
     }
 }

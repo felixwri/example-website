@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory
+from database import get_items
 
 app = Flask(__name__)
  
@@ -11,8 +12,8 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    test_data = []
-    return render_template('menu.html', menu_items=test_data)
+    data = get_items()
+    return render_template('menu.html', menu_items=data)
 
 
 

@@ -6,6 +6,9 @@
 
 :root {
     --primary: rgb(255, 100, 34);
+    --primary-highlight: rgb(255, 54, 36);
+    --blue: rgb(34, 229, 255);
+    --dark-green: rgb(0, 165, 36);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap');
