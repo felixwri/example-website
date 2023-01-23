@@ -34,8 +34,11 @@ def add_user(username, password):
     cursor = connection.cursor()
 
     try:
+        #Hash the password
         encrypted_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-            
+        #Convert the hashed password to bytes from string to use it in check_password function
+        encrypted_password = encrypted_password.decode()
+        #Add the hashed password and the username details to the database    
         cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
 
         connection.commit()
@@ -46,6 +49,31 @@ def add_user(username, password):
         print(e)
             
         connection.rollback()
+
+def check_password(username, password):
+    
+    cursor = connection.cursor()
+
+    #Access the users password
+    cursor.execute(f"SELECT password FROM users_table WHERE username = %s", (username,))
+        
+    result = cursor.fetchone()
+
+    #Check if the user exists
+    if result:
+        #Get the hashed password
+        encrypted_password = result[0]
+        #Check the password if it is correct or not
+        if bcrypt.checkpw(password.encode(), encrypted_password.encode()):
+            return True
+        else:
+           return False
+
+    else:
+        return False
+    
+
+
 
 def print_users():
     cursor = connection.cursor()
@@ -157,6 +185,10 @@ print_items()
 create_users_tabel()
 
 add_user("admin", "@dmin123")
+
+check_password("admin", "@dmin123")
+check_password("admin", "admin123")
+check_password("yo", "123")
 
 print_users()
 
