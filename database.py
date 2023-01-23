@@ -94,7 +94,16 @@ def create_mains_table():
         cursor.execute(f"DROP TABLE IF EXISTS mains_table")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute(f"CREATE TABLE IF NOT EXISTS mains_table (id serial PRIMARY KEY, name text, price real, description text)")
+        cursor.execute("""CREATE TABLE IF NOT EXISTS mains_table (
+            id serial PRIMARY KEY,
+            name text,
+            dish_type text,
+            price real,
+            calories integer,
+            vegetarian boolean,
+            allergies text,
+            description text
+        )""")
 
         print(f"Table created.")
 
@@ -112,12 +121,13 @@ def create_mains_table():
 
 
 
-def add_items(name, price, description):
-
+def add_items(name, dish_type, price, calories, vegetarian, allergies, description):
     cursor = connection.cursor()
     try:
-        cursor.execute(f"INSERT INTO mains_table (name, price, description) VALUES (%s, %s, %s)", (name, price, description))
-        
+        cursor.execute(
+            "INSERT INTO mains_table (name, dish_type, price, calories, vegetarian, allergies, description) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (name, dish_type, price, calories, vegetarian, allergies, description)
+        )
         connection.commit()
 
         cursor.close()
@@ -161,24 +171,39 @@ def update_price(price, id):
 
         connection.rollback() 
 
-def print_items():
+def get_items():
     cursor = connection.cursor()
     try:
         cursor.execute("SELECT * FROM mains_table;")
-        print(cursor.fetchall())
-        
+        items = cursor.fetchall()
         cursor.close()
+        return [
+            {
+                'id': item[0],
+                'name': item[1],
+                'type': item[2],
+                'price': item[3],
+                'calories': item[4],
+                'vegetarian': item[5],
+                'allergies': item[6],
+                'description': item[7],
+            }
+            for item in items
+        ]
     except Exception as e:
-        print(f"Error while printing items - {e}")
+        print(f"Error while retrieving items - {e}")
+
+def print_items():
+    print(get_items())
 
 
 create_mains_table()
 
-add_items('MEXICAN PAELLA', 15.00, 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
-add_items('SEAFOOD PAELLA', 15.00, 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
-add_items('MEAT PAELLA', 15.00, 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
-add_items('BEEF CARNITAS ENCHILADA', 14.50, 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
-add_items('POBLANO CHICKEN', 14.50, 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
+add_items('MEXICAN PAELLA', 'Main', 15.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
+add_items('SEAFOOD PAELLA', 'Main', 15.00, 200, False, 'Prawns, Nuts', 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
+add_items('MEAT PAELLA', 'Main', 15.00, 400, False, 'None', 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
+add_items('BEEF CARNITAS ENCHILADA', 'Main', 14.50, 410, False, 'None', 'olled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
+add_items('POBLANO CHICKEN', 'Main', 14.50, 350, False, 'None', 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
 
 print_items()
 
