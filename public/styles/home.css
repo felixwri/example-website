@@ -243,3 +243,19 @@ nav {
 #location-title {
     margin-bottom: 2rem;
 }
+
+/* PAGE FOOTER */
+
+footer {
+    border-top: 3px solid var(--primary);
+    color: black;
+    background-color: white;
+
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+}
+
+.footer-section {
+    height: 10rem;
+    padding: 2rem;
+}
