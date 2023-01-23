@@ -11,8 +11,8 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    print(request.method)
-    return render_template('menu.html', page_name="menu")
+    test_data = []
+    return render_template('menu.html', menu_items=test_data)
 
 
 

@@ -1,0 +1,19 @@
+main {
+    padding: 10rem 20vw 0rem 20vw;
+}
+
+.menu-item {
+    padding: 1rem;
+    border-left: 10px solid var(--primary);
+}
+
+.menu-name {
+    font-size: 1.2rem;
+    color: var(--primary);
+    padding: 1rem 0rem;
+}
+
+.menu-title {
+    display: flex;
+    justify-content: space-between;
+}
