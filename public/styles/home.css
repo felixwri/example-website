@@ -86,21 +86,44 @@
     transform: translate(-50%, -50%);
 }
 
-.location {
+.sub-section {
     height: 50%;
     padding: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    color: white;
-    font-size: 1.2rem;
 
+    font-size: 1.2rem;
+}
+
+#about {
     background-color: var(--primary);
+    color: white;
+}
+
+#about-explanation {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#about-title {
+    margin-bottom: 2rem;
+}
+
+#about-image {
+    background-image: url("https://res.cloudinary.com/djukm4fut/image/upload/v1674567185/restaurant_4k_vsqmwh.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 50vh;
 }
 
 #location-vector {
-    background-image: url("https://res.cloudinary.com/djukm4fut/image/upload/v1674237427/map_xltyej.png");
+    background-image: url("https://res.cloudinary.com/djukm4fut/image/upload/v1674566688/map-image_wezlel.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -118,6 +141,7 @@
 #location-button {
     border: none;
     background-color: white;
+    border: 3px solid var(--primary);
     border-radius: 5px;
     padding: 1rem;
     margin-top: 1rem;
@@ -127,4 +151,34 @@
 
 #location-title {
     margin-bottom: 2rem;
+}
+
+/* PAGE FOOTER */
+
+footer {
+    border-top: 3px solid var(--primary);
+    color: black;
+    background-color: white;
+
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+.footer-section {
+    height: 10rem;
+    padding: 2rem;
+}
+
+.footer-title {
+    margin-bottom: 1rem;
+}
+
+.footer-icon {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.footer-list>div {
+    margin-bottom: 1rem;
+    cursor: pointer;
 }
