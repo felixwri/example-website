@@ -11,5 +11,11 @@ def test_password_strength():
     assert result == True
 
 
+def test_existing_user():
+    result = login_database.existing_user("admin")
+    assert result == True
+
+
 
 test_password_strength()
+test_existing_user()

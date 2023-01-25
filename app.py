@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory
-from login_database import check_password, add_user
+import login_database
 
 app = Flask(__name__)
  
@@ -20,7 +20,7 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    if check_password(username, password):
+    if login_database.check_password(username, password):
         return "Login succesful!"
     else:
         return "Incorrect username or password!"
@@ -30,12 +30,16 @@ def login():
 def register():
     username = request.form['username']
     password = request.form['password']
+   
 
-    if check_password(username, password):
-        return "Users already exists!"
+    if login_database.exisiting_user(username):
+        return "User already exists!"
     else:
-        add_user(username, password)
-        return "Registiration succesful!"
+        if login_database.password_strength(password):
+            login_database.add_user(username, password)
+            return "Registiration succesful!"
+        else:
+            return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
 
 
 @app.route('/styles/<path:path>')
