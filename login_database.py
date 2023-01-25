@@ -1,5 +1,4 @@
-import psycopg2
-import bcrypt
+import psycopg2, bcrypt, re
 
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
 
@@ -71,6 +70,7 @@ def check_password(username, password):
     else:
         return False
 
+
 def print_users():
     cursor = connection.cursor()
     try:
@@ -81,14 +81,3 @@ def print_users():
     except Exception as e:
         print(f"Error while printing users - {e}")
 
-create_users_tabel()
-
-add_user("admin", "@dmin123")
-
-check_password("admin", "@dmin123")
-check_password("admin", "admin123")
-check_password("yo", "123")
-
-print_users()
-
-connection.close()

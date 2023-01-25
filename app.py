@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory
+from login_database import check_password, add_user
 
 app = Flask(__name__)
  
@@ -8,12 +9,23 @@ def home():
     return render_template('home.html', page_name="home")
 
 
-
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     print(request.method)
     return render_template('menu.html', page_name="menu")
 
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    username = request.form['username']
+    password = request.form['password']
+
+    if check_password(username, password):
+        return "Users already exists!"
+    else:
+        add_user(username, password)
+        return "Registiration succesful!"
 
 
 @app.route('/styles/<path:path>')
