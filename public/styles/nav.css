@@ -11,6 +11,11 @@ nav {
     transition: height 0.3s ease;
 }
 
+.link {
+    color: black;
+    text-decoration: none;
+}
+
 .nav-display {
     display: flex;
     justify-content: space-between;

@@ -28,8 +28,15 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-grow: 1;
     font-size: 1rem;
     padding: 1rem 0rem;
+}
+
+.menu-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-description {
@@ -107,25 +114,95 @@ section {
 #start-order {
     position: fixed;
 
-    bottom: 5rem;
+    bottom: 3rem;
     right: 10vw;
 
     border-radius: 5px;
     border: none;
 
     font-size: 1.2rem;
-    padding: 1rem;
+    padding: 0.5rem;
 
+    height: 4rem;
     width: 10rem;
     color: white;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 
     background-color: var(--primary);
-    transition: background-color 0.3s ease, width 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
-#start-order:hover {
-    background-color: var(--primary-highlight);
-    width: 15rem;
+#cancel-order {
+    position: fixed;
+
+    bottom: 3rem;
+    right: 10vw;
+
+    border-radius: 5px;
+    border: 3px solid var(--primary);
+
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    height: 4rem;
+    width: 10rem;
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: white;
+}
+
+.order-counter-container {
+    width: 0rem;
+    overflow: hidden;
+    transition: width 0.5s ease;
+}
+
+.order-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 10px;
+    height: 2rem;
+
+    width: 5rem;
+    margin-left: 1rem;
+}
+
+.order-quantity {
+    font-size: 1.4rem;
+    padding: 0rem 0.5rem;
+}
+
+.order-icon {
+    width: 2rem;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.order-icon:hover {
+    fill: var(--primary);
+}
+
+@media screen and (max-width: 750px) {
+    .food-section {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    section {
+        margin: 4rem 5vw 1rem 5vw;
+    }
 }

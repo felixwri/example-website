@@ -13,12 +13,12 @@
         <nav>
             <div class="nav-display">
                 <div id="nav-left">
-                    <div id="nav-title">Oaxaca</div>
+                    <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
                 <div id="nav-right">
-                    <div class="nav-page">About Us</div>
-                    <div class="nav-page">Order</div>
-                    <div class="nav-page">Login</div>
+                    <a href="/about" class="nav-page link">About Us</a>
+                    <a href="/order" class="nav-page link">Order</a>
+                    <a href="/login" class="nav-page link">Login</a>
                 </div>
                 <div id="mobile-nav-right">
                     <svg
@@ -46,9 +46,10 @@
                                 d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
                             />
                         </svg>
-                        <div class="mobile-nav-page">About Us</div>
-                        <div class="mobile-nav-page">Order</div>
-                        <div class="mobile-nav-page">Login</div>
+
+                        <a href="/about" class="mobile-nav-page link">About Us</a>
+                        <a href="/order" class="mobile-nav-page link">Order</a>
+                        <a href="/login" class="mobile-nav-page link">Login</a>
                     </div>
                 </div>
             </div>
@@ -68,9 +69,38 @@
                 <div class="food-section">
                     {% for item in menu_items %} {% if item.type == "Starters"%}
                     <div class="menu-item">
-                        <div class="menu-title">
-                            <div class="menu-name">{{ item.name.lower() }}</div>
-                            <div class="menu-price">£{{ item.price }}</div>
+                        <div class="menu-title-container">
+                            <div class="menu-title">
+                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-price">£{{ item.price }}</div>
+                            </div>
+                            <div class="order-counter-container">
+                                <div class="order-counter">
+                                    <svg
+                                        class="order-decrease order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
+                                        />
+                                    </svg>
+                                    <div class="order-quantity">0</div>
+                                    <svg
+                                        class="order-increase order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
@@ -91,10 +121,40 @@
                 <div class="food-section">
                     {% for item in menu_items %} {% if item.type == "Mains"%}
                     <div class="menu-item">
-                        <div class="menu-title">
-                            <div class="menu-name">{{ item.name.lower() }}</div>
-                            <div class="menu-price">£{{ item.price }}</div>
+                        <div class="menu-title-container">
+                            <div class="menu-title">
+                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-price">£{{ item.price }}</div>
+                            </div>
+                            <div class="order-counter-container">
+                                <div class="order-counter">
+                                    <svg
+                                        class="order-decrease order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
+                                        />
+                                    </svg>
+                                    <div class="order-quantity">0</div>
+                                    <svg
+                                        class="order-increase order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
                             {% if item.allergies != "None" %}
@@ -114,9 +174,38 @@
                 <div class="food-section">
                     {% for item in menu_items %} {% if item.type == "Desserts"%}
                     <div class="menu-item">
-                        <div class="menu-title">
-                            <div class="menu-name">{{ item.name.lower() }}</div>
-                            <div class="menu-price">£{{ item.price }}</div>
+                        <div class="menu-title-container">
+                            <div class="menu-title">
+                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-price">£{{ item.price }}</div>
+                            </div>
+                            <div class="order-counter-container">
+                                <div class="order-counter">
+                                    <svg
+                                        class="order-decrease order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
+                                        />
+                                    </svg>
+                                    <div class="order-quantity">0</div>
+                                    <svg
+                                        class="order-increase order-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
@@ -132,6 +221,8 @@
                 </div>
             </section>
         </main>
-        <button id="start-order"><div>Want to order?</div></button>
+        <div id="cancel-order" onclick="cancelOrder()">Cancel</div>
+        <div id="start-order" onclick="startOrder()">Start your order</div>
     </body>
+    <script src="{{url_for('send_js', path='menu.js')}}"></script>
 </html>
