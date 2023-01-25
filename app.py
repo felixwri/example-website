@@ -14,6 +14,16 @@ def menu():
     print(request.method)
     return render_template('menu.html', page_name="menu")
 
+@app.route('/login', methods=['POST'])
+def login():
+    #Get the username and password
+    username = request.form['username']
+    password = request.form['password']
+
+    if check_password(username, password):
+        return "Login succesful!"
+    else:
+        return "Incorrect username or password!"
 
 
 @app.route('/register', methods=['GET', 'POST'])
