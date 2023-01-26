@@ -91,10 +91,22 @@ def update_price(price, id):
 
         connection.rollback() 
 
-def get_items():
+def get_items(filter_vegetarian=False, filter_no_allergies=False):
+    query_start = "SELECT * FROM mains_table"
+    query_filters = ""
+    query_end = ";"
+    filter_strings = ["vegetarian = TRUE", "allergies = 'None'"]
+    active_filters = [filter_vegetarian, filter_no_allergies]
+    added_filters = 0
+    if active_filters.count(True) > 0:
+        for i, filter_is_active in enumerate(active_filters):
+            if filter_is_active:
+                query_filters += " WHERE " if added_filters == 0 else " AND "
+                query_filters += filter_strings[i]
+                added_filters += 1
     cursor = connection.cursor()
     try:
-        cursor.execute("SELECT * FROM mains_table;")
+        cursor.execute(query_start + query_filters + query_end)
         items = cursor.fetchall()
         cursor.close()
         return [
