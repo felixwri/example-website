@@ -8,19 +8,15 @@ app = Flask(__name__)
 def home():
     return render_template('home.html', page_name="home")
 
-
-
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     data = get_items()
     return render_template('menu.html', menu_items=data)
 
 
-
 @app.route('/styles/<path:path>')
 def send_css(path):
     return send_from_directory('public/styles', path)    
-
 
 @app.route('/scripts/<path:path>')
 def send_js(path):
