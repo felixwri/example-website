@@ -38,11 +38,8 @@ function toggleFilters() {
     let e = document.getElementById("filter-container");
     let btn = document.getElementById("filters");
     if (e.dataset.showing === "true") {
-        e.style.top = "-100%";
-        btn.classList.add("filter");
         e.dataset.showing = "false";
     } else {
-        e.style.top = "0%";
         e.dataset.showing = "true";
     }
 }
@@ -70,7 +67,7 @@ function applyFilter(id) {
     if (id === "veg-filter") {
         let inValidIds = [];
 
-        for (let item of server) {
+        for (let item of menu) {
             if (!item.vegetarian) {
                 inValidIds.push(item.id);
             }
@@ -87,7 +84,7 @@ function removeFilter(id) {
     if (id === "veg-filter") {
         let inValidIds = [];
 
-        for (let item of server) {
+        for (let item of menu) {
             if (!item.vegetarian) {
                 inValidIds.push(item.id);
             }
@@ -98,4 +95,29 @@ function removeFilter(id) {
             if (element) element.style.opacity = "1";
         }
     }
+}
+
+function increaseCounter(id) {
+    let counter = document.getElementById(`quantity-${id}`);
+    let currentValue = parseInt(counter.innerText);
+    currentValue++;
+    counter.innerText = currentValue;
+}
+
+function decreaseCounter(id) {
+    let counter = document.getElementById(`quantity-${id}`);
+    let currentValue = parseInt(counter.innerText);
+    currentValue--;
+
+    if (currentValue > -1) counter.innerText = currentValue;
+}
+
+function scrollToElement(id) {
+    const element = document.getElementById(id);
+
+    const y = element.getBoundingClientRect().top + window.scrollY;
+    window.scroll({
+        top: y - 120,
+        behavior: "smooth",
+    });
 }

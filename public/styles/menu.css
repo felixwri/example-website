@@ -128,7 +128,6 @@ section {
     width: 100%;
     padding: 0.5rem 10vw;
     position: absolute;
-    top: -100%;
     height: 4rem;
     left: 0;
 
@@ -165,6 +164,14 @@ section {
     border: 3px solid black;
 
     transition: background-color 0.3s ease;
+}
+
+[data-showing="true"] {
+    top: 0rem;
+}
+
+[data-showing="false"] {
+    top: -4rem;
 }
 
 [data-selected="true"] {
@@ -239,7 +246,9 @@ section {
 
 .order-quantity {
     font-size: 1.4rem;
-    padding: 0rem 0.5rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 .order-icon {
@@ -252,11 +261,35 @@ section {
     fill: var(--primary);
 }
 
+.no-select {
+    user-select: none;
+}
+
+@media screen and (max-width: 380px) {
+    .menu-name {
+        font-size: 1rem;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .food-section {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 1rem;
+    }
+
+    #filter-container {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        height: 6rem;
+    }
+
+    [data-showing="false"] {
+        top: -6rem;
+    }
+
+    .relative-container {
+        height: 6rem;
     }
 }
 

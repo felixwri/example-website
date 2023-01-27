@@ -52,10 +52,10 @@
                 </div>
             </div>
             <div id="quick-select-container">
-                <div class="quick-select">Starters</div>
-                <div class="quick-select">Mains</div>
-                <div class="quick-select">Desserts</div>
-                <div class="quick-select">Drinks</div>
+                <div class="quick-select" onclick="scrollToElement('starters')">Starters</div>
+                <div class="quick-select" onclick="scrollToElement('mains')">Mains</div>
+                <div class="quick-select" onclick="scrollToElement('desserts')">Desserts</div>
+                <div class="quick-select" onclick="scrollToElement('drinks')">Drinks</div>
                 <div id="filters" onclick="toggleFilters()">Filters</div>
             </div>
             <div class="relative-container">
@@ -72,9 +72,16 @@
                         <div class="filter-select" data-selected="false"></div>
                         <div>Lowest price</div>
                     </div>
+                    <div id="low-calorie-filter" class="filter-option" onclick="selectFilter(this)">
+                        <div class="filter-select" data-selected="false"></div>
+                        <div>Lowest calories</div>
+                    </div>
                 </div>
             </div>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
+            <script>
+                navSettings.navExpandTrigger = 20;
+            </script>
         </nav>
 
         <main>
@@ -91,7 +98,8 @@
                             <div class="order-counter-container">
                                 <div class="order-counter">
                                     <svg
-                                        class="order-decrease order-icon"
+                                        class="order-decrease order-icon no-select"
+                                        onclick="decreaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -101,9 +109,10 @@
                                             d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
                                         />
                                     </svg>
-                                    <div class="order-quantity">0</div>
+                                    <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
                                     <svg
-                                        class="order-increase order-icon"
+                                        class="order-increase order-icon no-select"
+                                        onclick="increaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -239,7 +248,7 @@
         <div id="start-order" onclick="startOrder()">Start your order</div>
     </body>
     <script>
-        const server = {{ menu_items | tojson }};
+        const menu = {{ menu_items | tojson }};
     </script>
     <script src="{{url_for('send_js', path='menu.js')}}"></script>
 </html>
