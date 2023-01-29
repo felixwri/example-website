@@ -92,3 +92,36 @@ nav {
         display: none;
     }
 }
+
+.basket-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 5px;
+    color: var(--primary);
+    height: 3rem;
+    min-width: 7rem;
+    width: 10vw;
+    padding: 0.5rem;
+}
+
+#basket-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 2.5rem;
+}
+
+#basket-icon {
+    width: 1.6rem;
+    fill: var(--primary);
+}
+
+#basket-qty {
+    font-size: 1.2rem;
+}
+
+#basket-total {
+    font-size: 1.2rem;
+}

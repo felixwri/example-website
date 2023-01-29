@@ -1,4 +1,44 @@
 let currentlyOrdering = false;
+class Order {
+    constructor(currentOrder, menu) {
+        this.orderStarted = new Date();
+        this.items = currentOrder;
+        this.menu = menu;
+        this.total = 0;
+    }
+
+    totalPrice() {
+        this.total = 0;
+        for (let i = 0; i < this.items.length; i++) {
+            this.total += this.items[i].price;
+        }
+        return this.total;
+    }
+
+    addItem(id) {
+        for (let i = 0; i < this.menu.length; i++) {
+            if (this.menu[i].id == id) {
+                this.items.push(this.menu[i]);
+                break;
+            }
+        }
+    }
+
+    removeItem(id) {
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].id === id) {
+                this.items.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    length() {
+        return this.items.length;
+    }
+}
+
+const order = new Order([], menu);
 
 function startOrder() {
     if (currentlyOrdering) return;
@@ -102,6 +142,7 @@ function increaseCounter(id) {
     let currentValue = parseInt(counter.innerText);
     currentValue++;
     counter.innerText = currentValue;
+    order.addItem(id);
 }
 
 function decreaseCounter(id) {
@@ -109,7 +150,11 @@ function decreaseCounter(id) {
     let currentValue = parseInt(counter.innerText);
     currentValue--;
 
-    if (currentValue > -1) counter.innerText = currentValue;
+    if (currentValue <= -1) return;
+
+    counter.innerText = currentValue;
+
+    order.removeItem(id);
 }
 
 function scrollToElement(id) {
