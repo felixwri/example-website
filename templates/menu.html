@@ -15,10 +15,14 @@
                 <div id="nav-left">
                     <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
-                <div id="nav-right" style="align-items: center">
-                    <div class="basket-container">
+                <div id="nav-icons">
+                    <div id="basket-container" class="nav-icon">
                         <div id="basket-left">
-                            <div id="basket-qty">0</div>
+                            <div id="basket-qty">
+                                <div class="bq-higher bq-value">1</div>
+                                <div class="bq-current bq-value">0</div>
+                                <div class="bq-lower bq-value">0</div>
+                            </div>
                             <svg
                                 id="basket-icon"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -31,11 +35,18 @@
                                 />
                             </svg>
                         </div>
-
-                        <div id="basket-total">£0.0</div>
+                        <div id="basket-right">
+                            <div id="basket-total">
+                                <div class="bt-higher bt-value">pend</div>
+                                <div class="bt-current bt-value">£0.0</div>
+                                <div class="bt-lower bt-value">pend</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="/basket" class="nav-page link">Basket</a>
-                    <a href="/login" class="nav-page link">Login</a>
+                    <div id="nav-right">
+                        <a href="/basket" class="nav-page link">Basket</a>
+                        <a href="/login" class="nav-page link">Login</a>
+                    </div>
                 </div>
                 <div id="mobile-nav-right">
                     <svg
@@ -74,7 +85,14 @@
                 <div class="quick-select" onclick="scrollToElement('mains')">Mains</div>
                 <div class="quick-select" onclick="scrollToElement('desserts')">Desserts</div>
                 <div class="quick-select" onclick="scrollToElement('drinks')">Drinks</div>
-                <div id="filters" onclick="toggleFilters()">Filters</div>
+                <div id="filters" onclick="toggleFilters()">
+                    <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                        <path
+                            d="M21.35 42V30.75h3v4.15H42v3H24.35V42ZM6 37.9v-3h12.35v3Zm9.35-8.3v-4.1H6v-3h9.35v-4.2h3v11.3Zm6-4.1v-3H42v3Zm8.3-8.25V6h3v4.1H42v3h-9.35v4.15ZM6 13.1v-3h20.65v3Z"
+                        />
+                    </svg>
+                    <span>Filters</span>
+                </div>
             </div>
             <div class="relative-container">
                 <div id="filter-container" data-showing="false">

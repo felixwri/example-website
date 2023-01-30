@@ -36,6 +36,10 @@ nav {
     display: flex;
 }
 
+#nav-icons {
+    display: flex;
+}
+
 .nav-page {
     margin: 1rem 0.5rem;
     padding: 0.5rem;
@@ -83,6 +87,12 @@ nav {
     cursor: pointer;
 }
 
+@media screen and (max-width: 400px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+}
+
 @media screen and (max-width: 550px) {
     #mobile-nav-right {
         display: initial;
@@ -93,24 +103,20 @@ nav {
     }
 }
 
-.basket-container {
+#basket-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    border-radius: 5px;
+    width: 7rem;
     color: var(--primary);
-    height: 3rem;
-    min-width: 7rem;
-    width: 10vw;
-    padding: 0.5rem;
 }
 
 #basket-left {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 2.5rem;
+    width: 3rem;
 }
 
 #basket-icon {
@@ -120,8 +126,62 @@ nav {
 
 #basket-qty {
     font-size: 1.2rem;
+    position: relative;
+    width: 2rem;
+    height: 1.5rem;
+    overflow: hidden;
+}
+
+.bq-value {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: top 0.5s ease;
+}
+
+.bq-current {
+    top: 0;
+}
+
+.bq-lower {
+    top: 100%;
+}
+
+.bq-higher {
+    top: -100%;
 }
 
 #basket-total {
     font-size: 1.2rem;
+    position: relative;
+    width: 4rem;
+    height: 1.5rem;
+    overflow: hidden;
+}
+
+.bt-value {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: top 0.5s ease;
+}
+
+.bt-current {
+    top: 0;
+}
+
+.bt-lower {
+    top: 100%;
+}
+
+.bt-higher {
+    top: -100%;
 }

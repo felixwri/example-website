@@ -106,19 +106,31 @@ section {
 }
 
 #filters {
-    padding: 0.5rem;
+    padding: 5px;
     border-radius: 5px;
     width: 8rem;
     border: 1px solid white;
     cursor: pointer;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#filter-icon {
+    fill: white;
+    width: 1.6rem;
+    height: 1.6rem;
+    transition: fill 0.3s ease;
 }
 
 #filters:hover {
     background-color: white;
     color: black;
+}
+
+#filters:hover #filter-icon {
+    fill: black;
 }
 
 #filter-container {
@@ -265,9 +277,44 @@ section {
     user-select: none;
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 400px) {
     .menu-name {
         font-size: 1rem;
+    }
+
+    #filters>span {
+        display: none;
+    }
+
+    #filters {
+        width: 4rem;
+    }
+
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        font-size: 0.8rem;
+    }
+
+    .filter-option {
+        font-size: 0.8rem
+    }
+
+    #filter-container {
+        padding: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        width: 6rem;
+        margin: 5px;
     }
 }
 
@@ -281,6 +328,7 @@ section {
     #filter-container {
         display: grid;
         grid-template-columns: repeat(2, 2fr);
+        grid-template-rows: repeat(2, 50%);
         height: 6rem;
     }
 
