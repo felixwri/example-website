@@ -14,7 +14,10 @@ def menu():
     print(request.method)
     return render_template('menu.html', page_name="menu")
 
-
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    print(request.method)
+    return render_template('login.html', page_name="login")
 
 @app.route('/styles/<path:path>')
 def send_css(path):

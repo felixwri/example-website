@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--META DATA-->
+    <head> 
         <title>Oaxaca</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="refresh" content="20">
+        <meta name="description" content="restaurant login page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{{url_for('send_css', path='home.css')}}" />
     </head>
-    <body>
+
+    <!--PAGE NAVIGATOR-->
+    <head>
         <nav>
             <div id="nav-left">
                 <div id="nav-title">Oaxaca</div>
@@ -53,32 +58,32 @@
             </div>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
+    </head>
 
-        <div
-            class="jumbotron"
-            style="
-                background-image: url(https://res.cloudinary.com/djukm4fut/image/upload/v1674231275/background_4k_lb6n3y.jpg);
-            "
-        >
-            <div class="centered">
-                <h1 class="font">We are a <i>not real</i> Mexican Resturant</h1>
-            </div>
-
-            <div class="vertical-center">
-                <button class="centerButton button" type="button" onclick="location.href='/menu'">Menu</button>
-            </div>
+    <!--LOGIN FORM-->
+    <h4>
+        <label for="login">Login</label>
+    </h4>
+    <body>
+        <div class="login-form">
+            <form method="post" action="">
+                <!--USERNAME INPUT-->
+                <input type="text"  id="username" name="username" required placeholder="Username"
+                aria-label="username" aria-describedby="input-username" autofocus
+                data-val="true" data-val-required="The Username field is required."  value="">
+                <br/>
+                <!--USER PASSWORD INPUT-->
+                <input type="password" id="password" name="password" required placeholder="Password"
+                aria-label="password" aria-describedby="input-password" autofocus 
+                data-val="true" data-val-required="The Password field is required."  value="">
+                <br/>
+                <input type="submit" value="Login">
+            </form>
         </div>
-
-        <section class="jumbotron">
-            <div class="location">
-                <div id="location-vector"></div>
-                <div id="location-explanation">
-                    <h1 id="location-title">Find Us</h1>
-                    <p>We have 25 stores based in and around London</p>
-                    <p>Find your closest store</p>
-                    <button id="location-button">Maps</button>
-                </div>
-            </div>
-        </section>
+        <br/>
+        <div>
+            <button>Forgot your password?</button>
+        </div>
     </body>
-</html>
+
+    
