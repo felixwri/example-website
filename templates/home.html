@@ -13,14 +13,43 @@
         <nav>
             <div class="nav-display">
                 <div id="nav-left">
-                    <div id="nav-title">Oaxaca</div>
+                    <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
-                <div id="nav-right">
-                    <div id="nav-hidden-menu">
-                        <a href="/menu" id="nav-revealed-menu" class="link">Menu</a>
+                <div id="nav-icons">
+                    <div id="basket-container" class="nav-icon">
+                        <div id="basket-left">
+                            <div id="basket-qty">
+                                <div class="bq-higher bq-value">1</div>
+                                <div class="bq-current bq-value">0</div>
+                                <div class="bq-lower bq-value">0</div>
+                            </div>
+                            <svg
+                                id="basket-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="48"
+                                width="48"
+                                viewBox="0 0 48 48"
+                            >
+                                <path
+                                    d="M9.8 42q-.8 0-1.425-.475T7.55 40.3L1.9 19.95q-.2-.75.275-1.35.475-.6 1.275-.6h10L22.7 4.5q.25-.3.55-.475.3-.175.7-.175.4 0 .7.175.3.175.55.475L34.4 18h10.25q.75 0 1.225.6.475.6.275 1.35l-5.7 20.35q-.2.75-.825 1.225Q39 42 38.2 42Zm.5-3h27.4l5.05-18H5.3ZM24 33q1.25 0 2.125-.875T27 30q0-1.25-.875-2.125T24 27q-1.25 0-2.125.875T21 30q0 1.25.875 2.125T24 33Zm-6.9-15h13.65l-6.8-10Zm-6.8 21h27.4Z"
+                                />
+                            </svg>
+                        </div>
+                        <div id="basket-right">
+                            <div id="basket-total">
+                                <div class="bt-higher bt-value">pend</div>
+                                <div class="bt-current bt-value">£0.00</div>
+                                <div class="bt-lower bt-value">pend</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="/basket" class="nav-page link">Basket</a>
-                    <a href="/login" class="nav-page link">Login</a>
+                    <div id="nav-right">
+                        <div id="nav-hidden-menu">
+                            <a href="/menu" id="nav-revealed-menu" class="link">Menu</a>
+                        </div>
+                        <a href="/basket" class="nav-page link">Basket</a>
+                        <a href="/login" class="nav-page link">Login</a>
+                    </div>
                 </div>
                 <div id="mobile-nav-right">
                     <svg
@@ -37,23 +66,24 @@
                     </svg>
                     <div id="mobile-nav-menu" data-open="false">
                         <svg
-                            id="burger-menu"
                             onclick="toggleMobileNav()"
+                            class="mobile-nav-page"
                             xmlns="http://www.w3.org/2000/svg"
                             height="48"
                             width="48"
                             viewBox="0 0 48 48"
                         >
                             <path
-                                d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
                             />
                         </svg>
-                        <a href="/menu" class="mobile-nav-page link">Menu</a>
+
                         <a href="/basket" class="mobile-nav-page link">Basket</a>
                         <a href="/login" class="mobile-nav-page link">Login</a>
                     </div>
                 </div>
             </div>
+            <script src="{{url_for('send_js', path='order.js')}}"></script>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
 

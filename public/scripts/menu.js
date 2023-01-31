@@ -2,6 +2,20 @@ let currentlyOrdering = false;
 
 const order = new Order([], menu);
 
+init();
+
+function init() {
+    if (order.length() > 0) {
+        increaseQuantity();
+        increasePrice();
+        startOrder();
+
+        for (let item of order.getItems()) {
+            setCounter(item.id, 1);
+        }
+    }
+}
+
 function startOrder() {
     if (currentlyOrdering) return;
 
@@ -26,6 +40,11 @@ function cancelOrder() {
     for (element of elements) {
         element.style.width = "0rem";
     }
+
+    order.clear();
+    clearCounters();
+    decreaseQuantity();
+    decreasePrice();
 
     document.documentElement.setAttribute("style", "--price-margin-right: 0rem");
 
@@ -99,11 +118,27 @@ function removeFilter(id) {
     }
 }
 
-function increaseCounter(id) {
+function setCounter(id, amount) {
     let counter = document.getElementById(`quantity-${id}`);
     let currentValue = parseInt(counter.innerText);
-    currentValue++;
+
+    if (currentValue + amount < 0) return false;
+
+    currentValue += amount;
     counter.innerText = currentValue;
+
+    return true;
+}
+
+function clearCounters() {
+    let counters = document.getElementsByClassName("order-quantity");
+    for (counter of counters) {
+        counter.innerText = 0;
+    }
+}
+
+function increaseCounter(id) {
+    setCounter(id, 1);
     order.addItem(id);
 
     increaseQuantity();
@@ -111,13 +146,7 @@ function increaseCounter(id) {
 }
 
 function decreaseCounter(id) {
-    let counter = document.getElementById(`quantity-${id}`);
-    let currentValue = parseInt(counter.innerText);
-    currentValue--;
-
-    if (currentValue <= -1) return;
-
-    counter.innerText = currentValue;
+    if (!setCounter(id, -1)) return;
 
     order.removeItem(id);
 
@@ -129,6 +158,7 @@ function increaseQuantity() {
     let targetAmount = order.length();
     // transition in queued element
     let element = document.querySelector(`.bq-higher`);
+    element.innerText = targetAmount;
     element.style.top = "0%";
 
     // transition out current
@@ -160,11 +190,7 @@ function increasePrice() {
     // transition in queued element
     let element = document.querySelector(`.bt-higher`);
 
-    if (!targetPrice.toString().includes(".")) {
-        element.innerText = `£${targetPrice}.0`;
-    } else {
-        element.innerText = `£${targetPrice}`;
-    }
+    element.innerText = order.priceToString(targetPrice);
 
     element.style.top = "0%";
 
@@ -227,11 +253,7 @@ function decreasePrice() {
     let element = document.querySelector(`.bt-lower`);
     element.style.top = "0%";
 
-    if (!targetPrice.toString().includes(".")) {
-        element.innerText = `£${targetPrice}.0`;
-    } else {
-        element.innerText = `£${targetPrice}`;
-    }
+    element.innerText = order.priceToString(targetPrice);
 
     // transition out current
     let current = document.querySelector(`.bt-current`);

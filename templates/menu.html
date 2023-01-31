@@ -38,7 +38,7 @@
                         <div id="basket-right">
                             <div id="basket-total">
                                 <div class="bt-higher bt-value">pend</div>
-                                <div class="bt-current bt-value">£0.0</div>
+                                <div class="bt-current bt-value">£0.00</div>
                                 <div class="bt-lower bt-value">pend</div>
                             </div>
                         </div>
@@ -114,6 +114,7 @@
                     </div>
                 </div>
             </div>
+            <script src="{{url_for('send_js', path='order.js')}}"></script>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
             <script>
                 navSettings.navExpandTrigger = 20;
@@ -290,6 +291,5 @@
     <script>
         const menu = {{ menu_items | tojson }};
     </script>
-    <script src="{{url_for('send_js', path='order.js')}}"></script>
     <script src="{{url_for('send_js', path='menu.js')}}"></script>
 </html>

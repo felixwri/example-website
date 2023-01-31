@@ -1,31 +1,3 @@
-#nav-hidden-menu {
-    position: relative;
-    width: 4rem;
-    margin: 1rem 0.5rem;
-
-    font-size: 1.2rem;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-#nav-revealed-menu {
-    position: absolute;
-    color: var(--primary);
-    left: 100%;
-    width: 100%;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    border-bottom: 3px solid rgba(255, 255, 255, 0);
-    transition: left 0.3s ease, border-bottom-color 0.3s ease;
-}
-
-#nav-revealed-menu:hover {
-    border-bottom-color: var(--primary);
-}
-
-/* END OF NAV */
-
 .jumbotron {
     height: 100vh;
     /* adjust as needed */
