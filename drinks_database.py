@@ -14,8 +14,7 @@ def create_drinks_table():
             name text,
             type text,
             price real,
-            calories integer,
-            description text
+            calories integer
         )""")
 
         print("Table created.")
@@ -35,7 +34,7 @@ def add_drinks(name, type, price, calories, description):
 
     try:
 
-        cursor.execute("""INSERT INTO drinks_table (name, type, price, calories, description) VALUES (%s, %s, %s, %s, %s)""", (name, type, price, calories, description))
+        cursor.execute("""INSERT INTO drinks_table (name, type, price, calories) VALUES (%s, %s, %s, %s)""", (name, type, price, calories))
 
         connection.commit()
         cursor.close()
@@ -46,19 +45,27 @@ def add_drinks(name, type, price, calories, description):
 
         connection.rollback()
 
+def get_drink():
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT * FROM drinks_table;")
+        print(cursor.fetchall())
+        
+        items = cursor.fetchall()
+        cursor.close()
+        return [
+            {
+                'id': item[0],
+                'name': item[1],
+                'type': item[2],
+                'price': item[3],
+                'calories': item[4],
+            }
+            for item in items
+        ]
+    except Exception as e:
+        print(f"Error while retrieving items - {e}")
+        print(e)
 
-
-create_drinks_table()
-
-add_drinks("Diet Coke / Coke Zero", "Soft Drinks", 3.30, 0, None)
-add_drinks("Coca Cola", "Soft Drinks", 3.50, 139, None)
-add_drinks("Sprite", "Soft Drinks", 3.30, 110, None)
-add_drinks("Fanta", "Soft Drinks", 3.30, 120, None)
-add_drinks("Orange Juice", "Soft Drinks", 4.00, 30, None)
-add_drinks("Budweiser 4.5% ABV", "Beer", 5.50, 186, None)
-add_drinks("Mahou 5.1% ABV", "Beer", 6.50, 190, None)
-add_drinks("Corona 4.5% ABV", "Beer", 5.50, 175, None)
-add_drinks("Stella Cidre", "Cider", 6.50, 150, None)
-add_drinks("Stella Cidre Raspberry", "Cider", 7.00, 190, None)
 
 
