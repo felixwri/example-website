@@ -1,8 +1,8 @@
-from databases import connection, bcrypt
+from __init__ import connection, bcrypt
 
 
 def create_users_tabel():
-        # create a cursor for navigating the postgres database
+        # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
@@ -23,7 +23,7 @@ def create_users_tabel():
     except Exception as e:
         print("Failed to build the users_table")
         print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
+        # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 def add_user(username, password):
@@ -35,7 +35,7 @@ def add_user(username, password):
         encrypted_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         #Convert the hashed password to bytes from string to use it in check_password function
         encrypted_password = encrypted_password.decode()
-        #Add the hashed password and the username details to the database    
+        #Add the hashed password and the username details to the e    
         cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
 
         connection.commit()

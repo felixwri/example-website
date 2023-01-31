@@ -1,8 +1,8 @@
-from databases import connection
+from __init__ import connection
 
 
 def create_mains_table():
-    # create a cursor for navigating the postgres database
+    # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
@@ -32,7 +32,7 @@ def create_mains_table():
     except Exception as e:
         print("Failed to build the mains_table")
         print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
+        # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 
