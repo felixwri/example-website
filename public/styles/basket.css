@@ -8,14 +8,18 @@ main {
     width: 100%;
 }
 
+#title {
+    width: 100%;
+    padding: 2rem 0rem;
+}
+
 .order-item {
-    padding: 1rem;
+    padding: 1.5rem 0rem;
+
     width: 50vw;
 
-    margin-bottom: 0.5rem;
 
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .item-title {
@@ -26,7 +30,7 @@ main {
 
 #total {
     margin: 1rem 0rem;
-    padding: 1rem;
+    padding: 1rem 0rem;
     width: 50vw;
     border-top: 3px solid black;
     display: flex;
@@ -36,4 +40,55 @@ main {
 
 #basket-container {
     display: none;
+}
+
+#submit-order {
+    margin-bottom: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#submit {
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 3px solid rgba(255, 255, 255, 0);
+    font-size: 1.2rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+#submit:hover {
+    color: black;
+    background-color: white;
+    border-color: var(--primary);
+}
+
+#order-confirmation {
+    height: 0rem;
+    width: 50%;
+    overflow: hidden;
+}
+
+#confirmation-ref {
+    color: var(--primary);
+}
+
+#confirmation-title {
+    padding: 1rem 0rem;
+}
+
+@media screen and (max-width: 1000px) {
+    #title {
+        width: 70%;
+    }
+
+    .order-item {
+        width: 70vw;
+    }
 }

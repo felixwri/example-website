@@ -90,10 +90,25 @@
         </nav>
 
         <main>
-            <div id="items"></div>
-            <div id="total">
-                <div>Total:</div>
-                <div id="price">£0.00</div>
+            <div id="order-confirmation">
+                <div>Ordered</div>
+                <h1 id="confirmation-title">Order Reference: <span id="confirmation-ref">None</span></h1>
+                <h3>Your order is on the way!</h3>
+            </div>
+            <div id="pre-order">
+                <div id="title">
+                    <h1>Your order</h1>
+                    <div id="title-hint">Submit your order and your food will be with you speedily!</div>
+                </div>
+                <div id="items"></div>
+                <div id="total">
+                    <div>Total:</div>
+                    <div id="price">£0.00</div>
+                </div>
+                <div id="submit-order">
+                    <label>All done?</label>
+                    <button id="submit" onclick="submitOrder()">Submit order</button>
+                </div>
             </div>
         </main>
     </body>

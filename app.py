@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, jsonify
 from database import get_items
 
 app = Flask(__name__)
@@ -15,7 +15,16 @@ def menu():
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
-    return render_template('basket.html')
+    if request.method == 'GET':
+        return render_template('basket.html')
+
+    elif request.method == 'POST':
+        
+        order = request.json["order"]
+        return jsonify(success="true", reference="1a2b3c4b5d")
+
+    else:
+        return jsonify(success="false", error="Bad method")
 
 
 @app.route('/styles/<path:path>')

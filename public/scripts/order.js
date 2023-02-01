@@ -60,6 +60,13 @@ class Order {
     getItems() {
         return this.items;
     }
+    getIds() {
+        let items = [];
+        for (let item of this.items) {
+            items.push({ id: item.id });
+        }
+        return items;
+    }
 
     currentItem() {
         let current = this.items[this.length() - 1];
