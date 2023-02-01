@@ -1,0 +1,39 @@
+main {
+    margin-top: 10rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.order-item {
+    padding: 1rem;
+    width: 50vw;
+
+    margin-bottom: 0.5rem;
+
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.item-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#total {
+    margin: 1rem 0rem;
+    padding: 1rem;
+    width: 50vw;
+    border-top: 3px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#basket-container {
+    display: none;
+}

@@ -13,6 +13,10 @@ def menu():
     data = get_items()
     return render_template('menu.html', menu_items=data)
 
+@app.route('/basket', methods=['GET', 'POST'])
+def basket():
+    return render_template('basket.html')
+
 
 @app.route('/styles/<path:path>')
 def send_css(path):

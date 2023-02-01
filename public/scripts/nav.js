@@ -28,7 +28,6 @@ function navInit() {
         let basketTotal = document.querySelector(".bt-current");
         let items = order.getStorage();
         basketQuantity.innerText = items.quantity;
-        console.log(items.total);
         basketTotal.innerText = order.priceToString(items.total);
     }
 }
