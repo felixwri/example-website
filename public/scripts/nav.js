@@ -22,7 +22,7 @@ navInit();
 function navInit() {
     if (!document.getElementById("nav-revealed-menu")) navSettings.navPopMenu = false;
 
-    let order = new Order([], null);
+    let order = new Order(null);
     if (order.length() > 0) {
         let basketQuantity = document.querySelector(".bq-current");
         let basketTotal = document.querySelector(".bt-current");

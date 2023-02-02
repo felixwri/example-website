@@ -1,7 +1,10 @@
-let order = new Order([], null);
+let order = new Order(null);
 
 init();
 function init() {
+    if (order.status === "ordered") {
+        showConfirmation(order.getReference());
+    }
     let parent = document.getElementById("items");
     if (order.length() === 0) {
         parent.innerText = "Nothing in your basket";
@@ -33,13 +36,12 @@ function scrollToTop() {
     });
 }
 
-function showConfirmation(ref) {
+async function showConfirmation(ref) {
     let confirmation = document.getElementById("order-confirmation");
     confirmation.style.height = "12rem";
 
     let reference = document.getElementById("confirmation-ref");
     reference.innerText = ref;
-    scrollToTop();
 
     document.getElementById("title-hint").style.display = "none";
     let submitButton = document.getElementById("submit-order");
@@ -47,6 +49,7 @@ function showConfirmation(ref) {
     submitButton.style.pointerEvents = "none";
 
     document.querySelector("#pre-order").style.opacity = 0.6;
+    scrollToTop();
 }
 
 async function submitOrder() {
@@ -65,5 +68,6 @@ async function submitOrder() {
 
     if (content.success) {
         showConfirmation(content.reference);
+        order.submitted(content.reference);
     }
 }

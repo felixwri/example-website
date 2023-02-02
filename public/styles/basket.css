@@ -73,6 +73,7 @@ main {
     height: 0rem;
     width: 50%;
     overflow: hidden;
+    transition: height 0.5s ease;
 }
 
 #confirmation-ref {
@@ -81,6 +82,10 @@ main {
 
 #confirmation-title {
     padding: 1rem 0rem;
+}
+
+#pre-order {
+    transition: opacity 0.5s ease;
 }
 
 @media screen and (max-width: 1000px) {

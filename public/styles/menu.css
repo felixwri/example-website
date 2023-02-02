@@ -1,5 +1,6 @@
 :root {
     --price-margin-right: 0rem;
+    --display-counters: "initial";
 }
 
 main {
@@ -264,6 +265,7 @@ section {
 }
 
 .order-icon {
+    display: var(--display-counters);
     width: 2rem;
     cursor: pointer;
     transition: fill 0.3s ease;

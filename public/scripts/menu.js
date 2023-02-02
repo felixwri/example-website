@@ -1,11 +1,11 @@
 let currentlyOrdering = false;
 
-const order = new Order([], menu);
+const order = new Order(menu);
 
 init();
 
 function init() {
-    if (order.length() > 0) {
+    if (order.status) {
         increaseQuantity();
         increasePrice();
         startOrder();
@@ -18,7 +18,9 @@ function init() {
 
 function startOrder() {
     if (currentlyOrdering) return;
+    order.createStorage();
 
+    // Set the styles of the page when the start order button is pressed
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "6rem";
@@ -36,6 +38,7 @@ function startOrder() {
 function cancelOrder() {
     if (!currentlyOrdering) return;
 
+    // Remove styles and clear all data from the counters and local storge
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "0rem";
@@ -56,8 +59,8 @@ function cancelOrder() {
 }
 
 function toggleFilters() {
+    // Shows the filter drop down menu
     let e = document.getElementById("filter-container");
-    let btn = document.getElementById("filters");
     if (e.dataset.showing === "true") {
         e.dataset.showing = "false";
     } else {
@@ -66,16 +69,16 @@ function toggleFilters() {
 }
 
 function selectFilter(parent) {
-    // unselect previous filter
+    // Unselect previous filter
     let prev = document.querySelector(`[data-selected="true"]`);
     if (prev) {
         prev.dataset.selected = "false";
         removeFilter(parent.id);
     }
 
-    // set new filter as selected
+    // Set new filter as selected
     let element = parent.children[0];
-    // remove the filter if it is the same as the previous filter
+    // Remove the filter if it is the same as the previous filter
     if (prev === element) {
         removeFilter(parent.id);
     } else {

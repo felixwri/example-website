@@ -21,6 +21,7 @@ def basket():
     elif request.method == 'POST':
         
         order = request.json["order"]
+        print(order)
         return jsonify(success="true", reference="1a2b3c4b5d")
 
     else:
