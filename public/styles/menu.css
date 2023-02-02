@@ -1,0 +1,350 @@
+:root {
+    --price-margin-right: 0rem;
+    --display-counters: "initial";
+}
+
+main {
+    margin-top: 16rem;
+    margin-bottom: 12rem;
+}
+
+.menu-item {
+    padding: 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.food-section {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 1rem;
+}
+
+section {
+    margin: 4rem 10vw 1rem 10vw;
+}
+
+.menu-name {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.menu-price {
+    margin-right: var(--price-margin-right);
+    transition: margin 0.5s ease;
+}
+
+.menu-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 1rem;
+    padding: 1rem 0rem;
+}
+
+.menu-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-description {
+    padding: 1rem 0rem;
+    font-size: 0.9rem;
+    min-height: 6rem;
+}
+
+.menu-extras {
+    font-size: 0.8rem;
+    color: rgb(100, 100, 100);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-extras>div {
+    margin-left: 2rem;
+}
+
+.menu-veg {
+    color: var(--dark-green);
+    font-weight: bold;
+}
+
+.section-title {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem 0rem;
+    font-size: 1.8rem;
+    border-bottom: 3px solid black;
+}
+
+#quick-select-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+
+    padding: 0.5rem 10vw;
+}
+
+.quick-select {
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.quick-select:hover {
+    background-color: white;
+    color: black;
+}
+
+#filters {
+    padding: 5px;
+    border-radius: 5px;
+    width: 8rem;
+    border: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#filter-icon {
+    fill: white;
+    width: 1.6rem;
+    height: 1.6rem;
+    transition: fill 0.3s ease;
+}
+
+#filters:hover {
+    background-color: white;
+    color: black;
+}
+
+#filters:hover #filter-icon {
+    fill: black;
+}
+
+#filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 10vw;
+    position: absolute;
+    height: 4rem;
+    left: 0;
+
+    border-bottom: 3px solid var(--primary);
+    background-color: white;
+    transition: top 0.3s ease;
+}
+
+.relative-container {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    overflow: hidden;
+}
+
+.filter-option {
+    display: flex;
+    border-radius: 15px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-option:hover {
+    background-color: var(--light-grey);
+}
+
+.filter-select {
+    margin-right: 1rem;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: 3px solid black;
+
+    transition: background-color 0.3s ease;
+}
+
+[data-showing="true"] {
+    top: 0rem;
+}
+
+[data-showing="false"] {
+    top: -4rem;
+}
+
+[data-selected="true"] {
+    background-color: black;
+}
+
+#start-order {
+    position: fixed;
+
+    bottom: 3rem;
+    right: 10vw;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    height: 4rem;
+    width: 10rem;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: var(--primary);
+    transition: opacity 0.3s ease;
+}
+
+#cancel-order {
+    position: fixed;
+
+    bottom: 3rem;
+    right: 10vw;
+
+    border-radius: 5px;
+    border: 3px solid var(--primary);
+
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    height: 4rem;
+    width: 10rem;
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: white;
+}
+
+.order-counter-container {
+    width: 0rem;
+    overflow: hidden;
+    transition: width 0.5s ease;
+}
+
+.order-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 10px;
+    height: 2rem;
+
+    width: 5rem;
+}
+
+.order-quantity {
+    font-size: 1.4rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.order-icon {
+    display: var(--display-counters);
+    width: 2rem;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.order-icon:hover {
+    fill: var(--primary);
+}
+
+.no-select {
+    user-select: none;
+}
+
+@media screen and (max-width: 400px) {
+    .menu-name {
+        font-size: 1rem;
+    }
+
+    #filters>span {
+        display: none;
+    }
+
+    #filters {
+        width: 4rem;
+    }
+
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        font-size: 0.8rem;
+    }
+
+    .filter-option {
+        font-size: 0.8rem
+    }
+
+    #filter-container {
+        padding: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        width: 6rem;
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .food-section {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+    #filter-container {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        grid-template-rows: repeat(2, 50%);
+        height: 6rem;
+    }
+
+    [data-showing="false"] {
+        top: -6rem;
+    }
+
+    .relative-container {
+        height: 6rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    section {
+        margin: 4rem 5vw 1rem 5vw;
+    }
+}

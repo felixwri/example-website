@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "test": "jest ./tests/"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.6"
+    },
+    "devDependencies": {
+        "jest": "^29.4.1"
+    }
+}

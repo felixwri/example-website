@@ -1,0 +1,156 @@
+.jumbotron {
+    height: 100vh;
+    /* adjust as needed */
+    width: 100%;
+    /* or a fixed width in pixels */
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+
+.subheading {
+    color: white
+}
+
+
+@media screen and (max-width: 767px) {
+    .jumbotron {
+        background-size: cover;
+    }
+}
+
+
+.centered {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+}
+
+.font {
+    font-family: Arial;
+    color: black;
+
+}
+
+.button {
+    background-color: #FF6422;
+    /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.centerButton {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.sub-section {
+    height: 50%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    font-size: 1.2rem;
+}
+
+#about {
+    background-color: var(--primary);
+    color: white;
+}
+
+#about-explanation {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#about-title {
+    margin-bottom: 2rem;
+}
+
+#about-image {
+    background-image: url("https://res.cloudinary.com/djukm4fut/image/upload/v1674567185/restaurant_4k_vsqmwh.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 50vh;
+}
+
+#location-vector {
+    background-image: url("https://res.cloudinary.com/djukm4fut/image/upload/v1674566688/map-image_wezlel.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 50vh;
+}
+
+#location-explanation {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#location-button {
+    border: none;
+    background-color: white;
+    border: 3px solid var(--primary);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 6rem;
+    font-size: 1rem;
+}
+
+#location-title {
+    margin-bottom: 2rem;
+}
+
+/* PAGE FOOTER */
+
+footer {
+    border-top: 3px solid var(--primary);
+    color: black;
+    background-color: white;
+
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+.footer-section {
+    height: 10rem;
+    padding: 2rem;
+}
+
+.footer-title {
+    margin-bottom: 1rem;
+}
+
+.footer-icon {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.footer-list>div {
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
