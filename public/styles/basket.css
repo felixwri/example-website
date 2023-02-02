@@ -13,6 +13,10 @@ main {
     padding: 2rem 0rem;
 }
 
+#title-hint {
+    color: var(--dark-grey);
+}
+
 .order-item {
     padding: 1.5rem 0rem;
 
@@ -26,6 +30,14 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#empty-basket {
+    height: 10rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
 }
 
 #total {

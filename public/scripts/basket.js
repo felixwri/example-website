@@ -7,7 +7,11 @@ function init() {
     }
     let parent = document.getElementById("items");
     if (order.length() === 0) {
-        parent.innerText = "Nothing in your basket";
+        document.getElementById("empty-basket").style.display = "flex";
+        document.getElementById(
+            "title-hint"
+        ).innerHTML = `<span style="color: red">Add an item on the menu to submit an order</span>`;
+        document.getElementById("submit-order").style.display = "none";
     }
 
     for (let item of order.getItems()) {
