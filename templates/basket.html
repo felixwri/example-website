@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oaxaca</title>
+        <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='nav.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='basket.css')}}" />
+    </head>
+    <body>
+        <nav>
+            <div class="nav-display">
+                <div id="nav-left">
+                    <a href="/" id="nav-title" class="link">Oaxaca</a>
+                </div>
+                <div id="nav-icons">
+                    <div id="basket-container" class="nav-icon">
+                        <div id="basket-left">
+                            <div id="basket-qty">
+                                <div class="bq-higher bq-value">1</div>
+                                <div class="bq-current bq-value">0</div>
+                                <div class="bq-lower bq-value">0</div>
+                            </div>
+                            <svg
+                                id="basket-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="48"
+                                width="48"
+                                viewBox="0 0 48 48"
+                            >
+                                <path
+                                    d="M9.8 42q-.8 0-1.425-.475T7.55 40.3L1.9 19.95q-.2-.75.275-1.35.475-.6 1.275-.6h10L22.7 4.5q.25-.3.55-.475.3-.175.7-.175.4 0 .7.175.3.175.55.475L34.4 18h10.25q.75 0 1.225.6.475.6.275 1.35l-5.7 20.35q-.2.75-.825 1.225Q39 42 38.2 42Zm.5-3h27.4l5.05-18H5.3ZM24 33q1.25 0 2.125-.875T27 30q0-1.25-.875-2.125T24 27q-1.25 0-2.125.875T21 30q0 1.25.875 2.125T24 33Zm-6.9-15h13.65l-6.8-10Zm-6.8 21h27.4Z"
+                                />
+                            </svg>
+                        </div>
+                        <div id="basket-right">
+                            <div id="basket-total">
+                                <div class="bt-higher bt-value">pend</div>
+                                <div class="bt-current bt-value">£0.00</div>
+                                <div class="bt-lower bt-value">pend</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nav-right">
+                        <a href="/menu" class="nav-page link">Menu</a>
+                        <a href="/basket" class="nav-page link">Basket</a>
+                        <a href="/login" class="nav-page link">Login</a>
+                    </div>
+                </div>
+                <div id="mobile-nav-right">
+                    <svg
+                        id="burger-menu"
+                        onclick="toggleMobileNav()"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="48"
+                        width="48"
+                        viewBox="0 0 48 48"
+                    >
+                        <path
+                            d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
+                        />
+                    </svg>
+                    <div id="mobile-nav-menu" data-open="false">
+                        <svg
+                            onclick="toggleMobileNav()"
+                            class="mobile-nav-page"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            />
+                        </svg>
+
+                        <a href="/basket" class="mobile-nav-page link">Basket</a>
+                        <a href="/login" class="mobile-nav-page link">Login</a>
+                    </div>
+                </div>
+            </div>
+
+            <script src="{{url_for('send_js', path='order.js')}}"></script>
+            <script src="{{url_for('send_js', path='nav.js')}}"></script>
+            <script>
+                navSettings.navExpandTrigger = 20;
+            </script>
+        </nav>
+
+        <main>
+            <div id="order-confirmation">
+                <div>Ordered</div>
+                <h1 id="confirmation-title">Order Reference: <span id="confirmation-ref">None</span></h1>
+                <h3>Your order is on the way!</h3>
+            </div>
+            <div id="pre-order">
+                <div id="title">
+                    <h1>Your order</h1>
+                    <div id="title-hint">Submit your order and your food will be with you speedily!</div>
+                </div>
+                <div id="items">
+                    <div id="empty-basket">
+                        <svg
+                            class="error-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 34q.7 0 1.175-.475.475-.475.475-1.175 0-.7-.475-1.175Q24.7 30.7 24 30.7q-.7 0-1.175.475-.475.475-.475 1.175 0 .7.475 1.175Q23.3 34 24 34Zm-1.35-7.65h3V13.7h-3ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                            />
+                        </svg>
+                        <div>Nothing in your basket</div>
+                    </div>
+                </div>
+                <div id="total">
+                    <div>Total:</div>
+                    <div id="price">£0.00</div>
+                </div>
+                <div id="submit-order">
+                    <label>All done?</label>
+                    <button id="submit" onclick="submitOrder()">Submit order</button>
+                </div>
+            </div>
+        </main>
+    </body>
+
+    <script src="{{url_for('send_js', path='basket.js')}}"></script>
+</html>

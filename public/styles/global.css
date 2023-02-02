@@ -6,6 +6,7 @@
 
 :root {
     --light-grey: rgb(200, 200, 200);
+    --dark-grey: rgb(100, 100, 100);
     --primary: rgb(255, 100, 34);
     --blue: rgb(34, 229, 255);
     --dark-green: rgb(0, 165, 36);
