@@ -16,7 +16,21 @@ let navSettings = {
     navExapandable: true,
     navPopMenu: true,
 };
-if (!document.getElementById("nav-revealed-menu")) navSettings.navPopMenu = false;
+
+navInit();
+
+function navInit() {
+    if (!document.getElementById("nav-revealed-menu")) navSettings.navPopMenu = false;
+
+    let order = new Order(null);
+    if (order.length() > 0) {
+        let basketQuantity = document.querySelector(".bq-current");
+        let basketTotal = document.querySelector(".bt-current");
+        let items = order.getStorage();
+        basketQuantity.innerText = items.quantity;
+        basketTotal.innerText = order.priceToString(items.total);
+    }
+}
 
 window.addEventListener("scroll", () => {
     if (navSettings.navExapandable) dyncamicNavbar();
@@ -44,11 +58,14 @@ function dynamicMenuButton() {
     const menuTrigger = 400;
     const y = window.scrollY;
     let menu = document.querySelector("#nav-revealed-menu");
+    let container = document.querySelector("#nav-hidden-menu");
 
     if (y > menuTrigger && navSettings.navMenuButtonToggle) {
+        container.style.width = "4rem";
         menu.style.left = "0%";
         navSettings.navMenuButtonToggle = false;
     } else if (y < menuTrigger && !navSettings.navMenuButtonToggle) {
+        container.style.width = "0rem";
         menu.style.left = "100%";
         navSettings.navMenuButtonToggle = true;
     }

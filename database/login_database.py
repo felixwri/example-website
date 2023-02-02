@@ -1,10 +1,10 @@
-import psycopg2
-import bcrypt
+import psycopg2, bcrypt
 
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
 
+
 def create_users_tabel():
-        # create a cursor for navigating the postgres database
+        # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
@@ -25,7 +25,7 @@ def create_users_tabel():
     except Exception as e:
         print("Failed to build the users_table")
         print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
+        # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 def add_user(username, password):
@@ -37,7 +37,7 @@ def add_user(username, password):
         encrypted_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         #Convert the hashed password to bytes from string to use it in check_password function
         encrypted_password = encrypted_password.decode()
-        #Add the hashed password and the username details to the database    
+        #Add the hashed password and the username details to the e    
         cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
 
         connection.commit()
@@ -80,15 +80,3 @@ def print_users():
         cursor.close()
     except Exception as e:
         print(f"Error while printing users - {e}")
-
-create_users_tabel()
-
-add_user("admin", "@dmin123")
-
-check_password("admin", "@dmin123")
-check_password("admin", "admin123")
-check_password("yo", "123")
-
-print_users()
-
-connection.close()

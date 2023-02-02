@@ -36,6 +36,10 @@ nav {
     display: flex;
 }
 
+#nav-icons {
+    display: flex;
+}
+
 .nav-page {
     margin: 1rem 0.5rem;
     padding: 0.5rem;
@@ -83,6 +87,22 @@ nav {
     cursor: pointer;
 }
 
+@media screen and (max-width: 400px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #basket-container {
+        flex-direction: column;
+
+        width: auto !important;
+    }
+
+    #nav-title {
+        margin: 0rem;
+    }
+}
+
 @media screen and (max-width: 550px) {
     #mobile-nav-right {
         display: initial;
@@ -91,4 +111,114 @@ nav {
     #nav-right {
         display: none;
     }
+}
+
+#nav-hidden-menu {
+    position: relative;
+    width: 0rem;
+    margin: 1rem 0.5rem;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+#nav-revealed-menu {
+    position: absolute;
+    color: var(--primary);
+    left: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid rgba(255, 255, 255, 0);
+    transition: left 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+#nav-revealed-menu:hover {
+    border-bottom-color: var(--primary);
+}
+
+#basket-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 8rem;
+    color: var(--primary);
+}
+
+#basket-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 3rem;
+}
+
+#basket-icon {
+    width: 1.6rem;
+    fill: var(--primary);
+}
+
+#basket-qty {
+    font-size: 1.2rem;
+    position: relative;
+    width: 2rem;
+    height: 1.5rem;
+    overflow: hidden;
+}
+
+.bq-value {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: top 0.5s ease;
+}
+
+.bq-current {
+    top: 0;
+}
+
+.bq-lower {
+    top: 100%;
+}
+
+.bq-higher {
+    top: -100%;
+}
+
+#basket-total {
+    font-size: 1.2rem;
+    position: relative;
+    width: 5rem;
+    height: 1.5rem;
+    overflow: hidden;
+}
+
+.bt-value {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: top 0.5s ease;
+}
+
+.bt-current {
+    top: 0;
+}
+
+.bt-lower {
+    top: 100%;
+}
+
+.bt-higher {
+    top: -100%;
 }

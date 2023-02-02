@@ -15,9 +15,38 @@
                 <div id="nav-left">
                     <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
-                <div id="nav-right">
-                    <a href="/basket" class="nav-page link">Basket</a>
-                    <a href="/login" class="nav-page link">Login</a>
+                <div id="nav-icons">
+                    <div id="basket-container" class="nav-icon">
+                        <div id="basket-left">
+                            <div id="basket-qty">
+                                <div class="bq-higher bq-value">1</div>
+                                <div class="bq-current bq-value">0</div>
+                                <div class="bq-lower bq-value">0</div>
+                            </div>
+                            <svg
+                                id="basket-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="48"
+                                width="48"
+                                viewBox="0 0 48 48"
+                            >
+                                <path
+                                    d="M9.8 42q-.8 0-1.425-.475T7.55 40.3L1.9 19.95q-.2-.75.275-1.35.475-.6 1.275-.6h10L22.7 4.5q.25-.3.55-.475.3-.175.7-.175.4 0 .7.175.3.175.55.475L34.4 18h10.25q.75 0 1.225.6.475.6.275 1.35l-5.7 20.35q-.2.75-.825 1.225Q39 42 38.2 42Zm.5-3h27.4l5.05-18H5.3ZM24 33q1.25 0 2.125-.875T27 30q0-1.25-.875-2.125T24 27q-1.25 0-2.125.875T21 30q0 1.25.875 2.125T24 33Zm-6.9-15h13.65l-6.8-10Zm-6.8 21h27.4Z"
+                                />
+                            </svg>
+                        </div>
+                        <div id="basket-right">
+                            <div id="basket-total">
+                                <div class="bt-higher bt-value">pend</div>
+                                <div class="bt-current bt-value">£0.00</div>
+                                <div class="bt-lower bt-value">pend</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nav-right">
+                        <a href="/basket" class="nav-page link">Basket</a>
+                        <a href="/login" class="nav-page link">Login</a>
+                    </div>
                 </div>
                 <div id="mobile-nav-right">
                     <svg
@@ -52,11 +81,18 @@
                 </div>
             </div>
             <div id="quick-select-container">
-                <div class="quick-select">Starters</div>
-                <div class="quick-select">Mains</div>
-                <div class="quick-select">Desserts</div>
-                <div class="quick-select">Drinks</div>
-                <div id="filters" onclick="toggleFilters()">Filters</div>
+                <div class="quick-select" onclick="scrollToElement('starters')">Starters</div>
+                <div class="quick-select" onclick="scrollToElement('mains')">Mains</div>
+                <div class="quick-select" onclick="scrollToElement('desserts')">Desserts</div>
+                <div class="quick-select" onclick="scrollToElement('drinks')">Drinks</div>
+                <div id="filters" onclick="toggleFilters()">
+                    <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                        <path
+                            d="M21.35 42V30.75h3v4.15H42v3H24.35V42ZM6 37.9v-3h12.35v3Zm9.35-8.3v-4.1H6v-3h9.35v-4.2h3v11.3Zm6-4.1v-3H42v3Zm8.3-8.25V6h3v4.1H42v3h-9.35v4.15ZM6 13.1v-3h20.65v3Z"
+                        />
+                    </svg>
+                    <span>Filters</span>
+                </div>
             </div>
             <div class="relative-container">
                 <div id="filter-container" data-showing="false">
@@ -66,15 +102,23 @@
                     </div>
                     <div id="allergy-filter" class="filter-option" onclick="selectFilter(this)">
                         <div class="filter-select" data-selected="false"></div>
-                        <div>No allergines</div>
+                        <div>No allergans</div>
                     </div>
                     <div id="low-price-filter" class="filter-option" onclick="selectFilter(this)">
                         <div class="filter-select" data-selected="false"></div>
                         <div>Lowest price</div>
                     </div>
+                    <div id="low-calorie-filter" class="filter-option" onclick="selectFilter(this)">
+                        <div class="filter-select" data-selected="false"></div>
+                        <div>Lowest calories</div>
+                    </div>
                 </div>
             </div>
+            <script src="{{url_for('send_js', path='order.js')}}"></script>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
+            <script>
+                navSettings.navExpandTrigger = 20;
+            </script>
         </nav>
 
         <main>
@@ -91,7 +135,8 @@
                             <div class="order-counter-container">
                                 <div class="order-counter">
                                     <svg
-                                        class="order-decrease order-icon"
+                                        class="order-decrease order-icon no-select"
+                                        onclick="decreaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -101,9 +146,10 @@
                                             d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
                                         />
                                     </svg>
-                                    <div class="order-quantity">0</div>
+                                    <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
                                     <svg
-                                        class="order-increase order-icon"
+                                        class="order-increase order-icon no-select"
+                                        onclick="increaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -144,6 +190,7 @@
                                 <div class="order-counter">
                                     <svg
                                         class="order-decrease order-icon"
+                                        onclick="decreaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -153,9 +200,10 @@
                                             d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
                                         />
                                     </svg>
-                                    <div class="order-quantity">0</div>
+                                    <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
                                     <svg
                                         class="order-increase order-icon"
+                                        onclick="increaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -197,6 +245,7 @@
                                 <div class="order-counter">
                                     <svg
                                         class="order-decrease order-icon"
+                                        onclick="decreaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -206,9 +255,10 @@
                                             d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
                                         />
                                     </svg>
-                                    <div class="order-quantity">0</div>
+                                    <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
                                     <svg
                                         class="order-increase order-icon"
+                                        onclick="increaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
                                         width="48"
@@ -239,7 +289,7 @@
         <div id="start-order" onclick="startOrder()">Start your order</div>
     </body>
     <script>
-        const server = {{ menu_items | tojson }};
+        const menu = {{ menu_items | tojson }};
     </script>
     <script src="{{url_for('send_js', path='menu.js')}}"></script>
 </html>
