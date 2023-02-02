@@ -6,3 +6,4 @@ connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc
 
 from database.login_database import *
 from database.menu_database import *
+from database.orders_database import *
