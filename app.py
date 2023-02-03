@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    print(db.print_users())
     return render_template('home.html', page_name="home")
 
 @app.route('/menu', methods=['GET', 'POST'])
