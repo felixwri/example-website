@@ -16,6 +16,12 @@ def menu():
     return render_template('menu.html', menu_items=data)
 
 
+@app.route('/staffHomePage', methods=['GET', 'POST'])
+def staffHomePage():
+    data = get_items()
+    return render_template('staffHomePage.html', menu_items=data)
+
+
 
 @app.route('/styles/<path:path>')
 def send_css(path):
