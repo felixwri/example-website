@@ -63,8 +63,6 @@ function applyFilter(id) {
             menuArray.push(item);
         }
 
-        console.log(menuArray);
-
         let result = menu.sort((a, b) => {
             if (a.calories < b.calories) {
                 return -1;
@@ -74,8 +72,6 @@ function applyFilter(id) {
             }
             return 0;
         });
-
-        console.log(result);
 
         let starters = document.querySelector("#starters > .food-section");
         let mains = document.querySelector("#mains > .food-section");
@@ -126,21 +122,41 @@ function removeFilter(id) {
     }
 }
 
+let prevSelectedFilter = null;
+
 function selectFilter(parent) {
+    // The element which was clicked on
+    let element = parent.children[0];
+
     // Unselect previous filter
-    let prev = document.querySelector(`[data-selected="true"]`);
+    let prev = document.getElementById(prevSelectedFilter);
     if (prev) {
-        prev.dataset.selected = "false";
-        removeFilter(parent.id);
+        let prevChild = prev.children[0];
+        if (
+            prevChild.hasAttribute("data-overwriteable") &&
+            element.hasAttribute("data-overwriteable") &&
+            prev.id !== parent.id
+        ) {
+            console.log("here");
+            prevChild.dataset.selected = "false";
+            removeFilter(parent.id);
+            prevSelectedFilter = parent.id;
+        } else if (element.dataset.selected === "true") {
+            console.log("skipped");
+            removeFilter(parent.id);
+            element.dataset.selected = "false";
+            return;
+        }
     }
 
-    // Set new filter as selected
-    let element = parent.children[0];
     // Remove the filter if it is the same as the previous filter
-    if (prev === element) {
+    if (prev === parent && element.dataset.selected === "true") {
         removeFilter(parent.id);
+        element.dataset.selected = "false";
+        prevSelectedFilter = null;
     } else {
         element.dataset.selected = "true";
         applyFilter(parent.id);
+        prevSelectedFilter = parent.id;
     }
 }
