@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
+from flask_cors import CORS, cross_origin
 import database as db
 import string, random
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
  
 
 @app.route('/')
@@ -14,31 +16,24 @@ def menu():
     data = db.get_items()
     return render_template('menu.html', menu_items=data)
 
-@app.route('/basket', methods=['GET', 'POST'])
+@app.route('/basket', methods=['GET'])
 def basket():
     if request.method == 'GET':
         return render_template('basket.html')
-
-    elif request.method == 'POST':
-        
-        order = request.json["order"]
-        print(order)
-
-        return jsonify(success="true", reference="1a2b3c4b5d")
-
     else:
         return jsonify(success="false", error="Bad method")
 
-@app.route('/submit_order', methods=['POST'])
+@app.route('/submit-order', methods=['POST'])
 def submit_order():
-    if request.form.get("submit_order"):
-        basket = request.json["basket"]
+    obj = request.get_json()
+    if obj:
+        basket = obj["basket"]
         reference = generate_reference()
 
         for item in basket:
-            db.add_order(item["id"])
+            db.add_order(item)
 
-        return jsonify(success = "true", reference = reference)
+        return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
     
 
