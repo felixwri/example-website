@@ -16,6 +16,7 @@ def create_orders_tables():
             id serial PRIMARY KEY,
             time timestamp
         )""")
+
         cursor.execute("CREATE TYPE order_status AS ENUM ('preparing', 'ready', 'delivered', 'cancelled');")
         cursor.execute("""CREATE TABLE IF NOT EXISTS order_items (
             id serial PRIMARY KEY,
@@ -34,7 +35,7 @@ def create_orders_tables():
         print(e)
         connection.rollback()
 
-def add_order(dish_ids):
+def add_order(order_items):
     cursor = connection.cursor()
     try:
         cursor.execute(
@@ -42,7 +43,8 @@ def add_order(dish_ids):
             (datetime.datetime.now(),)
         )
         [order_id] = cursor.fetchone()
-        for dish_id in dish_ids:
+        for item in order_items:
+            dish_id = item["id"]
             cursor.execute(
                 "INSERT INTO order_items (order_id, item_id, status) VALUES (%s, %s, 'preparing')",
                 (order_id, dish_id)
@@ -78,3 +80,6 @@ def get_orders():
         return list(orders.values())
     except Exception as e:
         print(f"Error while retrieving items - {e}")
+
+def print_orders():
+    print(get_orders())

@@ -56,8 +56,15 @@ async function showConfirmation(ref) {
     scrollToTop();
 }
 
+async function getBasket() {
+    const response = await fetch('http://localhost:5000/basket');
+    const basket = await response.json();
+    return basket;
+}
+
 async function submitOrder() {
-    const response = await fetch(`http://localhost:5000/basket`, {
+    const basket = getBasket();
+    const response = await fetch(`http://localhost:5000/submit_order`, {
         method: "POST",
         headers: {
             Accept: "application/json",

@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
 import database as db
+import string, random
 
 app = Flask(__name__)
  
@@ -23,14 +24,11 @@ def basket():
         order = request.json["order"]
         print(order)
 
-        #pass the items to the database
-        db.add_order(order)
-
         return jsonify(success="true", reference="1a2b3c4b5d")
 
     else:
         return jsonify(success="false", error="Bad method")
-
+    
 
 @app.route('/styles/<path:path>')
 def send_css(path):
@@ -43,6 +41,12 @@ def send_js(path):
 @app.route('/images/<path:filename>')
 def send_img(filename):
     return send_from_directory('public/images', filename)
+
+#Genereating random references
+def generate_reference():
+    letters = string.ascii_letters
+    reference = ''.join(random.choice(letters) for i in range(10))
+    return reference
 
 if __name__ == '__main__':
     app.debug = True
