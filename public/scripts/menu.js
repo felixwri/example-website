@@ -68,59 +68,6 @@ function toggleFilters() {
     }
 }
 
-function selectFilter(parent) {
-    // Unselect previous filter
-    let prev = document.querySelector(`[data-selected="true"]`);
-    if (prev) {
-        prev.dataset.selected = "false";
-        removeFilter(parent.id);
-    }
-
-    // Set new filter as selected
-    let element = parent.children[0];
-    // Remove the filter if it is the same as the previous filter
-    if (prev === element) {
-        removeFilter(parent.id);
-    } else {
-        element.dataset.selected = "true";
-        applyFilter(parent.id);
-    }
-}
-
-function applyFilter(id) {
-    if (id === "veg-filter") {
-        let inValidIds = [];
-
-        for (let item of menu) {
-            if (!item.vegetarian) {
-                inValidIds.push(item.id);
-            }
-        }
-
-        for (let i = 0; i < inValidIds.length; i++) {
-            let element = document.getElementById(`item-${inValidIds[i]}`);
-            if (element) element.style.opacity = "0.2";
-        }
-    }
-}
-
-function removeFilter(id) {
-    if (id === "veg-filter") {
-        let inValidIds = [];
-
-        for (let item of menu) {
-            if (!item.vegetarian) {
-                inValidIds.push(item.id);
-            }
-        }
-
-        for (let i = 0; i < inValidIds.length; i++) {
-            let element = document.getElementById(`item-${inValidIds[i]}`);
-            if (element) element.style.opacity = "1";
-        }
-    }
-}
-
 function setCounter(id, amount) {
     let counter = document.getElementById(`quantity-${id}`);
     let currentValue = parseInt(counter.innerText);

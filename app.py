@@ -11,6 +11,7 @@ def home():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     data = get_items()
+    print(data)
     return render_template('menu.html', menu_items=data)
 
 @app.route('/basket', methods=['GET', 'POST'])
