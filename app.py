@@ -28,6 +28,18 @@ def basket():
 
     else:
         return jsonify(success="false", error="Bad method")
+
+@app.route('/submit_order', methods=['POST'])
+def submit_order():
+    if request.form.get("submit_order"):
+        basket = request.json["basket"]
+        reference = generate_reference()
+
+        for item in basket:
+            db.add_order(item["id"])
+
+        return jsonify(success = "true", reference = reference)
+    return jsonify(success = "false", reference = "Bad method")
     
 
 @app.route('/styles/<path:path>')

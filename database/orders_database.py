@@ -83,3 +83,6 @@ def get_orders():
 
 def print_orders():
     print(get_orders())
+
+print_orders()
+

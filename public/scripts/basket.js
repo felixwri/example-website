@@ -71,7 +71,7 @@ async function submitOrder() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            order: order.getIds(),
+            basket: basket, 
         }),
     });
 
@@ -79,6 +79,5 @@ async function submitOrder() {
 
     if (content.success) {
         showConfirmation(content.reference);
-        order.submitted(content.reference);
     }
 }
