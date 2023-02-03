@@ -11,53 +11,14 @@
     <link rel="stylesheet" href="{{url_for('send_css', path='home.css')}}" />
 </head>
 <body>
-    <nav>
-        <div class="nav-display">
-            <div id="nav-left">
-                <div id="nav-title">Oaxaca</div>
-            </div>
-            <div id="nav-right">
-                <div id="nav-hidden-menu">
-                    <a href="/menu" id="nav-revealed-menu" class="link">Menu</a>
-                </div>
-                <a href="/basket" class="nav-page link">Basket</a>
-                <a href="/login" class="nav-page link">Logout</a>
-            </div>
-            <div id="mobile-nav-right">
-                <svg
-                    id="burger-menu"
-                    onclick="toggleMobileNav()"
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="48"
-                    width="48"
-                    viewBox="0 0 48 48"
-                >
-                    <path
-                        d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
-                    />
-                </svg>
-                <div id="mobile-nav-menu" data-open="false">
-                    <svg
-                        id="burger-menu"
-                        onclick="toggleMobileNav()"
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="48"
-                        width="48"
-                        viewBox="0 0 48 48"
-                    >
-                        <path
-                            d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
-                        />
-                    </svg>
-                    <a href="/menu" class="mobile-nav-page link">Menu</a>
-                    <a href="/basket" class="mobile-nav-page link">Basket</a>
-                    <a href="/login" class="mobile-nav-page link">Login</a>
-                </div>
-            </div>
-        </div>
-        <script src="{{url_for('send_js', path='nav.js')}}"></script>
-    </nav>
-
     
+    
+
+
+    <script src="{{url_for('send_js', path='order.js')}}"></script>
+    
+    <button class=" button1">Incoming Orders</button>
+    <button class=" button1">Edit Menu</button>
+    <button class=" button1">Edit Order</button>
 </body>
 </html>
