@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
-from database import get_items
+import database as db
 
 app = Flask(__name__)
  
@@ -10,7 +10,7 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    data = get_items()
+    data = db.get_items()
     return render_template('menu.html', menu_items=data)
 
 @app.route('/basket', methods=['GET', 'POST'])
@@ -22,6 +22,10 @@ def basket():
         
         order = request.json["order"]
         print(order)
+
+        #pass the items to the database
+        db.add_order(order)
+
         return jsonify(success="true", reference="1a2b3c4b5d")
 
     else:
