@@ -9,7 +9,7 @@ def create_mains_table():
 
     try:
         # delete the table to not have any duplication of data
-        cursor.execute(f"DROP TABLE IF EXISTS mains_table")
+        cursor.execute(f"DROP TABLE IF EXISTS mains_table CASCADE")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
         cursor.execute("""CREATE TABLE IF NOT EXISTS mains_table (
