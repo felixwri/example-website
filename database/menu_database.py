@@ -1,17 +1,15 @@
-
 import psycopg2
-import bcrypt
 
-# connection details of the database
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
 
+
 def create_mains_table():
-    # create a cursor for navigating the postgres database
+    # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
         # delete the table to not have any duplication of data
-        cursor.execute(f"DROP TABLE IF EXISTS mains_table")
+        cursor.execute(f"DROP TABLE IF EXISTS mains_table CASCADE")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
         cursor.execute("""CREATE TABLE IF NOT EXISTS mains_table (
@@ -36,7 +34,7 @@ def create_mains_table():
     except Exception as e:
         print("Failed to build the mains_table")
         print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
+        # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 
