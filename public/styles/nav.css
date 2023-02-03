@@ -91,6 +91,16 @@ nav {
     .nav-display {
         padding: 0rem 0.5rem;
     }
+
+    #basket-container {
+        flex-direction: column;
+
+        width: auto !important;
+    }
+
+    #nav-title {
+        margin: 0rem;
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -103,12 +113,39 @@ nav {
     }
 }
 
+#nav-hidden-menu {
+    position: relative;
+    width: 0rem;
+    margin: 1rem 0.5rem;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+#nav-revealed-menu {
+    position: absolute;
+    color: var(--primary);
+    left: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid rgba(255, 255, 255, 0);
+    transition: left 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+#nav-revealed-menu:hover {
+    border-bottom-color: var(--primary);
+}
+
 #basket-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width: 7rem;
+    width: 8rem;
     color: var(--primary);
 }
 
@@ -158,7 +195,7 @@ nav {
 #basket-total {
     font-size: 1.2rem;
     position: relative;
-    width: 4rem;
+    width: 5rem;
     height: 1.5rem;
     overflow: hidden;
 }

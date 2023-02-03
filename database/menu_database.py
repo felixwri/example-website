@@ -1,12 +1,10 @@
-
 import psycopg2
-import bcrypt
 
-# connection details of the database
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
 
+
 def create_mains_table():
-    # create a cursor for navigating the postgres database
+    # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
@@ -36,7 +34,7 @@ def create_mains_table():
     except Exception as e:
         print("Failed to build the mains_table")
         print(e)
-        # this will rollback the state of the database to before any changes were made by the cursor
+        # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 
@@ -91,10 +89,22 @@ def update_price(price, id):
 
         connection.rollback() 
 
-def get_items():
+def get_items(filter_vegetarian=False, filter_no_allergies=False):
+    query_start = "SELECT * FROM mains_table"
+    query_filters = ""
+    query_end = ";"
+    filter_strings = ["vegetarian = TRUE", "allergies = 'None'"]
+    active_filters = [filter_vegetarian, filter_no_allergies]
+    added_filters = 0
+    if active_filters.count(True) > 0:
+        for i, filter_is_active in enumerate(active_filters):
+            if filter_is_active:
+                query_filters += " WHERE " if added_filters == 0 else " AND "
+                query_filters += filter_strings[i]
+                added_filters += 1
     cursor = connection.cursor()
     try:
-        cursor.execute("SELECT * FROM mains_table;")
+        cursor.execute(query_start + query_filters + query_end)
         items = cursor.fetchall()
         cursor.close()
         return [

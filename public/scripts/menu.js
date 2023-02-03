@@ -1,60 +1,26 @@
 let currentlyOrdering = false;
-class Order {
-    constructor(currentOrder, menu) {
-        this.orderStarted = new Date();
-        this.items = currentOrder;
-        this.menu = menu;
-        this.total = 0;
-    }
 
-    totalPrice() {
-        this.total = 0;
-        for (let i = 0; i < this.items.length; i++) {
-            this.total += this.items[i].price;
+const order = new Order(menu);
+
+init();
+
+function init() {
+    if (order.status) {
+        increaseQuantity();
+        increasePrice();
+        startOrder();
+
+        for (let item of order.getItems()) {
+            setCounter(item.id, 1);
         }
-        return this.total;
-    }
-
-    addItem(id) {
-        for (let i = 0; i < this.menu.length; i++) {
-            if (this.menu[i].id == id) {
-                this.items.push(this.menu[i]);
-                break;
-            }
-        }
-    }
-
-    removeItem(id) {
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].id === id) {
-                this.items.splice(i, 1);
-                break;
-            }
-        }
-    }
-
-    currentItem() {
-        let current = this.items[this.length() - 1];
-        if (current) {
-            return current;
-        } else {
-            return {
-                id: -1,
-                price: 0.0,
-            };
-        }
-    }
-
-    length() {
-        return this.items.length;
     }
 }
 
-const order = new Order([], menu);
-
 function startOrder() {
     if (currentlyOrdering) return;
+    order.createStorage();
 
+    // Set the styles of the page when the start order button is pressed
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "6rem";
@@ -72,10 +38,16 @@ function startOrder() {
 function cancelOrder() {
     if (!currentlyOrdering) return;
 
+    // Remove styles and clear all data from the counters and local storge
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "0rem";
     }
+
+    order.clear();
+    clearCounters();
+    decreaseQuantity();
+    decreasePrice();
 
     document.documentElement.setAttribute("style", "--price-margin-right: 0rem");
 
@@ -87,8 +59,8 @@ function cancelOrder() {
 }
 
 function toggleFilters() {
+    // Shows the filter drop down menu
     let e = document.getElementById("filter-container");
-    let btn = document.getElementById("filters");
     if (e.dataset.showing === "true") {
         e.dataset.showing = "false";
     } else {
@@ -97,16 +69,16 @@ function toggleFilters() {
 }
 
 function selectFilter(parent) {
-    // unselect previous filter
+    // Unselect previous filter
     let prev = document.querySelector(`[data-selected="true"]`);
     if (prev) {
         prev.dataset.selected = "false";
         removeFilter(parent.id);
     }
 
-    // set new filter as selected
+    // Set new filter as selected
     let element = parent.children[0];
-    // remove the filter if it is the same as the previous filter
+    // Remove the filter if it is the same as the previous filter
     if (prev === element) {
         removeFilter(parent.id);
     } else {
@@ -149,11 +121,27 @@ function removeFilter(id) {
     }
 }
 
-function increaseCounter(id) {
+function setCounter(id, amount) {
     let counter = document.getElementById(`quantity-${id}`);
     let currentValue = parseInt(counter.innerText);
-    currentValue++;
+
+    if (currentValue + amount < 0) return false;
+
+    currentValue += amount;
     counter.innerText = currentValue;
+
+    return true;
+}
+
+function clearCounters() {
+    let counters = document.getElementsByClassName("order-quantity");
+    for (counter of counters) {
+        counter.innerText = 0;
+    }
+}
+
+function increaseCounter(id) {
+    setCounter(id, 1);
     order.addItem(id);
 
     increaseQuantity();
@@ -161,13 +149,7 @@ function increaseCounter(id) {
 }
 
 function decreaseCounter(id) {
-    let counter = document.getElementById(`quantity-${id}`);
-    let currentValue = parseInt(counter.innerText);
-    currentValue--;
-
-    if (currentValue <= -1) return;
-
-    counter.innerText = currentValue;
+    if (!setCounter(id, -1)) return;
 
     order.removeItem(id);
 
@@ -179,6 +161,7 @@ function increaseQuantity() {
     let targetAmount = order.length();
     // transition in queued element
     let element = document.querySelector(`.bq-higher`);
+    element.innerText = targetAmount;
     element.style.top = "0%";
 
     // transition out current
@@ -210,11 +193,7 @@ function increasePrice() {
     // transition in queued element
     let element = document.querySelector(`.bt-higher`);
 
-    if (!targetPrice.toString().includes(".")) {
-        element.innerText = `£${targetPrice}.0`;
-    } else {
-        element.innerText = `£${targetPrice}`;
-    }
+    element.innerText = order.priceToString(targetPrice);
 
     element.style.top = "0%";
 
@@ -277,11 +256,7 @@ function decreasePrice() {
     let element = document.querySelector(`.bt-lower`);
     element.style.top = "0%";
 
-    if (!targetPrice.toString().includes(".")) {
-        element.innerText = `£${targetPrice}.0`;
-    } else {
-        element.innerText = `£${targetPrice}`;
-    }
+    element.innerText = order.priceToString(targetPrice);
 
     // transition out current
     let current = document.querySelector(`.bt-current`);
