@@ -25,13 +25,16 @@ def basket():
 
 @app.route('/submit-order', methods=['POST'])
 def submit_order():
+    items = []
     obj = request.get_json()
     if obj:
         basket = obj["basket"]
         reference = generate_reference()
 
         for item in basket:
-            db.add_order(item)
+            items.append(item)
+
+        db.add_order(items)
 
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")

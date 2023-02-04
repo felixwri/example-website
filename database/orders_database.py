@@ -35,7 +35,7 @@ def create_orders_tables():
         print(e)
         connection.rollback()
 
-def add_order(order_items):
+def add_order(dish_ids):
     cursor = connection.cursor()
     try:
         cursor.execute(
@@ -43,8 +43,7 @@ def add_order(order_items):
             (datetime.datetime.now(),)
         )
         [order_id] = cursor.fetchone()
-        for item in order_items:
-            dish_id = item["id"]
+        for dish_id in dish_ids:
             cursor.execute(
                 "INSERT INTO order_items (order_id, item_id, status) VALUES (%s, %s, 'preparing')",
                 (order_id, dish_id)
@@ -84,5 +83,5 @@ def get_orders():
 def print_orders():
     print(get_orders())
 
-print_orders()
+
 
