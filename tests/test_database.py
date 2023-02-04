@@ -11,3 +11,17 @@ def test_postGres():
         assert True
     except:
         assert False
+
+def test_add_order():
+
+    order = [1]
+    add_order(order)
+
+    cursor = connection.cursor()
+
+    num_order = cursor.fetchone()
+
+    assert num_order == 1
+
+test_add_order()
+

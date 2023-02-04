@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
-from database import get_items
+from flask_cors import CORS, cross_origin
+import database as db
+import string, random
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
  
 
 @app.route('/')
@@ -14,20 +17,29 @@ def menu():
     print(data)
     return render_template('menu.html', menu_items=data)
 
-@app.route('/basket', methods=['GET', 'POST'])
+@app.route('/basket', methods=['GET'])
 def basket():
     if request.method == 'GET':
         return render_template('basket.html')
-
-    elif request.method == 'POST':
-        
-        order = request.json["order"]
-        print(order)
-        return jsonify(success="true", reference="1a2b3c4b5d")
-
     else:
         return jsonify(success="false", error="Bad method")
 
+@app.route('/submit-order', methods=['POST'])
+def submit_order():
+    items = []
+    obj = request.get_json()
+    if obj:
+        basket = obj["basket"]
+        reference = generate_reference()
+
+        for item in basket:
+            items.append(item)
+
+        db.add_order(items)
+
+        return jsonify(success = "true", reference=reference)
+    return jsonify(success = "false", reference = "Bad method")
+    
 
 @app.route('/styles/<path:path>')
 def send_css(path):
@@ -40,6 +52,12 @@ def send_js(path):
 @app.route('/images/<path:filename>')
 def send_img(filename):
     return send_from_directory('public/images', filename)
+
+#Genereating random references
+def generate_reference():
+    letters = string.ascii_letters
+    reference = ''.join(random.choice(letters) for i in range(10))
+    return reference
 
 if __name__ == '__main__':
     app.debug = True

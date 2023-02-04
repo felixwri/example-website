@@ -16,6 +16,7 @@ def create_orders_tables():
             id serial PRIMARY KEY,
             time timestamp
         )""")
+
         cursor.execute("CREATE TYPE order_status AS ENUM ('preparing', 'ready', 'delivered', 'cancelled');")
         cursor.execute("""CREATE TABLE IF NOT EXISTS order_items (
             id serial PRIMARY KEY,
@@ -78,3 +79,9 @@ def get_orders():
         return list(orders.values())
     except Exception as e:
         print(f"Error while retrieving items - {e}")
+
+def print_orders():
+    print(get_orders())
+
+
+

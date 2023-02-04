@@ -57,14 +57,16 @@ async function showConfirmation(ref) {
 }
 
 async function submitOrder() {
-    const response = await fetch(`http://localhost:5000/basket`, {
+    const basket = order.getIds();
+    console.log(basket);
+    const response = await fetch(`http://localhost:5000/submit-order`, {
         method: "POST",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            order: order.getIds(),
+            basket: basket,
         }),
     });
 
@@ -72,6 +74,5 @@ async function submitOrder() {
 
     if (content.success) {
         showConfirmation(content.reference);
-        order.submitted(content.reference);
     }
 }
