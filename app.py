@@ -13,9 +13,7 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    data = get_items()
-    print(data)
-    return render_template('menu.html', menu_items=data)
+    return render_template('menu.html', menu_items=db.get_items())
 
 @app.route('/basket', methods=['GET'])
 def basket():
@@ -39,6 +37,14 @@ def submit_order():
 
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
+
+
+@app.route('/staff/orders', methods=['GET'])
+def view_all_orders():
+    if request.method == 'GET':
+        return render_template('orders.html', orders=db.get_orders())
+    else:
+        return jsonify(success="false", error="Bad method")
     
 
 @app.route('/styles/<path:path>')

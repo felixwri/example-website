@@ -1,0 +1,32 @@
+main {
+    margin-top: 10rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+#title {
+    width: 100%;
+    padding: 2rem 0rem;
+}
+
+.order-group {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid grey;
+}
+
+.order-items {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 5rem);
+    gap: 10px;
+}
+
+.order-item {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 5rem;
+}
