@@ -33,7 +33,7 @@ def submit_order():
         for item in basket:
             items.append(item)
 
-        db.add_order(items)
+        db.add_order(reference, items)
 
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")

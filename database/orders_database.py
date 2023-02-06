@@ -14,7 +14,7 @@ def create_orders_tables():
 
         cursor.execute("""CREATE TABLE IF NOT EXISTS orders_table (
             id serial PRIMARY KEY,
-            user_id serial REFERENCES users_table(id),
+            user_id VARCHAR(10),
             time timestamp
         )""")
 

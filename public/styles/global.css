@@ -8,6 +8,7 @@
     --light-grey: rgb(200, 200, 200);
     --dark-grey: rgb(100, 100, 100);
     --primary: rgb(255, 100, 34);
+    --primary-alt: rgb(255, 60, 34);
     --blue: rgb(34, 229, 255);
     --dark-green: rgb(0, 165, 36);
 }
@@ -32,4 +33,8 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.no-select {
+    user-select: none;
 }
