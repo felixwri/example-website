@@ -58,7 +58,9 @@ def add_order(dish_ids):
 def get_orders():
     cursor = connection.cursor()
     try:
-        cursor.execute("SELECT * FROM orders_table, order_items;")
+        cursor.execute(
+            "SELECT * FROM orders_table, order_items WHERE orders_table.id = order_items.order_id;"
+        )
         items = cursor.fetchall()
         # `items` is list of (Order ID, Order Time, Order Item ID, Order ID, Item ID, Status)
         cursor.close()
