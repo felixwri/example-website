@@ -78,3 +78,13 @@ def get_orders():
         return list(orders.values())
     except Exception as e:
         print(f"Error while retrieving items - {e}")
+
+def update_order_item_status(item_id, status):
+    assert status in ['preparing', 'ready', 'delivered', 'cancelled']
+    cursor = connection.cursor()
+    try:
+        cursor.execute("UPDATE order_items SET status = %s WHERE id = %s;", (status, item_id))
+        connection.commit()
+        cursor.close()
+    except Exception as e:
+        print(f"Error while updating status for item - {e}")
