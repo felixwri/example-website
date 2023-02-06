@@ -14,6 +14,7 @@ def create_orders_tables():
 
         cursor.execute("""CREATE TABLE IF NOT EXISTS orders_table (
             id serial PRIMARY KEY,
+            user_id serial REFERENCES users_table(id),
             time timestamp
         )""")
         cursor.execute("CREATE TYPE order_status AS ENUM ('preparing', 'ready', 'delivered', 'cancelled');")
@@ -34,12 +35,12 @@ def create_orders_tables():
         print(e)
         connection.rollback()
 
-def add_order(dish_ids):
+def add_order(user_id, dish_ids):
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "INSERT INTO orders_table (time) VALUES (%s) RETURNING id",
-            (datetime.datetime.now(),)
+            "INSERT INTO orders_table (user_id, time) VALUES (%s, %s) RETURNING id",
+            (user_id, datetime.datetime.now())
         )
         [order_id] = cursor.fetchone()
         for dish_id in dish_ids:
@@ -55,7 +56,7 @@ def add_order(dish_ids):
         print(e)
         connection.rollback()
 
-def get_orders():
+def get_orders(limit=None):
     cursor = connection.cursor()
     try:
         cursor.execute(
@@ -69,15 +70,20 @@ def get_orders():
             if item[0] not in orders:
                 orders[item[0]] = {
                     'id': item[0],
-                    'time': item[1],
+                    'user_id': item[1],
+                    'time': item[2],
                     'items': [],
                 }
             orders[item[0]]["items"].append({
-                'id': item[2],
-                'item_id': item[4],
-                'status': item[5],
+                'id': item[3],
+                'item_id': item[5],
+                'status': item[6],
             })
-        return list(orders.values())
+        orders_sorted = sorted(list(orders.values()), key=lambda order: order['time'], reverse=True)
+        if limit != None:
+            return orders_sorted[:limit]
+        else:
+            return orders_sorted
     except Exception as e:
         print(f"Error while retrieving items - {e}")
 
