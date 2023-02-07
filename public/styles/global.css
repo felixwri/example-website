@@ -19,6 +19,15 @@ body {
     overflow: overlay;
 }
 
+
+.title{
+
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: bold;
+    transition: font-size 0.3s ease;
+}
+
 ::-webkit-scrollbar {
     width: 16px;
 }
