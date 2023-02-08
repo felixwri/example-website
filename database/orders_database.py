@@ -12,13 +12,15 @@ def create_orders_tables():
         cursor.execute("""DROP TABLE IF EXISTS orders_table""")
         cursor.execute("""DROP TYPE IF EXISTS order_status""")
 
+        cursor.execute("CREATE TYPE order_status AS ENUM ('pending', 'preparing', 'ready', 'delivered', 'cancelled');")
+
         cursor.execute("""CREATE TABLE IF NOT EXISTS orders_table (
             id serial PRIMARY KEY,
             user_id VARCHAR(10),
+            status order_status,
             time timestamp
         )""")
 
-        cursor.execute("CREATE TYPE order_status AS ENUM ('preparing', 'ready', 'delivered', 'cancelled');")
         cursor.execute("""CREATE TABLE IF NOT EXISTS order_items (
             id serial PRIMARY KEY,
             order_id serial REFERENCES orders_table(id),
@@ -40,13 +42,13 @@ def add_order(user_id, dish_ids):
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "INSERT INTO orders_table (user_id, time) VALUES (%s, %s) RETURNING id",
+            "INSERT INTO orders_table (user_id, time, status) VALUES (%s, %s, 'pending') RETURNING id",
             (user_id, datetime.datetime.now())
         )
         [order_id] = cursor.fetchone()
         for dish_id in dish_ids:
             cursor.execute(
-                "INSERT INTO order_items (order_id, item_id, status) VALUES (%s, %s, 'preparing')",
+                "INSERT INTO order_items (order_id, item_id, status) VALUES (%s, %s, 'pending')",
                 (order_id, dish_id)
             )
         connection.commit()
@@ -72,13 +74,14 @@ def get_orders(limit=None):
                 orders[item[0]] = {
                     'id': item[0],
                     'user_id': item[1],
-                    'time': item[2],
+                    'status': item[2],
+                    'time': item[3],
                     'items': [],
                 }
             orders[item[0]]["items"].append({
-                'id': item[3],
-                'item_id': item[5],
-                'status': item[6],
+                'id': item[4],
+                'item_id': item[6],
+                'status': item[7],
             })
         orders_sorted = sorted(list(orders.values()), key=lambda order: order['time'], reverse=True)
         if limit != None:
@@ -89,10 +92,20 @@ def get_orders(limit=None):
         print(f"Error while retrieving items - {e}")
 
 def update_order_item_status(item_id, status):
-    assert status in ['preparing', 'ready', 'delivered', 'cancelled']
+    assert status in ['pendng', 'preparing', 'ready', 'delivered', 'cancelled']
     cursor = connection.cursor()
     try:
         cursor.execute("UPDATE order_items SET status = %s WHERE id = %s;", (status, item_id))
+        connection.commit()
+        cursor.close()
+    except Exception as e:
+        print(f"Error while updating status for item - {e}")
+
+def update_order_table_status(table_id, status):
+    assert status in ['pendng', 'preparing', 'ready', 'delivered', 'cancelled']
+    cursor = connection.cursor()
+    try:
+        cursor.execute("UPDATE order_table SET status = %s WHERE id = %s;", (status, table_id))
         connection.commit()
         cursor.close()
     except Exception as e:
