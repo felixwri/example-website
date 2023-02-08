@@ -92,7 +92,7 @@ def get_orders(limit=None):
         print(f"Error while retrieving items - {e}")
 
 def update_order_item_status(item_id, status):
-    assert status in ['pendng', 'preparing', 'ready', 'delivered', 'cancelled']
+    assert status in ['pending', 'preparing', 'ready', 'delivered', 'cancelled']
     cursor = connection.cursor()
     try:
         cursor.execute("UPDATE order_items SET status = %s WHERE id = %s;", (status, item_id))
@@ -102,10 +102,10 @@ def update_order_item_status(item_id, status):
         print(f"Error while updating status for item - {e}")
 
 def update_order_table_status(table_id, status):
-    assert status in ['pendng', 'preparing', 'ready', 'delivered', 'cancelled']
+    assert status in ['pending', 'preparing', 'ready', 'delivered', 'cancelled']
     cursor = connection.cursor()
     try:
-        cursor.execute("UPDATE order_table SET status = %s WHERE id = %s;", (status, table_id))
+        cursor.execute("UPDATE orders_table SET status = %s WHERE id = %s;", (status, table_id))
         connection.commit()
         cursor.close()
     except Exception as e:

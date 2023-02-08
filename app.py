@@ -46,6 +46,17 @@ def view_all_orders():
     else:
         return jsonify(success="false", error="Bad method")
     
+@app.route('/staff/order-status', methods=['POST'])
+def cancel_order():
+    if request.method == 'POST':
+        req = request.get_json()
+        if req:
+            db.update_order_table_status(req["id"], req["status"])
+            return jsonify(success = "true", newStatus = req["status"])
+        return jsonify(success = "false")
+    else:
+        return jsonify(success="false", error="Bad method")
+    
 
 @app.route('/styles/<path:path>')
 def send_css(path):

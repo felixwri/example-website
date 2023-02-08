@@ -8,7 +8,7 @@ main {
     width: 100%;
 }
 
-#all-orders {
+.all-orders {
     display: grid;
 
     grid-template-columns: repeat(3, 3fr);
@@ -16,7 +16,7 @@ main {
     gap: 1rem;
 }
 
-#title {
+.title {
     width: 100%;
     padding: 2rem 0rem;
     margin: 2rem 0rem;
@@ -77,7 +77,27 @@ main {
     color: rgb(40, 40, 40);
 }
 
+.static-clock {
+    font-size: 1rem;
+}
 
+.order-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.action-icon {
+    height: 3rem;
+    width: 3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.cancel-order-icon:hover {
+    fill: red;
+}
 
 @media screen and (max-width: 900px) {
     #all-orders {
