@@ -1,16 +1,19 @@
 :root {
     --price-margin-right: 0rem;
     --display-counters: "initial";
+    --edit-icon-width: 0rem;
 }
 
 main {
     margin-top: 16rem;
     margin-bottom: 12rem;
+    transition: margin-top 0.5s ease;
 }
 
 .menu-item {
     padding: 1rem;
-    transition: opacity 0.3s ease;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .food-section {
@@ -41,13 +44,13 @@ section {
     align-items: center;
     flex-grow: 1;
     font-size: 1rem;
-    padding: 1rem 0rem;
 }
 
 .menu-title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 3rem;
 }
 
 .menu-description {
@@ -57,10 +60,12 @@ section {
 }
 
 .menu-extras {
+    margin-top: 5px;
     font-size: 0.8rem;
     color: rgb(100, 100, 100);
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .menu-extras>div {
@@ -213,7 +218,11 @@ section {
     cursor: pointer;
 
     background-color: var(--primary);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#start-order:hover {
+    transform: scale(105%);
 }
 
 #cancel-order {
@@ -343,4 +352,125 @@ section {
     section {
         margin: 4rem 5vw 1rem 5vw;
     }
+}
+
+
+
+#edit-menu {
+    position: fixed;
+    bottom: 3rem;
+    right: calc(10vw + 10rem + 2rem);
+    width: 10rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 5px;
+    color: var(--primary-alt);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border: 3px solid var(--primary-alt);
+    transition: transform 0.3s ease;
+}
+
+#edit-menu:hover {
+    transform: scale(105%);
+}
+
+#stop-edit-menu {
+    position: fixed;
+    bottom: 3rem;
+    right: calc(10vw + 10rem + 2rem);
+    width: 10rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 5px;
+    color: var(--primary-alt);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border: 3px solid var(--primary-alt);
+    transition: transform 0.3s ease;
+}
+
+#stop-edit-menu>svg {
+    margin-right: 1rem;
+}
+
+#stop-edit-menu:hover {
+    transform: scale(105%);
+}
+
+[contenteditable] {
+    transition: margin 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+}
+
+[data-editing="true"] {
+    background-color: rgba(255, 60, 34, 0.1);
+}
+
+br {
+    display: none;
+}
+
+.menu-description[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 1rem 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.menu-name[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.menu-price[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.edit-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--primary-alt);
+    cursor: pointer;
+}
+
+#edit-menu>svg {
+    margin-right: 1rem;
+}
+
+.start-editing-item {
+    width: var(--edit-icon-width);
+
+    transition: width 0.5s ease;
+}
+
+.save-item {
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.reload-item {
+    width: 0;
+    transition: width 0.5s ease;
 }
