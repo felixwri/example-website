@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oaxaca</title>
+        <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='staffNav.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='allOrders.css')}}" />
+    </head>
+    <body>
+        <nav>
+            <div class="nav-display">
+                <div id="nav-left">
+                    <a href="/" id="nav-title" class="staff link">Oaxaca</a>
+                </div>
+                <div id="nav-icons">
+                    <div id="nav-right">
+                        <a href="/" class="nav-page link">Main site</a>
+                        <a href="/staff/home" class="nav-page link">Home</a>
+                        <a href="/staff/orders" class="nav-page link">Orders</a>
+                        <a href="/staff/menu" class="nav-page link">Edit</a>
+                    </div>
+                </div>
+                <div id="mobile-nav-right">
+                    <svg
+                        id="burger-menu"
+                        onclick="toggleMobileNav()"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="48"
+                        width="48"
+                        viewBox="0 0 48 48"
+                    >
+                        <path
+                            d="M7.5 36q-.65 0-1.075-.425Q6 35.15 6 34.5q0-.65.425-1.075Q6.85 33 7.5 33h33q.65 0 1.075.425Q42 33.85 42 34.5q0 .65-.425 1.075Q41.15 36 40.5 36Zm0-10.5q-.65 0-1.075-.425Q6 24.65 6 24q0-.65.425-1.075Q6.85 22.5 7.5 22.5h33q.65 0 1.075.425Q42 23.35 42 24q0 .65-.425 1.075-.425.425-1.075.425Zm0-10.5q-.65 0-1.075-.425Q6 14.15 6 13.5q0-.65.425-1.075Q6.85 12 7.5 12h33q.65 0 1.075.425Q42 12.85 42 13.5q0 .65-.425 1.075Q41.15 15 40.5 15Z"
+                        />
+                    </svg>
+                    <div id="mobile-nav-menu" data-open="false">
+                        <svg
+                            onclick="toggleMobileNav()"
+                            class="mobile-nav-page"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            />
+                        </svg>
+
+                        <a href="/basket" class="mobile-nav-page link">Basket</a>
+                        <a href="/login" class="mobile-nav-page link">Login</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleMobileNav() {
+                    let menu = document.getElementById("mobile-nav-menu");
+                    if (menu.dataset.open === "true") {
+                        menu.style.right = "-12rem";
+                        menu.dataset.open = "false";
+                    } else {
+                        menu.style.right = "0rem";
+                        menu.dataset.open = "true";
+                    }
+                }
+            </script>
+        </nav>
+
+        <main>
+            <h1 class="title">Incoming Orders</h1>
+            <div id="active-orders" class="all-orders">
+                {% for order in orders %} {% if order.status != 'cancelled' %}
+                <div id="id-{{ order.id }}" class="order-group">
+                    <div class="group-title">
+                        <div class="order-title-left">
+                            <svg
+                                class="clock-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="48"
+                                width="48"
+                                viewBox="0 0 48 48"
+                            >
+                                <path
+                                    d="M18 5V2h12v3Zm4.5 22.35h3v-11.5h-3Zm1.5 16.6q-3.7 0-6.975-1.425Q13.75 41.1 11.3 38.65q-2.45-2.45-3.875-5.725Q6 29.65 6 25.95q0-3.7 1.425-6.975Q8.85 15.7 11.3 13.25q2.45-2.45 5.725-3.875Q20.3 7.95 24 7.95q3.35 0 6.3 1.125 2.95 1.125 5.25 3.125l2.55-2.55 2.1 2.1-2.55 2.55q1.8 2 3.075 4.85Q42 22 42 25.95q0 3.7-1.425 6.975Q39.15 36.2 36.7 38.65q-2.45 2.45-5.725 3.875Q27.7 43.95 24 43.95Zm0-3q6.25 0 10.625-4.375T39 25.95q0-6.25-4.375-10.625T24 10.95q-6.25 0-10.625 4.375T9 25.95q0 6.25 4.375 10.625T24 40.95ZM24 26Z"
+                                />
+                            </svg>
+                            <div class="order-time active-clock" data-time="{{order.time}}">{{order.time}}</div>
+                        </div>
+                        <div class="order-ref">
+                            <span class="no-select" style="color: grey"># </span><span>{{order.user_id}}</span>
+                        </div>
+                    </div>
+
+                    <div class="order-items">
+                        {% for item in order["items"] %}
+                        <div class="order-item">
+                            <div>#{{item.item_id}}</div>
+                            <div data-status="{{item.status}}">{{item.status}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="order-actions">
+                        <svg
+                            class="edit-order-icon action-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                            />
+                        </svg>
+                        <svg
+                            onclick="changeStatus({{ order.id }}, 'cancelled')"
+                            class="cancel-order-icon action-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            />
+                        </svg>
+                    </div>
+                </div>
+                {% endif%} {% endfor %}
+            </div>
+            <h1 class="title">Cancelled Orders</h1>
+            <div id="cancelled-orders" class="all-orders">
+                {% for order in orders %} {% if order.status == 'cancelled' %}
+                <div id="id-{{ order.id }}" class="order-group">
+                    <div class="group-title">
+                        <div class="order-title-left">
+                            <svg
+                                class="clock-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="48"
+                                width="48"
+                                viewBox="0 0 48 48"
+                            >
+                                <path
+                                    d="M18 5V2h12v3Zm4.5 22.35h3v-11.5h-3Zm1.5 16.6q-3.7 0-6.975-1.425Q13.75 41.1 11.3 38.65q-2.45-2.45-3.875-5.725Q6 29.65 6 25.95q0-3.7 1.425-6.975Q8.85 15.7 11.3 13.25q2.45-2.45 5.725-3.875Q20.3 7.95 24 7.95q3.35 0 6.3 1.125 2.95 1.125 5.25 3.125l2.55-2.55 2.1 2.1-2.55 2.55q1.8 2 3.075 4.85Q42 22 42 25.95q0 3.7-1.425 6.975Q39.15 36.2 36.7 38.65q-2.45 2.45-5.725 3.875Q27.7 43.95 24 43.95Zm0-3q6.25 0 10.625-4.375T39 25.95q0-6.25-4.375-10.625T24 10.95q-6.25 0-10.625 4.375T9 25.95q0 6.25 4.375 10.625T24 40.95ZM24 26Z"
+                                />
+                            </svg>
+                            <div class="order-time static-clock" data-time="{{order.time}}">{{order.time}}</div>
+                        </div>
+                        <div class="order-ref">
+                            <span class="no-select" style="color: grey"># </span><span>{{order.user_id}}</span>
+                        </div>
+                    </div>
+
+                    <div class="order-items">
+                        {% for item in order["items"] %}
+                        <div class="order-item">
+                            <div>#{{item.item_id}}</div>
+                            <div data-status="{{item.status}}">{{item.status}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="order-actions">
+                        <svg
+                            onclick="changeStatus({{ order.id }}, 'pending')"
+                            class="restore-order action-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path d="M22.5 40V13.7L10.1 26.1 8 24 24 8l16 16-2.1 2.1-12.4-12.4V40Z" />
+                        </svg>
+                    </div>
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+        </main>
+    </body>
+    <script>
+        const orders = JSON.parse(`{{ orders | tojson}}`);
+    </script>
+    <script src="{{url_for('send_js', path='allOrders.js')}}"></script>
+</html>

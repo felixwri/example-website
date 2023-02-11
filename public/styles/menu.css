@@ -275,10 +275,6 @@ section {
     fill: var(--primary);
 }
 
-.no-select {
-    user-select: none;
-}
-
 @media screen and (max-width: 400px) {
     .menu-name {
         font-size: 1rem;
