@@ -61,6 +61,7 @@ section {
 
 .menu-extras {
     margin-top: 5px;
+    height: 1.6rem;
     font-size: 0.8rem;
     color: rgb(100, 100, 100);
     display: flex;
@@ -68,13 +69,23 @@ section {
     align-items: center;
 }
 
-.menu-extras>div {
+.menu-calories {
     margin-left: 2rem;
 }
 
 .menu-veg {
     color: var(--dark-green);
     font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    margin: 0rem 0.5rem;
+
+    position: relative;
+
+    transition: opacity 0.5s ease, width 0.5s ease, padding 0.5s ease, background-color 0.5s ease;
 }
 
 .section-title {
@@ -424,28 +435,29 @@ br {
     display: none;
 }
 
-.menu-description[contenteditable]:focus {
-    outline: 0px solid transparent;
-    background-color: white;
-    padding: 1rem 5px;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-.menu-name[contenteditable]:focus {
-    outline: 0px solid transparent;
-    background-color: white;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 5px;
-}
-
+.menu-name[contenteditable]:focus,
 .menu-price[contenteditable]:focus {
     outline: 0px solid transparent;
     background-color: white;
     padding: 5px;
     margin: 5px;
     border-radius: 5px;
+}
+
+.menu-cal[contenteditable]:focus,
+.menu-alg[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.menu-description[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 1rem 5px;
 }
 
 .edit-icon {
@@ -470,7 +482,32 @@ br {
     transition: width 0.5s ease;
 }
 
-.reload-item {
+.more-items {
     width: 0;
     transition: width 0.5s ease;
+}
+
+[data-veg="false"] {
+    color: rgb(100, 100, 100);
+    opacity: 0;
+    width: 0;
+}
+
+.toggle-veg[data-veg="false"] {
+    opacity: 0.5;
+    width: 4rem;
+}
+
+.empty-alg {
+    width: 3rem;
+}
+
+.toggle-veg {
+    cursor: pointer;
+}
+
+.toggle-veg:hover {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
 }

@@ -1,3 +1,5 @@
+let edits = [];
+
 function startEditing() {
     const root = document.querySelector(":root");
     root.style.setProperty("--primary", "rgb(255, 60, 34)");
@@ -31,27 +33,84 @@ function stopEditing() {
 }
 
 function editItem(id) {
-    let parent = document.getElementById(`item-${id}`);
+    edits.push(id);
+    let { parent, name, price, description, allergans, vegatarian, calories } = getFields(id);
+
     parent.dataset.editing = "true";
-    let name = parent.children[0].children[0].children[0];
-    let price = parent.children[0].children[0].children[1];
-    let description = parent.children[1];
+
     name.setAttribute("contentEditable", "");
     price.setAttribute("contentEditable", "");
     description.setAttribute("contentEditable", "");
+    allergans.setAttribute("contentEditable", "");
+    calories.setAttribute("contentEditable", "");
+
+    vegatarian.classList.add("toggle-veg");
 
     document.getElementById(`start-${id}`).style.width = "0rem";
     document.getElementById(`save-${id}`).style.width = "2rem";
-    document.getElementById(`reload-${id}`).style.width = "2rem";
+    document.getElementById(`more-${id}`).style.width = "2rem";
 }
 
 function saveItem(id) {
-    let parent = document.getElementById(`item-${id}`);
-    let name = parent.children[0].children[0].children[0];
-    let price = parent.children[0].children[0].children[1];
-    let description = parent.children[1];
+    let { name, price, description, calories, allergans } = getFields(id);
 
     console.log(name.innerText);
     console.log(price.innerText);
     console.log(description.innerText);
+    console.log(calories.innerText);
+    console.log(allergans.innerText);
+
+    stopEditingItem(id);
+}
+
+function getFields(id) {
+    let parent = document.getElementById(`item-${id}`);
+    let name = parent.children[0].children[0].children[0];
+    let price = parent.children[0].children[0].children[1];
+    let description = parent.children[1];
+    let allergans = parent.children[2].children[0];
+    let vegatarian = parent.children[2].children[1];
+    let calories = parent.children[2].children[2];
+
+    return {
+        parent: parent,
+        name: name,
+        price: price,
+        description: description,
+        allergans: allergans,
+        vegatarian: vegatarian,
+        calories: calories,
+    };
+}
+
+function stopEditingItem(id) {
+    const index = edits.indexOf(id);
+    if (index > -1) {
+        edits.splice(index, 1); // 2nd parameter means remove one item only
+    }
+
+    let { parent, name, price, description, allergans, vegatarian, calories } = getFields(id);
+
+    parent.dataset.editing = "false";
+
+    name.removeAttribute("contentEditable");
+    price.removeAttribute("contentEditable");
+    description.removeAttribute("contentEditable");
+    allergans.removeAttribute("contentEditable");
+    calories.removeAttribute("contentEditable");
+
+    vegatarian.classList.remove("toggle-veg");
+
+    document.getElementById(`start-${id}`).removeAttribute("style");
+    document.getElementById(`save-${id}`).style.width = "0rem";
+    document.getElementById(`more-${id}`).style.width = "0rem";
+}
+
+function toggleVegatarian(e) {
+    if (edits.length <= 0) return;
+    if (e.dataset.veg === "true") {
+        e.dataset.veg = "false";
+    } else {
+        e.dataset.veg = "true";
+    }
 }
