@@ -39,7 +39,7 @@ def add_user(username, password):
         encrypted_password = encrypted_password.decode()
         #Add the hashed password and the username details to the e    
         cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
-
+        
         connection.commit()
         cursor.close()
 
@@ -70,6 +70,35 @@ def check_password(username, password):
 
     else:
         return False
+
+def password_strength(password):
+    lower_case = re.search(r"[a-z]", password)
+    upper_case = re.search(r"[A-Z]", password)
+    digit = re.search(r"[0-9]", password)
+    special_char = re.search(r"[!@#\$%\^&\*]", password)
+
+    if len(password) < 8:
+        return False
+    elif lower_case and upper_case and digit and special_char:
+        return True
+    else:
+        return False   
+
+def existing_user(username):
+    cursor = connection.cursor()
+
+    cursor.execute(f"SELECT 1 FROM users_table WHERE username = %s", (username,))
+
+    result = cursor.fetchone()
+
+    cursor.close()
+
+    if result:
+        return True
+    else:
+        return False
+
+
 
 def print_users():
     cursor = connection.cursor()
