@@ -38,16 +38,19 @@ def submit_order():
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    #Get the username and password
-    username = request.form['username']
-    password = request.form['password']
-
-    if login_database.check_password(username, password):
-        return "Login succesful!"
+    if request.method == 'GET':
+        return render_template("login.html")
     else:
-        return "Incorrect username or password!"
+        #Get the username and password
+        username = request.form['username']
+        password = request.form['password']
+
+        if db.check_password(username, password):
+            return "Login succesful!"
+        else:
+            return "Incorrect username or password!"
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -56,11 +59,11 @@ def register():
     password = request.form['password']
    
 
-    if login_database.exisiting_user(username):
+    if db.exisiting_user(username):
         return "User already exists!"
     else:
-        if login_database.password_strength(password):
-            login_database.add_user(username, password)
+        if db.password_strength(password):
+            db.add_user(username, password)
             return "Registiration succesful!"
         else:
             return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."

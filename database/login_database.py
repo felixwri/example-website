@@ -1,4 +1,4 @@
-import psycopg2, bcrypt
+import psycopg2, bcrypt, re
 
 connection = psycopg2.connect("postgres://odstwujyyeqrmq:e17c2c73945aea33a3547fc80fee617794063f339711ba1ffcdf6de4055c10aa@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dai4en0moi3ve4")
 
@@ -60,7 +60,7 @@ def check_password(username, password):
 
     #Check if the user exists
     if result:
-        #Get the hashed password
+        #Get the hashed 
         encrypted_password = result[0]
         #Check the password if it is correct or not
         if bcrypt.checkpw(password.encode(), encrypted_password.encode()):
