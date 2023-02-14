@@ -60,7 +60,7 @@ section {
 }
 
 .menu-extras {
-    margin-top: 5px;
+    margin-top: 0.4rem;
     height: 1.6rem;
     font-size: 0.8rem;
     color: rgb(100, 100, 100);
@@ -510,4 +510,57 @@ br {
     background-color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+.temporary-item {
+    position: relative;
+    animation: open 0.5s ease normal forwards;
+}
+
+.create-item-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: opacity 0.5s ease, background-color 0.5s ease;
+}
+
+.create-item-button>div {
+    transition: color 0.3s ease;
+}
+
+.create-item-button:hover,
+.create-item-button:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--primary-alt);
+    fill: var(--primary-alt);
+}
+
+@keyframes open {
+    0% {
+        height: 0rem;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        height: 13rem;
+        opacity: 1;
+    }
 }
