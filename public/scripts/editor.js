@@ -1,6 +1,7 @@
 let edits = [];
 
 async function startEditing() {
+    if (currentlyOrdering) cancelOrder();
     const root = document.querySelector(":root");
     root.style.setProperty("--primary", "rgb(255, 60, 34)");
 
@@ -17,7 +18,12 @@ async function startEditing() {
     editButton.style.pointerEvents = "none";
 
     setTimeout(() => {
-        if (document.querySelectorAll(".temporary-item").length === 0) createNewElement();
+        if (document.querySelectorAll(".temporary-item").length === 0) {
+            createNewElement("starters");
+            createNewElement("mains");
+            createNewElement("desserts");
+            createNewElement("drinks");
+        }
     }, 500);
 
     document.getElementById("start-order").style.opacity = 0.5;
@@ -43,8 +49,10 @@ function stopEditing() {
 
     let temporaryItems = document.querySelectorAll(".temporary-item");
     for (tempItem of temporaryItems) {
-        console.log(tempItem);
         tempItem.remove();
+        console.log(edits);
+        removeEdit(parseInt(tempItem.dataset.id));
+        console.log(edits);
     }
 
     let allEdits = [...edits];
@@ -82,8 +90,10 @@ function saveItem(id) {
 
     if (parent.classList.contains("temporary-item")) {
         parent.classList.remove("temporary-item");
-        createNewElement();
+        createNewElement(parent.parentElement.parentElement.id);
     }
+
+    hideContext();
 
     console.log(name.innerText);
     console.log(price.innerText);
@@ -114,12 +124,15 @@ function getFields(id) {
     };
 }
 
-function stopEditingItem(id) {
+function removeEdit(id) {
     const index = edits.indexOf(id);
     if (index > -1) {
         edits.splice(index, 1); // 2nd parameter means remove one item only
     }
+}
 
+function stopEditingItem(id) {
+    removeEdit(id);
     let { parent, name, price, description, allergans, vegatarian, calories } = getFields(id);
 
     parent.dataset.editing = "false";
@@ -146,16 +159,16 @@ function toggleVegatarian(e) {
     }
 }
 
-function createNewElement() {
+function createNewElement(selector) {
     console.time();
-    let parent = document.querySelector(".food-section");
+    let parent = document.querySelector(`#${selector}>.food-section`);
 
     const array = new Uint32Array(1);
     crypto.getRandomValues(array);
     const temporaryID = array.join();
 
     parent.innerHTML += `
-    <div id="item-${temporaryID}" class="menu-item temporary-item">
+    <div id="item-${temporaryID}" data-id="${temporaryID}" class="menu-item temporary-item">
         <div class="menu-title-container">
             <div class="menu-title">
                 <div class="menu-name">Title</div>
@@ -221,6 +234,7 @@ function createNewElement() {
 
                 <svg
                     id="more-${temporaryID}"
+                    onclick="showContext(this, ${temporaryID})"
                     class="edit-icon more-items"
                     xmlns="http://www.w3.org/2000/svg"
                     height="48"
