@@ -7,7 +7,8 @@ async function startEditing() {
     root.style.setProperty("--edit-icon-width", "2rem");
     root.style.setProperty("--price-margin-right", "1rem");
 
-    document.getElementById("quick-select-container").style.display = "none";
+    document.getElementById("quick-select-container").style.opacity = "0";
+    document.getElementById("quick-select-container").style.pointerEvents = "none";
     document.querySelector(".relative-container").style.pointerEvents = "none";
     document.querySelector("main").style.marginTop = "8rem";
 
@@ -18,6 +19,10 @@ async function startEditing() {
     setTimeout(() => {
         if (document.querySelectorAll(".temporary-item").length === 0) createNewElement();
     }, 500);
+
+    document.getElementById("start-order").style.opacity = 0.5;
+    document.getElementById("cancel-order").style.opacity = 0;
+    editing = true;
 }
 
 function stopEditing() {
@@ -27,7 +32,8 @@ function stopEditing() {
     root.style.setProperty("--edit-icon-width", "0rem");
     root.style.setProperty("--price-margin-right", "0rem");
 
-    document.getElementById("quick-select-container").style.display = "flex";
+    document.getElementById("quick-select-container").style.opacity = "1";
+    document.getElementById("quick-select-container").style.pointerEvents = "all";
     document.querySelector(".relative-container").style.pointerEvents = "initial";
     document.querySelector("main").style.marginTop = "16rem";
 
@@ -45,6 +51,11 @@ function stopEditing() {
     for (let edit of allEdits) {
         saveItem(edit);
     }
+
+    hideContext();
+    document.getElementById("start-order").style.opacity = 1;
+    document.getElementById("cancel-order").style.opacity = 1;
+    editing = false;
 }
 
 function editItem(id) {
@@ -254,4 +265,43 @@ function addNewItem(id) {
     overlay.style.opacity = 0;
     overlay.style.pointerEvents = "none";
     editItem(id);
+}
+
+let currentFocusedItem = null;
+
+function showContext(element, id) {
+    if (currentFocusedItem) {
+        if (currentFocusedItem.id === element.id) {
+            hideContext(element);
+            return;
+        } else {
+            currentFocusedItem.classList.remove("more-items-focused");
+        }
+    }
+
+    let bound = element.getBoundingClientRect();
+    let context = document.getElementById("context-menu");
+
+    if (bound.x > window.innerWidth - 200) {
+        let contextBound = context.getBoundingClientRect();
+        context.style.top = `${bound.y + window.scrollY - (contextBound.height + 20)}px`;
+        context.style.left = `${bound.x - contextBound.width / 2}px`;
+    } else {
+        context.style.top = `${bound.y + window.scrollY}px`;
+        context.style.left = `${bound.x + 50}px`;
+    }
+
+    context.style.opacity = "1";
+    context.style.pointerEvents = "all";
+
+    element.classList.add("more-items-focused");
+    currentFocusedItem = element;
+}
+
+function hideContext(element) {
+    let context = document.getElementById("context-menu");
+    context.style.opacity = "0";
+    context.style.pointerEvents = "none";
+    if (element) element.classList.remove("more-items-focused");
+    currentFocusedItem = null;
 }

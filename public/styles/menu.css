@@ -105,6 +105,7 @@ section {
     color: white;
 
     padding: 0.5rem 10vw;
+    transition: opacity 0.3s ease;
 }
 
 .quick-select {
@@ -258,6 +259,7 @@ section {
     cursor: pointer;
 
     background-color: white;
+    transition: opacity 0.3s ease;
 }
 
 .order-counter-container {
@@ -484,7 +486,7 @@ br {
 
 .more-items {
     width: 0;
-    transition: width 0.5s ease;
+    transition: transform 0.3s ease, width 0.5s ease;
 }
 
 [data-veg="false"] {
@@ -563,4 +565,57 @@ br {
         height: 13rem;
         opacity: 1;
     }
+}
+
+#context-menu {
+    position: absolute;
+    left: 50%;
+    top: 10rem;
+    border-radius: 15px;
+    pointer-events: none;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    transition: top 0.4s ease, opacity 0.5s ease, left 0.5s ease;
+}
+
+.context-option {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    width: 8rem;
+    color: var(--primary-alt);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.context-option:hover {
+    background-color: var(--primary-alt);
+    color: white;
+}
+
+.context-option:hover>svg {
+    fill: white;
+}
+
+#ctx-reset {
+    margin-bottom: 1rem;
+}
+
+.context-option>svg {
+    height: 1.6rem;
+    width: 1.6rem;
+    fill: var(--primary-alt);
+    transition: fill 0.3s ease;
+}
+
+.more-items:hover {
+    transform: rotate(90deg);
+}
+
+.more-items-focused {
+    transform: rotate(90deg);
 }
