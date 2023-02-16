@@ -1,15 +1,19 @@
 :root {
     --price-margin-right: 0rem;
+    --display-counters: "initial";
+    --edit-icon-width: 0rem;
 }
 
 main {
     margin-top: 16rem;
     margin-bottom: 12rem;
+    transition: margin-top 0.5s ease;
 }
 
 .menu-item {
     padding: 1rem;
-    transition: opacity 0.3s ease;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .food-section {
@@ -40,13 +44,13 @@ section {
     align-items: center;
     flex-grow: 1;
     font-size: 1rem;
-    padding: 1rem 0rem;
 }
 
 .menu-title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 3rem;
 }
 
 .menu-description {
@@ -56,19 +60,32 @@ section {
 }
 
 .menu-extras {
+    margin-top: 0.4rem;
+    height: 1.6rem;
     font-size: 0.8rem;
     color: rgb(100, 100, 100);
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
-.menu-extras>div {
+.menu-calories {
     margin-left: 2rem;
 }
 
 .menu-veg {
     color: var(--dark-green);
     font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    margin: 0rem 0.5rem;
+
+    position: relative;
+
+    transition: opacity 0.5s ease, width 0.5s ease, padding 0.5s ease, background-color 0.5s ease;
 }
 
 .section-title {
@@ -88,6 +105,7 @@ section {
     color: white;
 
     padding: 0.5rem 10vw;
+    transition: opacity 0.3s ease;
 }
 
 .quick-select {
@@ -212,7 +230,11 @@ section {
     cursor: pointer;
 
     background-color: var(--primary);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#start-order:hover {
+    transform: scale(105%);
 }
 
 #cancel-order {
@@ -237,6 +259,7 @@ section {
     cursor: pointer;
 
     background-color: white;
+    transition: opacity 0.3s ease;
 }
 
 .order-counter-container {
@@ -264,6 +287,7 @@ section {
 }
 
 .order-icon {
+    display: var(--display-counters);
     width: 2rem;
     cursor: pointer;
     transition: fill 0.3s ease;
@@ -271,10 +295,6 @@ section {
 
 .order-icon:hover {
     fill: var(--primary);
-}
-
-.no-select {
-    user-select: none;
 }
 
 @media screen and (max-width: 400px) {
@@ -345,4 +365,307 @@ section {
     section {
         margin: 4rem 5vw 1rem 5vw;
     }
+}
+
+
+
+#edit-menu {
+    position: fixed;
+    bottom: 3rem;
+    right: calc(10vw + 10rem + 2rem);
+    width: 10rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 5px;
+    color: var(--primary-alt);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border: 3px solid var(--primary-alt);
+    transition: transform 0.3s ease;
+}
+
+#edit-menu:hover {
+    transform: scale(105%);
+}
+
+#stop-edit-menu {
+    position: fixed;
+    bottom: 3rem;
+    right: calc(10vw + 10rem + 2rem);
+    width: 10rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 5px;
+    color: var(--primary-alt);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border: 3px solid var(--primary-alt);
+    transition: transform 0.3s ease;
+}
+
+#stop-edit-menu>svg {
+    margin-right: 1rem;
+}
+
+#stop-edit-menu:hover {
+    transform: scale(105%);
+}
+
+[contenteditable] {
+    transition: margin 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
+}
+
+[data-editing="true"] {
+    background-color: rgba(255, 60, 34, 0.1);
+}
+
+br {
+    display: none;
+}
+
+.menu-name[contenteditable]:focus,
+.menu-price[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.menu-cal[contenteditable]:focus,
+.menu-alg[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.menu-description[contenteditable]:focus {
+    outline: 0px solid transparent;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 1rem 5px;
+}
+
+.edit-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--primary-alt);
+    cursor: pointer;
+}
+
+#edit-menu>svg {
+    margin-right: 1rem;
+}
+
+.start-editing-item {
+    width: var(--edit-icon-width);
+
+    transition: width 0.5s ease;
+}
+
+.save-item {
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.more-items {
+    width: 0;
+    transition: transform 0.3s ease, width 0.5s ease;
+}
+
+[data-veg="false"] {
+    color: rgb(100, 100, 100);
+    opacity: 0;
+    width: 0;
+}
+
+.toggle-veg[data-veg="false"] {
+    opacity: 0.5;
+    width: 4rem;
+}
+
+.empty-alg {
+    width: 3rem;
+}
+
+.toggle-veg {
+    cursor: pointer;
+}
+
+.toggle-veg:hover {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.temporary-item {
+    position: relative;
+    animation: open 0.5s ease normal forwards;
+}
+
+.create-item-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: opacity 0.5s ease, background-color 0.5s ease;
+}
+
+.create-item-button>div {
+    transition: color 0.3s ease;
+}
+
+.create-item-button:hover,
+.create-item-button:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--primary-alt);
+    fill: var(--primary-alt);
+}
+
+@keyframes open {
+    0% {
+        height: 0rem;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        height: 13rem;
+        opacity: 1;
+    }
+}
+
+#context-menu {
+    position: absolute;
+    left: 50%;
+    top: 10rem;
+    border-radius: 15px;
+    pointer-events: none;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    transition: top 0.4s ease, opacity 0.5s ease, left 0.5s ease;
+}
+
+.context-option {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    width: 8rem;
+    color: var(--primary-alt);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.context-option:hover {
+    background-color: var(--primary-alt);
+    color: white;
+}
+
+.context-option:hover>svg {
+    fill: white;
+}
+
+#ctx-reset {
+    margin-bottom: 1rem;
+}
+
+.context-option>svg {
+    height: 1.6rem;
+    width: 1.6rem;
+    fill: var(--primary-alt);
+    transition: fill 0.3s ease;
+}
+
+.more-items:hover {
+    transform: rotate(90deg);
+}
+
+.more-items-focused {
+    transform: rotate(90deg);
+}
+
+#fixed-finish {
+    position: fixed;
+    bottom: 10rem;
+    right: 10vw;
+    width: 22rem;
+    height: 0rem;
+
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+#finish-edit {
+    height: 12rem;
+    width: 22rem;
+    background-color: white;
+    border: 3px solid var(--primary);
+    padding: 1rem;
+    border-radius: 5px;
+    color: var(--primary-alt);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: height 0.5s ease;
+}
+
+#finish-title {
+    display: flex;
+    justify-content: center;
+}
+
+#finish-edit-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.finish-button {
+    border: none;
+    padding: 5px;
+    margin: 5px 15px;
+    cursor: pointer;
+    height: 2rem;
+    border-radius: 15px;
+}
+
+.finish-button:hover {
+    background-color: var(--primary-alt);
+    color: white;
 }

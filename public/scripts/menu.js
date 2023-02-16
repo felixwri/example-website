@@ -1,11 +1,12 @@
 let currentlyOrdering = false;
+let editing = false;
 
-const order = new Order([], menu);
+const order = new Order(menu);
 
 init();
 
 function init() {
-    if (order.length() > 0) {
+    if (order.status) {
         increaseQuantity();
         increasePrice();
         startOrder();
@@ -18,7 +19,10 @@ function init() {
 
 function startOrder() {
     if (currentlyOrdering) return;
+    if (editing) return;
+    order.createStorage();
 
+    // Set the styles of the page when the start order button is pressed
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "6rem";
@@ -36,6 +40,7 @@ function startOrder() {
 function cancelOrder() {
     if (!currentlyOrdering) return;
 
+    // Remove styles and clear all data from the counters and local storge
     let elements = document.getElementsByClassName("order-counter-container");
     for (element of elements) {
         element.style.width = "0rem";
@@ -56,65 +61,12 @@ function cancelOrder() {
 }
 
 function toggleFilters() {
+    // Shows the filter drop down menu
     let e = document.getElementById("filter-container");
-    let btn = document.getElementById("filters");
     if (e.dataset.showing === "true") {
         e.dataset.showing = "false";
     } else {
         e.dataset.showing = "true";
-    }
-}
-
-function selectFilter(parent) {
-    // unselect previous filter
-    let prev = document.querySelector(`[data-selected="true"]`);
-    if (prev) {
-        prev.dataset.selected = "false";
-        removeFilter(parent.id);
-    }
-
-    // set new filter as selected
-    let element = parent.children[0];
-    // remove the filter if it is the same as the previous filter
-    if (prev === element) {
-        removeFilter(parent.id);
-    } else {
-        element.dataset.selected = "true";
-        applyFilter(parent.id);
-    }
-}
-
-function applyFilter(id) {
-    if (id === "veg-filter") {
-        let inValidIds = [];
-
-        for (let item of menu) {
-            if (!item.vegetarian) {
-                inValidIds.push(item.id);
-            }
-        }
-
-        for (let i = 0; i < inValidIds.length; i++) {
-            let element = document.getElementById(`item-${inValidIds[i]}`);
-            if (element) element.style.opacity = "0.2";
-        }
-    }
-}
-
-function removeFilter(id) {
-    if (id === "veg-filter") {
-        let inValidIds = [];
-
-        for (let item of menu) {
-            if (!item.vegetarian) {
-                inValidIds.push(item.id);
-            }
-        }
-
-        for (let i = 0; i < inValidIds.length; i++) {
-            let element = document.getElementById(`item-${inValidIds[i]}`);
-            if (element) element.style.opacity = "1";
-        }
     }
 }
 

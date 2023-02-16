@@ -32,6 +32,11 @@ nav {
     transition: font-size 0.3s ease;
 }
 
+#nav-left {
+    display: flex;
+    align-items: center;
+}
+
 #nav-right {
     display: flex;
 }

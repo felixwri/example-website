@@ -105,11 +105,11 @@
                         <div>No allergans</div>
                     </div>
                     <div id="low-price-filter" class="filter-option" onclick="selectFilter(this)">
-                        <div class="filter-select" data-selected="false"></div>
+                        <div class="filter-select" data-selected="false" data-overwriteable></div>
                         <div>Lowest price</div>
                     </div>
                     <div id="low-calorie-filter" class="filter-option" onclick="selectFilter(this)">
-                        <div class="filter-select" data-selected="false"></div>
+                        <div class="filter-select" data-selected="false" data-overwriteable></div>
                         <div>Lowest calories</div>
                     </div>
                 </div>
@@ -125,17 +125,17 @@
             <section id="starters">
                 <h2 class="section-title">Starters</h2>
                 <div class="food-section">
-                    {% for item in menu_items %} {% if item.type == "Starters"%}
+                    {% for item in menu_items %} {% if item.type == "Starters" %}
                     <div id="item-{{ item.id }}" class="menu-item">
                         <div class="menu-title-container">
                             <div class="menu-title">
-                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-name">{{ item.name }}</div>
                                 <div class="menu-price">£{{ item.price }}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
                                     <svg
-                                        class="order-decrease order-icon no-select"
+                                        class="order-decrease order-icon"
                                         onclick="decreaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
@@ -148,7 +148,7 @@
                                     </svg>
                                     <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
                                     <svg
-                                        class="order-increase order-icon no-select"
+                                        class="order-increase order-icon"
                                         onclick="increaseCounter({{ item.id }})"
                                         xmlns="http://www.w3.org/2000/svg"
                                         height="48"
@@ -161,13 +161,60 @@
                                     </svg>
                                 </div>
                             </div>
+                            <div class="edit-item">
+                                <svg
+                                    id="start-{{ item.id }}"
+                                    onclick="editItem({{ item.id }})"
+                                    class="edit-icon start-editing-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="save-{{ item.id }}"
+                                    onclick="saveItem({{ item.id }})"
+                                    class="edit-icon save-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M42 13.85V39q0 1.2-.9 2.1-.9.9-2.1.9H9q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h25.15Zm-3 1.35L32.8 9H9v30h30ZM24 35.75q2.15 0 3.675-1.525T29.2 30.55q0-2.15-1.525-3.675T24 25.35q-2.15 0-3.675 1.525T18.8 30.55q0 2.15 1.525 3.675T24 35.75ZM11.65 18.8h17.9v-7.15h-17.9ZM9 15.2V39 9Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="more-{{ item.id }}"
+                                    onclick="showContext(this, {{ item.id }})"
+                                    class="edit-icon more-items"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewbox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                                    />
+                                </svg>
+                            </div>
                         </div>
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
                             {% if item.allergies != "None" %}
                             <div class="menu-alg">{{ item.allergies }}</div>
+                            {% else %}
+                            <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div class="menu-veg">Veg</div>
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            {% else %}
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -183,7 +230,7 @@
                     <div id="item-{{ item.id }}" class="menu-item">
                         <div class="menu-title-container">
                             <div class="menu-title">
-                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-name">{{ item.name }}</div>
                                 <div class="menu-price">£{{ item.price }}</div>
                             </div>
                             <div class="order-counter-container">
@@ -215,14 +262,61 @@
                                     </svg>
                                 </div>
                             </div>
+                            <div class="edit-item">
+                                <svg
+                                    id="start-{{ item.id }}"
+                                    onclick="editItem({{ item.id }})"
+                                    class="edit-icon start-editing-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="save-{{ item.id }}"
+                                    onclick="saveItem({{ item.id }})"
+                                    class="edit-icon save-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M42 13.85V39q0 1.2-.9 2.1-.9.9-2.1.9H9q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h25.15Zm-3 1.35L32.8 9H9v30h30ZM24 35.75q2.15 0 3.675-1.525T29.2 30.55q0-2.15-1.525-3.675T24 25.35q-2.15 0-3.675 1.525T18.8 30.55q0 2.15 1.525 3.675T24 35.75ZM11.65 18.8h17.9v-7.15h-17.9ZM9 15.2V39 9Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="more-{{ item.id }}"
+                                    onclick="showContext(this, {{ item.id }})"
+                                    class="edit-icon more-items"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewbox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                                    />
+                                </svg>
+                            </div>
                         </div>
 
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
                             {% if item.allergies != "None" %}
                             <div class="menu-alg">{{ item.allergies }}</div>
+                            {% else %}
+                            <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div class="menu-veg">Veg</div>
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            {% else %}
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -238,7 +332,7 @@
                     <div id="item-{{ item.id }}" class="menu-item">
                         <div class="menu-title-container">
                             <div class="menu-title">
-                                <div class="menu-name">{{ item.name.lower() }}</div>
+                                <div class="menu-name">{{ item.name }}</div>
                                 <div class="menu-price">£{{ item.price }}</div>
                             </div>
                             <div class="order-counter-container">
@@ -270,13 +364,165 @@
                                     </svg>
                                 </div>
                             </div>
+                            <div class="edit-item">
+                                <svg
+                                    id="start-{{ item.id }}"
+                                    onclick="editItem({{ item.id }})"
+                                    class="edit-icon start-editing-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="save-{{ item.id }}"
+                                    onclick="saveItem({{ item.id }})"
+                                    class="edit-icon save-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M42 13.85V39q0 1.2-.9 2.1-.9.9-2.1.9H9q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h25.15Zm-3 1.35L32.8 9H9v30h30ZM24 35.75q2.15 0 3.675-1.525T29.2 30.55q0-2.15-1.525-3.675T24 25.35q-2.15 0-3.675 1.525T18.8 30.55q0 2.15 1.525 3.675T24 35.75ZM11.65 18.8h17.9v-7.15h-17.9ZM9 15.2V39 9Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="more-{{ item.id }}"
+                                    onclick="showContext(this, {{ item.id }})"
+                                    class="edit-icon more-items"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewbox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                                    />
+                                </svg>
+                            </div>
                         </div>
                         <div class="menu-description">{{ item.description }}</div>
                         <div class="menu-extras">
                             {% if item.allergies != "None" %}
                             <div class="menu-alg">{{ item.allergies }}</div>
+                            {% else %}
+                            <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div class="menu-veg">Veg</div>
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            {% else %}
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                            {% endif %}
+                            <div class="menu-cal">{{ item.calories }}kcal</div>
+                        </div>
+                    </div>
+                    {% endif%} {% endfor %}
+                </div>
+            </section>
+
+            <section id="drinks">
+                <h2 class="section-title">Drinks</h2>
+                <div class="food-section">
+                    {% for item in menu_items %} {% if item.type == "Soft Drinks"%}
+                    <div id="item-{{ item.id }}" class="menu-item">
+                        <div class="menu-title-container">
+                            <div class="menu-title">
+                                <div class="menu-name">{{ item.name }}</div>
+                                <div class="menu-price">£{{ item.price }}</div>
+                            </div>
+                            <div class="order-counter-container">
+                                <div class="order-counter">
+                                    <svg
+                                        class="order-decrease order-icon"
+                                        onclick="decreaseCounter({{ item.id }})"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
+                                        />
+                                    </svg>
+                                    <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
+                                    <svg
+                                        class="order-increase order-icon"
+                                        onclick="increaseCounter({{ item.id }})"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="edit-item">
+                                <svg
+                                    id="start-{{ item.id }}"
+                                    onclick="editItem({{ item.id }})"
+                                    class="edit-icon start-editing-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="save-{{ item.id }}"
+                                    onclick="saveItem({{ item.id }})"
+                                    class="edit-icon save-item"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M42 13.85V39q0 1.2-.9 2.1-.9.9-2.1.9H9q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h25.15Zm-3 1.35L32.8 9H9v30h30ZM24 35.75q2.15 0 3.675-1.525T29.2 30.55q0-2.15-1.525-3.675T24 25.35q-2.15 0-3.675 1.525T18.8 30.55q0 2.15 1.525 3.675T24 35.75ZM11.65 18.8h17.9v-7.15h-17.9ZM9 15.2V39 9Z"
+                                    />
+                                </svg>
+
+                                <svg
+                                    id="more-{{ item.id }}"
+                                    onclick="showContext(this, {{ item.id }})"
+                                    class="edit-icon more-items"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="48"
+                                    width="48"
+                                    viewbox="0 0 48 48"
+                                >
+                                    <path
+                                        d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        {% if item.description %}
+                        <div class="menu-description">{{ item.description }}</div>
+                        {% else %}
+                        <div class="menu-description"></div>
+                        {% endif %}
+                        <div class="menu-extras">
+                            {% if item.allergies != "None" %}
+                            <div class="menu-alg">{{ item.allergies }}</div>
+                            {% else %}
+                            <div class="menu-alg empty-alg"></div>
+                            {% endif %} {% if item.vegetarian == True %}
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            {% else %}
+                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -285,11 +531,64 @@
                 </div>
             </section>
         </main>
+        {% if editable %}
+        <div id="context-menu">
+            <div id="ctx-reset" class="context-option" onclick="ctxReset()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                    <path
+                        d="M24 44q-3.75 0-7.025-1.4-3.275-1.4-5.725-3.85Q8.8 36.3 7.4 33.025 6 29.75 6 26h3q0 6.25 4.375 10.625T24 41q6.25 0 10.625-4.375T39 26q0-6.25-4.25-10.625T24.25 11H23.1l3.65 3.65-2.05 2.1-7.35-7.35 7.35-7.35 2.05 2.05-3.9 3.9H24q3.75 0 7.025 1.4 3.275 1.4 5.725 3.85 2.45 2.45 3.85 5.725Q42 22.25 42 26q0 3.75-1.4 7.025-1.4 3.275-3.85 5.725-2.45 2.45-5.725 3.85Q27.75 44 24 44Z"
+                    />
+                </svg>
+                <div>Reset</div>
+            </div>
+            <div id="ctx-delete" class="context-option" onclick="ctxRemove()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                    <path
+                        d="M13.05 42q-1.25 0-2.125-.875T10.05 39V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"
+                    />
+                </svg>
+                <div>Delete</div>
+            </div>
+        </div>
+        <div id="fixed-finish">
+            <div id="finish-edit" class="collapsed">
+                <div id="finish-title">You have unsaved changes.</div>
+                <div id="finish-edit-buttons">
+                    <button class="finish-button" onclick="saveAll()">Save all</button>
+                    <button class="finish-button" onclick="resetUnsaved()">Reset unsaved</button>
+                    <button class="finish-button" onclick="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="stop-edit-menu" onclick="checkIfSaved()">
+            <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                <path
+                    d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                />
+            </svg>
+            <div>Finish</div>
+        </div>
+        <div id="edit-menu" onclick="startEditing()">
+            <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
+                <path
+                    d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                />
+            </svg>
+            <div>Edit</div>
+        </div>
+        {% endif %}
         <div id="cancel-order" onclick="cancelOrder()">Cancel</div>
         <div id="start-order" onclick="startOrder()">Start your order</div>
     </body>
     <script>
         const menu = {{ menu_items | tojson }};
+        const editable = false ? `{{ editable }}` === "True" : true;
     </script>
+
+    {% if editable %}
+    <script src="{{url_for('send_js', path='editor.js')}}"></script>
+    {% endif %}
+
     <script src="{{url_for('send_js', path='menu.js')}}"></script>
+    <script src="{{url_for('send_js', path='filter.js')}}"></script>
 </html>
