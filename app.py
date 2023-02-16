@@ -63,7 +63,9 @@ def editable_menu():
 
 @app.route('/staff/menu/delete', methods=['POST'])
 def delete_item():
-    return jsonify(success = "false")
+    items_id = request.json.get['id']
+    db.delete_items(items_id)
+    return jsonify(success = "true")
 
 @app.route('/styles/<path:path>')
 def send_css(path):
