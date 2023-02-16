@@ -34,6 +34,11 @@ async function startEditing() {
 function checkIfSaved() {
     if (edits.length === 0) {
         clearStyles();
+        let temporaryItems = document.querySelectorAll(".temporary-item");
+        for (tempItem of temporaryItems) {
+            tempItem.remove();
+            removeEdit(parseInt(tempItem.dataset.id));
+        }
         return;
     }
 
@@ -117,7 +122,7 @@ function editItem(id) {
 }
 
 function saveItem(id) {
-    let { parent, name, price, description, calories, allergans } = getFields(id);
+    let { parent, name, price, description, vegatarian, calories, allergans } = getFields(id);
 
     if (parent.classList.contains("temporary-item")) {
         parent.classList.remove("temporary-item");
@@ -133,6 +138,18 @@ function saveItem(id) {
     console.log(allergans.innerText);
 
     stopEditingItem(id);
+
+    let item = {
+        id: id,
+        name: name.innerText,
+        price: price.innerText,
+        description: description.innerText,
+        calories: calories.innerText,
+        vegatarian: false ? vegatarian.dataset.veg === "true" : true,
+        allergans: allergans.innerText,
+    };
+
+    console.log(item);
 }
 
 function resetItem(id) {
@@ -159,6 +176,12 @@ function resetItem(id) {
     allergans.innerText = menuItem.allergies;
 
     stopEditingItem(id);
+}
+
+function removeItem(id) {
+    console.log("delete");
+    let { parent } = getFields(id);
+    parent.remove();
 }
 
 function getFields(id) {
@@ -340,7 +363,7 @@ function addNewItem(id) {
 
 let currentFocusedItem = null;
 
-function showContext(element, id) {
+function showContext(element) {
     if (currentFocusedItem) {
         if (currentFocusedItem.id === element.id) {
             hideContext(element);
@@ -382,4 +405,41 @@ function ctxReset() {
     let id = parseInt(currentFocusedItem.id.split("-")[1]);
 
     resetItem(id);
+}
+
+function ctxRemove() {
+    if (!currentFocusedItem) return;
+    let id = parseInt(currentFocusedItem.id.split("-")[1]);
+
+    removeItem(id);
+}
+
+async function postSave(item) {
+    const response = await fetch(`http://localhost:5000/staff/menu/add`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+    });
+
+    const content = await response.json();
+    console.log(content);
+}
+
+async function postDelete(id) {
+    const response = await fetch(`http://localhost:5000/staff/menu/delete`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: id,
+        }),
+    });
+
+    const content = await response.json();
+    console.log(content);
 }
