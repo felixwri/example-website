@@ -31,7 +31,56 @@ async function startEditing() {
     editing = true;
 }
 
-function stopEditing() {
+function checkIfSaved() {
+    if (edits.length === 0) {
+        clearStyles();
+        return;
+    }
+
+    let warning = document.getElementById("fixed-finish");
+    warning.style.height = "12rem";
+}
+
+function saveAll() {
+    let temporaryItems = document.querySelectorAll(".temporary-item");
+    for (tempItem of temporaryItems) {
+        tempItem.remove();
+        removeEdit(parseInt(tempItem.dataset.id));
+    }
+
+    let allEdits = [...edits];
+    for (let edit of allEdits) {
+        saveItem(edit);
+    }
+    clearStyles();
+    cancel();
+}
+
+function resetUnsaved() {
+    let temporaryItems = document.querySelectorAll(".temporary-item");
+    for (tempItem of temporaryItems) {
+        tempItem.remove();
+        removeEdit(parseInt(tempItem.dataset.id));
+    }
+
+    let allEdits = [...edits];
+    for (let edit of allEdits) {
+        resetItem(edit);
+    }
+    clearStyles();
+    cancel();
+}
+
+function cancel() {
+    let warning = document.getElementById("fixed-finish");
+    warning.style.height = "0rem";
+}
+
+function clearStyles() {
+    let editButton = document.getElementById("edit-menu");
+    editButton.style.opacity = "1";
+    editButton.style.pointerEvents = "initial";
+
     const root = document.querySelector(":root");
     root.style.setProperty("--primary", "rgb(255, 100, 34)");
 
@@ -42,24 +91,6 @@ function stopEditing() {
     document.getElementById("quick-select-container").style.pointerEvents = "all";
     document.querySelector(".relative-container").style.pointerEvents = "initial";
     document.querySelector("main").style.marginTop = "16rem";
-
-    let editButton = document.getElementById("edit-menu");
-    editButton.style.opacity = "1";
-    editButton.style.pointerEvents = "initial";
-
-    let temporaryItems = document.querySelectorAll(".temporary-item");
-    for (tempItem of temporaryItems) {
-        tempItem.remove();
-        console.log(edits);
-        removeEdit(parseInt(tempItem.dataset.id));
-        console.log(edits);
-    }
-
-    let allEdits = [...edits];
-    for (let edit of allEdits) {
-        saveItem(edit);
-    }
-
     hideContext();
     document.getElementById("start-order").style.opacity = 1;
     document.getElementById("cancel-order").style.opacity = 1;
@@ -100,6 +131,32 @@ function saveItem(id) {
     console.log(description.innerText);
     console.log(calories.innerText);
     console.log(allergans.innerText);
+
+    stopEditingItem(id);
+}
+
+function resetItem(id) {
+    console.log("reset");
+    let { parent, name, price, description, vegatarian, calories, allergans } = getFields(id);
+
+    hideContext();
+
+    let menuItem = null;
+    for (let item of menu) {
+        if (item.id === id) {
+            menuItem = item;
+            break;
+        }
+    }
+
+    console.log(menuItem);
+
+    name.innerText = menuItem.name;
+    price.innerText = order.priceToString(menuItem.price);
+    description.innerText = menuItem.description;
+    vegatarian.dataset.veg = menuItem.vegatarian;
+    calories.innerText = menuItem.calories + "kcal";
+    allergans.innerText = menuItem.allergies;
 
     stopEditingItem(id);
 }
@@ -318,4 +375,11 @@ function hideContext(element) {
     context.style.pointerEvents = "none";
     if (element) element.classList.remove("more-items-focused");
     currentFocusedItem = null;
+}
+
+function ctxReset() {
+    if (!currentFocusedItem) return;
+    let id = parseInt(currentFocusedItem.id.split("-")[1]);
+
+    resetItem(id);
 }
