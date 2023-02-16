@@ -13,7 +13,7 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu.html', menu_items=db.get_items())
+    return render_template('menu.html', menu_items=db.get_items(), editable=False)
 
 @app.route('/basket', methods=['GET'])
 def basket():
@@ -85,7 +85,10 @@ def cancel_order():
         return jsonify(success = "false")
     else:
         return jsonify(success="false", error="Bad method")
-    
+
+@app.route('/staff/menu', methods=['GET'])
+def editable_menu():
+    return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
 @app.route('/styles/<path:path>')
 def send_css(path):

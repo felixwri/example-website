@@ -25,19 +25,7 @@ class Order {
     }
 
     priceToString(price) {
-        price = price.toString();
-
-        if (price.includes(".")) {
-            let pence = price.split(".")[1];
-
-            if (pence.length == 1) {
-                return `£${price}0`;
-            }
-        } else {
-            return `£${price}.00`;
-        }
-
-        return `£${price}`;
+        return new Intl.NumberFormat("en-UK", { style: "currency", currency: "GBP" }).format(price);
     }
 
     addItem(id) {
@@ -131,6 +119,11 @@ class Order {
 
     updateStorage() {
         let object = this.getStorage();
+
+        if (!object) {
+            this.createStorage();
+            object = this.getStorage();
+        }
 
         object.items = this.items;
         object.quantity = this.length();

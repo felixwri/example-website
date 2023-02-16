@@ -1,4 +1,5 @@
 let currentlyOrdering = false;
+let editing = false;
 
 const order = new Order(menu);
 
@@ -18,6 +19,7 @@ function init() {
 
 function startOrder() {
     if (currentlyOrdering) return;
+    if (editing) return;
     order.createStorage();
 
     // Set the styles of the page when the start order button is pressed
