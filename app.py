@@ -90,6 +90,12 @@ def cancel_order():
 def editable_menu():
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
+@app.route('/staff/menu/delete', methods=['POST'])
+def delete_item():
+    items_id = request.json.get['id']
+    db.delete_items(items_id)
+    return jsonify(success = "true")
+
 @app.route('/styles/<path:path>')
 def send_css(path):
     return send_from_directory('public/styles', path)    
