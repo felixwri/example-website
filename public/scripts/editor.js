@@ -149,7 +149,7 @@ function saveItem(id) {
         allergens: allergens.innerText,
     };
 
-    console.log(item);
+    postSave(item);
 }
 
 function resetItem(id) {
@@ -183,6 +183,7 @@ function removeItem(id) {
     let { parent } = getFields(id);
     parent.remove();
     hideContext();
+    postDelete(id);
 }
 
 function getFields(id) {
