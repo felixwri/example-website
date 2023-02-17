@@ -38,6 +38,35 @@ def submit_order():
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    else:
+        #Get the username and password
+        username = request.form['username']
+        password = request.form['password']
+
+        if db.check_password(username, password):
+            return "Login succesful!"
+        else:
+            return "Incorrect username or password!"
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    username = request.form['username']
+    password = request.form['password']
+   
+
+    if db.exisiting_user(username):
+        return "User already exists!"
+    else:
+        if db.password_strength(password):
+            db.add_user(username, password)
+            return "Registiration succesful!"
+        else:
+            return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():
@@ -69,7 +98,8 @@ def add_item():
 
 @app.route('/staff/menu/delete', methods=['POST'])
 def delete_item():
-    items_id = request.json.get['id']
+    json = request.get_json()
+    items_id = json['id']
     db.delete_items(items_id)
     return jsonify(success = "true")
 
