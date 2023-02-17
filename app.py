@@ -61,6 +61,10 @@ def cancel_order():
 def editable_menu():
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
+@app.route('/staff/menu/add', methods=['POST'])
+def add_item():
+    return jsonify(success = "false")
+
 @app.route('/staff/menu/delete', methods=['POST'])
 def delete_item():
     items_id = request.json.get['id']
