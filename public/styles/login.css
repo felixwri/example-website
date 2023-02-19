@@ -7,6 +7,16 @@ h4 {
     color rgb(255, 100, 34);
 }
 
+.password-field {
+    color: color rgb(3, 216, 222);
+}
+
+.username-field {
+    color: color rgb(3, 216, 222);
+}
+
+
+
 /*font*/
 
 @font-face {
