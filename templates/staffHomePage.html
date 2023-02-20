@@ -74,25 +74,26 @@
 
 
 
- <main style="margin-top: 10rem">
+ <main style="margin-top: 8rem">
 
     
     <p class="title" style="text-align: center;"> Staff Home Page</p>
 
     <div style="text-align: center; margin-top: 2rem;">
-    <button class=" button1">Incoming Orders</button>
+    <button class=" button1"   onclick="location.href='/menu'" >Incoming Orders</button>
     <button class=" button1">Edit Menu</button>
     <button class=" button1">Edit Order</button>
     </div>
 
 
-    <div id="piechart"></div>
+    <div   id="piechart"></div>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="{{url_for('send_js', path='statusPiChart.js')}}"></script>
 
 
 
+    
  </main>
    
   
