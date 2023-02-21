@@ -501,7 +501,8 @@ br {
 }
 
 .empty-alg {
-    width: 3rem;
+    min-width: 4rem;
+    max-width: 18rem;
 }
 
 .toggle-veg {

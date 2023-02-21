@@ -104,14 +104,14 @@ function clearStyles() {
 
 function editItem(id) {
     edits.push(id);
-    let { parent, name, price, description, allergans, vegatarian, calories } = getFields(id);
+    let { parent, name, price, description, allergens, vegatarian, calories } = getFields(id);
 
     parent.dataset.editing = "true";
 
     name.setAttribute("contentEditable", "");
     price.setAttribute("contentEditable", "");
     description.setAttribute("contentEditable", "");
-    allergans.setAttribute("contentEditable", "");
+    allergens.setAttribute("contentEditable", "");
     calories.setAttribute("contentEditable", "");
 
     vegatarian.classList.add("toggle-veg");
@@ -122,39 +122,33 @@ function editItem(id) {
 }
 
 function saveItem(id) {
-    let { parent, name, price, description, vegatarian, calories, allergans } = getFields(id);
+    let { parent, name, price, description, vegatarian, calories, allergens } = getFields(id);
+    let newItem = parent.classList.contains("temporary-item");
 
-    if (parent.classList.contains("temporary-item")) {
+    if (newItem) {
         parent.classList.remove("temporary-item");
         createNewElement(parent.parentElement.parentElement.id);
     }
 
     hideContext();
-
-    console.log(name.innerText);
-    console.log(price.innerText);
-    console.log(description.innerText);
-    console.log(calories.innerText);
-    console.log(allergans.innerText);
-
     stopEditingItem(id);
 
     let item = {
         id: id,
+        new: newItem,
         name: name.innerText,
         price: price.innerText,
         description: description.innerText,
         calories: calories.innerText,
-        vegatarian: false ? vegatarian.dataset.veg === "true" : true,
-        allergans: allergans.innerText,
+        vegatarian: vegatarian.dataset.veg === "true",
+        allergens: allergens.innerText,
     };
-
-    console.log(item);
+    postSave(item);
 }
 
 function resetItem(id) {
-    console.log("reset");
-    let { parent, name, price, description, vegatarian, calories, allergans } = getFields(id);
+    console.log("Reset: ", id);
+    let { parent, name, price, description, vegatarian, calories, allergens } = getFields(id);
 
     hideContext();
 
@@ -173,15 +167,18 @@ function resetItem(id) {
     description.innerText = menuItem.description;
     vegatarian.dataset.veg = menuItem.vegatarian;
     calories.innerText = menuItem.calories + "kcal";
-    allergans.innerText = menuItem.allergies;
+    allergens.innerText = menuItem.allergies;
 
     stopEditingItem(id);
 }
 
 function removeItem(id) {
-    console.log("delete");
+    console.log("Delete: ", id);
     let { parent } = getFields(id);
     parent.remove();
+    removeEdit(id);
+    hideContext();
+    postDelete(id);
 }
 
 function getFields(id) {
@@ -189,7 +186,7 @@ function getFields(id) {
     let name = parent.children[0].children[0].children[0];
     let price = parent.children[0].children[0].children[1];
     let description = parent.children[1];
-    let allergans = parent.children[2].children[0];
+    let allergens = parent.children[2].children[0];
     let vegatarian = parent.children[2].children[1];
     let calories = parent.children[2].children[2];
 
@@ -198,7 +195,7 @@ function getFields(id) {
         name: name,
         price: price,
         description: description,
-        allergans: allergans,
+        allergens: allergens,
         vegatarian: vegatarian,
         calories: calories,
     };
@@ -213,14 +210,14 @@ function removeEdit(id) {
 
 function stopEditingItem(id) {
     removeEdit(id);
-    let { parent, name, price, description, allergans, vegatarian, calories } = getFields(id);
+    let { parent, name, price, description, allergens, vegatarian, calories } = getFields(id);
 
     parent.dataset.editing = "false";
 
     name.removeAttribute("contentEditable");
     price.removeAttribute("contentEditable");
     description.removeAttribute("contentEditable");
-    allergans.removeAttribute("contentEditable");
+    allergens.removeAttribute("contentEditable");
     calories.removeAttribute("contentEditable");
 
     vegatarian.classList.remove("toggle-veg");
@@ -315,6 +312,7 @@ function createNewElement(selector) {
                 <svg
                     id="more-${temporaryID}"
                     onclick="showContext(this, ${temporaryID})"
+                    style="display: none"
                     class="edit-icon more-items"
                     xmlns="http://www.w3.org/2000/svg"
                     height="48"
@@ -329,7 +327,7 @@ function createNewElement(selector) {
         </div>
         <div class="menu-description">Description</div>
         <div class="menu-extras">
-            <div class="menu-alg empty-alg"></div>
+            <div class="menu-alg empty-alg">Allergens</div>
             <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
             <div class="menu-cal">0kcal</div>
         </div>
