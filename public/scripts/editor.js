@@ -123,32 +123,26 @@ function editItem(id) {
 
 function saveItem(id) {
     let { parent, name, price, description, vegatarian, calories, allergens } = getFields(id);
+    let newItem = parent.classList.contains("temporary-item");
 
-    if (parent.classList.contains("temporary-item")) {
+    if (newItem) {
         parent.classList.remove("temporary-item");
         createNewElement(parent.parentElement.parentElement.id);
     }
 
     hideContext();
-
-    console.log(name.innerText);
-    console.log(price.innerText);
-    console.log(description.innerText);
-    console.log(calories.innerText);
-    console.log(allergens.innerText);
-
     stopEditingItem(id);
 
     let item = {
         id: id,
+        new: newItem,
         name: name.innerText,
         price: price.innerText,
         description: description.innerText,
         calories: calories.innerText,
-        vegatarian: false ? vegatarian.dataset.veg === "true" : true,
+        vegatarian: vegatarian.dataset.veg === "true",
         allergens: allergens.innerText,
     };
-
     postSave(item);
 }
 
@@ -182,6 +176,7 @@ function removeItem(id) {
     console.log("Delete: ", id);
     let { parent } = getFields(id);
     parent.remove();
+    removeEdit(id);
     hideContext();
     postDelete(id);
 }
