@@ -45,7 +45,7 @@
                     </div>
                     <div id="nav-right">
                         <a href="/basket" class="nav-page link">Basket</a>
-                        <a href="/login" class="nav-page link">Login</a>
+                        <a href="/login" class="nav-page link">Log in</a>
                     </div>
                 </div>
                 <div id="mobile-nav-right">
@@ -76,7 +76,7 @@
                         </svg>
 
                         <a href="/basket" class="mobile-nav-page link">Basket</a>
-                        <a href="/login" class="mobile-nav-page link">Sign up or log in</a>
+                        <a href="/login" class="mobile-nav-page link">Log in</a>
                     </div>
                 </div>
             </div>
@@ -211,10 +211,10 @@
                             <div class="menu-alg">{{ item.allergies }}</div>
                             {% else %}
                             <div class="menu-alg empty-alg"></div>
-                            {% endif %} {% if item.vegetarian == True %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            {% endif %} {% if item.vegeterian == True %}
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="true">Veg</div>
                             {% else %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -314,9 +314,9 @@
                             {% else %}
                             <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="true">Veg</div>
                             {% else %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -415,9 +415,9 @@
                             {% else %}
                             <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="true">Veg</div>
                             {% else %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>
@@ -520,9 +520,9 @@
                             {% else %}
                             <div class="menu-alg empty-alg"></div>
                             {% endif %} {% if item.vegetarian == True %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="true">Veg</div>
                             {% else %}
-                            <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                            <div onclick="toggleVegetarian(this)" class="menu-veg" data-veg="false">Veg</div>
                             {% endif %}
                             <div class="menu-cal">{{ item.calories }}kcal</div>
                         </div>

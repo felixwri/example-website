@@ -48,7 +48,7 @@ def login():
         password = request.form['password']
 
         if db.check_password(username, password):
-            return "Login succesful!"
+            return "Login successful!"
         else:
             return "Incorrect username or password!"
 
@@ -64,7 +64,7 @@ def register():
     else:
         if db.password_strength(password):
             db.add_user(username, password)
-            return "Registiration succesful!"
+            return "Registration successful!"
         else:
             return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
 
