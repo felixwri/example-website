@@ -6,3 +6,13 @@ test("clicking button opens menu", () => {
   fireEvent.click(button);
   expect(getByText("Menu is open")).toBeInTheDocument();
 });
+
+////
+
+//Case 2: Testing a page loading up
+
+test("page loads correctly", () => {
+  const { getByText } = render(<MyComponent />);
+  expect(getByText("Welcome to My Page")).toBeInTheDocument();
+});
+
