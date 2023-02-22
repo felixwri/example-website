@@ -2,7 +2,6 @@ import psycopg2
 
 connection = psycopg2.connect("postgres://judajuxuiirttb:2b479b982ee432dbf30816d4f26d87aa3e2c2b458628cba8311be031d295dddb@ec2-52-17-81-195.eu-west-1.compute.amazonaws.com:5432/d9qjkvssoft7iu")
 
-
 def create_mains_table():
     # create a cursor for navigating the postgres e
     cursor = connection.cursor()
