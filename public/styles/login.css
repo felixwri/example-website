@@ -1,10 +1,85 @@
 /* The top element needs to have a marging of 8rem */
 /* This is so it can be seen below the nav */
-h4 {
+h2 {
     margin-top: 8rem;
-    font-size: medium;
-    letter-spacing: 0.1em
-    color rgb(255, 100, 34);
+    font-size: large;
+    letter-spacing: 0.1em;
+    color: rgb(255, 100, 34);
+    font-weight: 500;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.forget-pass {
+  color: rgb(255, 100, 34);
+  font-weight: 600;
+}
+
+.forget-pass hover {
+  color: #c5e5ed;
+  font-weight: 600;
+}
+
+.login-form {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding-top: 64px
+}
+
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 500px;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.field-wraps {
+  inline-size: 150px;
+  overflow-wrap: break-word;
+}
+
+.login-button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: rgb(255, 100, 34);
+  text-align: center;
+  width: 50%;
+  display: block;
+  padding-bottom: 54px;
+  position: absolute;
+  z-index: -1;
+  width: 300%;
+  height: 100%;
+  background: rgb(222, 94, 3);
+  background: -webkit-linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
+  background: -o-linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
+  background: -moz-linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
+  background: linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
+  top: 0;
+  left: -100%;
 }
 
 .password-field {
@@ -20,29 +95,12 @@ h4 {
 /*font*/
 
 @font-face {
-    font-family: Poppins-Regular;
-    src: url('../fonts/poppins/Poppins-Regular.ttf'); 
-  }
-  
- .login-form {
-    font-family: Poppins-Medium;
-    src: url('../fonts/poppins/Poppins-Medium.ttf'); 
-  }
-  
-  @font-face {
-    font-family: Poppins-Bold;
-    src: url('../fonts/poppins/Poppins-Bold.ttf'); 
-  }
-  
-  @font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
-  }
-  
-  .font {
-    font-family: Arial;
-    color: black;
-
+  font-family: 'Montserrat';
+  font-style: bold;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUQjIg1_i6t8kCHKm459WxRxC7m0dR9pBOi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
   
   * {
@@ -117,12 +175,7 @@ h4 {
     text-transform: uppercase;
   }
   
-  .bg1 {background-color: #3b5998}
-  .bg2 {background-color: #1da1f2}
-  .bg3 {background-color: #ea4335}
-  
-  
-  
+
   /* login */
   .limiter {
     width: 100%;
@@ -146,13 +199,6 @@ h4 {
     background-size: cover;
   }
   
-  .wrap-login100 {
-    width: 500px;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
   
   /* Form */
   
@@ -162,7 +208,7 @@ h4 {
   
   h1 {
     display: block;
-    font-family: Poppins-Bold;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 39px;
     color: #333333;
     line-height: 1.2;
@@ -290,17 +336,7 @@ h4 {
   }
   
  #login-button {
-    position: absolute;
-    z-index: -1;
-    width: 300%;
-    height: 100%;
-    background: #a64bf4;
-    background: -webkit-linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
-    background: -o-linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
-    background: -moz-linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
-    background: linear-gradient(right,  rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222) , rgb(225, 235, 31));
-    top: 0;
-    left: -100%;
+
   
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -309,6 +345,8 @@ h4 {
   }
   
   #login-button {
+
+  
     font-family: Poppins-Medium;
     font-size: 16px;
     color: #fff;

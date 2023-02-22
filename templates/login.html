@@ -90,14 +90,15 @@
             <script src="{{url_for('send_js', path='order.js')}}"></script>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
-
+        
+        <div class="login-container">
         <div class="login-form">
-            <h4>
+            <h2>
                 <label for="login-header">Login</label>
-            </h4>
+            </h2>
             <br>
             <form method="post" action="">
-                <div class="username-field">
+                <div class="form-fields">
                     <input
                         type="text"
                         id="username"
@@ -109,11 +110,10 @@
                         focus
                         data-val="true"
                         data-val-required="The Username field is required."
-                        value=""
-                    />
+                        value="" />
                 </div>
                 <br />
-                <div class="password-field">
+                <div class="form-fields">
                     <input
                         type="password"
                         id="password"
@@ -125,16 +125,18 @@
                         focus
                         data-val="true"
                         data-val-required="The Password field is required."
-                        value=""
-                    />
+                        value="" />
                 </div>
-                <br />
-                <input id="login-button" type="submit" value="Login" />
+                <br>
+                <div class="login-button">
+                <input id="login-button" type="submit" value="login" />
+                </div>
             </form>
         </div>
         <br />
-        <div>
+        <div class="forget-pass">
             <button>Forgot your password?</button>
         </div>
+    </div>
     </body>
 </html>
