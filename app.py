@@ -53,7 +53,7 @@ def login():
 
         if db.check_password(username, password):
             session['username'] = 'staff'
-            return redirect('/staff/orders')
+            return redirect('/staff/')
         else:
             return render_template("login.html", error = "Invalid Credentials")
 
@@ -72,6 +72,18 @@ def register():
             return "Registration successful!"
         else:
             return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
+
+
+# Staff Pages
+
+
+@app.route('/staff/', methods=['GET'])
+def staff_home():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    
+
+    return render_template('staffHomePage.html', orders=db.get_orders())
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():
@@ -120,6 +132,10 @@ def delete_item():
     items_id = json['id']
     db.delete_items(items_id)
     return jsonify(success = "true")
+
+
+# Content delivery routes
+
 
 @app.route('/styles/<path:path>')
 def send_css(path):
