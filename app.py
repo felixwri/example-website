@@ -92,7 +92,8 @@ def editable_menu():
 
 @app.route('/staff/menu/add', methods=['POST'])
 def add_item():
-    item = request.json.get['item']
+    json = request.get_json()
+    item = json['item']
     db.add_items(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
     return jsonify(success = "true")
 
