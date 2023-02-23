@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory, jsonify, session
+from flask import Flask, request, render_template, send_from_directory, jsonify, session, redirect
 from flask_session import Session
 from flask_cors import CORS, cross_origin
 import database as db
@@ -7,7 +7,6 @@ import string, random, secrets
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
-
 Session(app)
 CORS(app, support_credentials=True)
  
@@ -53,9 +52,10 @@ def login():
         password = request.form['password']
 
         if db.check_password(username, password):
-            return "Login successful!"
+            session['username'] = 'staff'
+            return redirect('/staff/orders')
         else:
-            return "Incorrect username or password!"
+            return render_template("login.html", error = "Invalid Credentials")
 
 
 @app.route('/register', methods=['GET', 'POST'])
