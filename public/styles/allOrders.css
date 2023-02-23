@@ -16,11 +16,61 @@ main {
     gap: 1rem;
 }
 
-.title {
+.title-bar {
     width: 100%;
     padding: 2rem 0rem 1rem 0rem;
     margin: 2rem 0rem;
+    display: flex;
+    justify-content: space-between;
     border-bottom: 3px solid var(--light-grey);
+}
+
+.title {
+    margin-left: 2rem;
+}
+
+.search-container {
+    position: relative;
+    width: 16rem;
+    height: 2.5rem;
+    margin-right: 2rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: var(--dark-grey);
+    padding: 0.5rem;
+}
+
+.search {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 20px;
+    padding: 0rem 0rem 0rem 2.5rem;
+    outline: none;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 1rem;
+
+    transition: background-color 0.3s ease;
+}
+
+.search:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-found="true"] {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .order-group {

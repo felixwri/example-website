@@ -69,7 +69,34 @@ async function changeStatus(id, status) {
     const content = await response.json();
 
     if (content.success) {
-        if (status === "cancelled") moveElement(id, "cancelled-orders");
+        updateOrder(status, id);
+    }
+}
+
+function updateOrder(status, id) {
+    let element = document.getElementById(`id-${id}`);
+    let group = element.parentNode.id;
+
+    console.log(status, id, group);
+
+    switch (status) {
+        case "pending":
+        case "preparing":
+        case "ready":
+            if (group !== "active-orders") {
+                moveElement(id, "active-orders");
+            }
+            break;
+        case "delivered":
+            break;
+        case "cancelled":
+            if (group !== "cancelled-orders") {
+                moveElement(id, "cancelled-orders");
+            }
+            break;
+
+        default:
+            break;
     }
 }
 
@@ -126,8 +153,12 @@ function setStatus(status) {
     tag.innerText = status;
     tag.setAttribute(`data-group`, status);
 
+    let ref = currentFocusedItem.element.parentNode.parentNode.children[1].children[1].children[1];
+    ref.setAttribute(`data-highlight`, status);
+
     console.log(currentFocusedItem);
     changeStatus(currentFocusedItem.id, status);
+    hideContext(currentFocusedItem.element);
 }
 
 document.addEventListener("click", (e) => {
@@ -143,3 +174,18 @@ document.addEventListener("click", (e) => {
         }
     }
 });
+
+function search(e, section) {
+    let current = document.querySelector(`[data-found="true"]`);
+    if (current) current.dataset.found = "false";
+    if (e.value.length < 10) return;
+
+    let children = document.getElementById(section).children;
+    if (children.length === 0) return;
+
+    for (let child of children) {
+        if (child.dataset.ref === e.value) {
+            child.dataset.found = "true";
+        }
+    }
+}
