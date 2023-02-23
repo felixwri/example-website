@@ -4,7 +4,6 @@
         <title>Login | Oaxaca</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="refresh" content="20" />
         <meta name="description" content="restaurant login page" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
@@ -90,53 +89,55 @@
             <script src="{{url_for('send_js', path='order.js')}}"></script>
             <script src="{{url_for('send_js', path='nav.js')}}"></script>
         </nav>
-        
+
         <div class="login-container">
-        <div class="login-form">
-            <h2>
-                <label for="login-header">Login</label>
-            </h2>
-            <br>
-            <form method="post" action="">
-                <div class="form-fields">
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        required
-                        placeholder="Username"
-                        aria-label="username"
-                        aria-describedby="input-username"
-                        focus
-                        data-val="true"
-                        data-val-required="The Username field is required."
-                        value="" />
-                </div>
+            <div class="login-form">
+                <h2>
+                    <label for="login-header">Login</label>
+                </h2>
                 <br />
-                <div class="form-fields">
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        placeholder="Password"
-                        aria-label="password"
-                        aria-describedby="input-password"
-                        focus
-                        data-val="true"
-                        data-val-required="The Password field is required."
-                        value="" />
-                </div>
-                <br>
-                <div class="login-button">
-                <input id="login-button" type="submit" value="login" />
-                </div>
-            </form>
+                <form method="post" action="">
+                    <div class="form-fields">
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            required
+                            placeholder="Username"
+                            aria-label="username"
+                            aria-describedby="input-username"
+                            focus
+                            data-val="true"
+                            data-val-required="The Username field is required."
+                            value=""
+                        />
+                    </div>
+                    <br />
+                    <div class="form-fields">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            placeholder="Password"
+                            aria-label="password"
+                            aria-describedby="input-password"
+                            focus
+                            data-val="true"
+                            data-val-required="The Password field is required."
+                            value=""
+                        />
+                    </div>
+                    <br />
+                    <div class="login-button">
+                        <input id="login-button" type="submit" value="Login" />
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div class="forget-pass">
+                <button>Forgot your password?</button>
+            </div>
         </div>
-        <br />
-        <div class="forget-pass">
-            <button>Forgot your password?</button>
-        </div>
-    </div>
     </body>
 </html>
