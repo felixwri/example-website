@@ -17,10 +17,9 @@
                 </div>
                 <div id="nav-icons">
                     <div id="nav-right">
-                        <a href="/" class="nav-page link">Main site</a>
                         <a href="/staff/home" class="nav-page link">Home</a>
                         <a href="/staff/orders" class="nav-page link">Orders</a>
-                        <a href="/staff/menu" class="nav-page link">Edit</a>
+                        <a href="/staff/menu" class="nav-page link">Menu</a>
                     </div>
                 </div>
                 <div id="mobile-nav-right">
@@ -70,10 +69,42 @@
         </nav>
 
         <main>
-            <h1 class="title">Incoming Orders</h1>
+            <h1 class="title-bar">
+                <div class="title">Active Orders</div>
+                <div class="search-container">
+                    <svg
+                        class="search-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="48"
+                        viewBox="0 96 960 960"
+                        width="48"
+                    >
+                        <path
+                            d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z"
+                        />
+                    </svg>
+                    <input class="search" placeholder="Search reference" oninput="search(this, 'active-orders')" />
+                </div>
+            </h1>
             <div id="active-orders" class="all-orders">
                 {% for order in orders %} {% if order.status != 'cancelled' %}
-                <div id="id-{{ order.id }}" class="order-group">
+                <div id="id-{{ order.id }}" class="order-group" data-ref="{{order.user_id}}">
+                    <div class="group-status">
+                        <div class="status-tag" data-group="{{order.status}}">{{order.status}}</div>
+                        <svg
+                            id="icon-{{ order.id }}"
+                            onclick="showOptions(this, {{ order.id }})"
+                            class="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewbox="0 0 48 48"
+                        >
+                            <path
+                                d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                            />
+                        </svg>
+                    </div>
                     <div class="group-title">
                         <div class="order-title-left">
                             <svg
@@ -90,7 +121,8 @@
                             <div class="order-time active-clock" data-time="{{order.time}}">{{order.time}}</div>
                         </div>
                         <div class="order-ref">
-                            <span class="no-select" style="color: grey"># </span><span>{{order.user_id}}</span>
+                            <span class="no-select" style="color: grey"># </span
+                            ><span data-highlight="{{order.status}}">{{order.user_id}}</span>
                         </div>
                     </div>
 
@@ -102,38 +134,45 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="order-actions">
-                        <svg
-                            class="edit-order-icon action-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="48"
-                            width="48"
-                            viewBox="0 0 48 48"
-                        >
-                            <path
-                                d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
-                            />
-                        </svg>
-                        <svg
-                            onclick="changeStatus({{ order.id }}, 'cancelled')"
-                            class="cancel-order-icon action-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="48"
-                            width="48"
-                            viewBox="0 0 48 48"
-                        >
-                            <path
-                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
-                            />
-                        </svg>
-                    </div>
                 </div>
                 {% endif%} {% endfor %}
             </div>
-            <h1 class="title">Cancelled Orders</h1>
+            <h1 class="title-bar">
+                <div class="title">Cancelled Orders</div>
+                <div class="search-container">
+                    <svg
+                        class="search-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="48"
+                        viewBox="0 96 960 960"
+                        width="48"
+                    >
+                        <path
+                            d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z"
+                        />
+                    </svg>
+                    <input class="search" placeholder="Search reference" oninput="search(this, 'cancelled-orders')" />
+                </div>
+            </h1>
             <div id="cancelled-orders" class="all-orders">
                 {% for order in orders %} {% if order.status == 'cancelled' %}
-                <div id="id-{{ order.id }}" class="order-group">
+                <div id="id-{{ order.id }}" class="order-group" data-ref="{{order.user_id}}">
+                    <div class="group-status">
+                        <div class="status-tag" data-group="{{order.status}}">{{order.status}}</div>
+                        <svg
+                            id="icon-{{ order.id }}"
+                            onclick="showOptions(this, {{ order.id }})"
+                            class="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewbox="0 0 48 48"
+                        >
+                            <path
+                                d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                            />
+                        </svg>
+                    </div>
                     <div class="group-title">
                         <div class="order-title-left">
                             <svg
@@ -150,7 +189,8 @@
                             <div class="order-time static-clock" data-time="{{order.time}}">{{order.time}}</div>
                         </div>
                         <div class="order-ref">
-                            <span class="no-select" style="color: grey"># </span><span>{{order.user_id}}</span>
+                            <span class="no-select" style="color: grey"># </span>
+                            <span data-highlight="{{order.status}}">{{order.user_id}}</span>
                         </div>
                     </div>
 
@@ -162,22 +202,32 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="order-actions">
-                        <svg
-                            onclick="changeStatus({{ order.id }}, 'pending')"
-                            class="restore-order action-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="48"
-                            width="48"
-                            viewBox="0 0 48 48"
-                        >
-                            <path d="M22.5 40V13.7L10.1 26.1 8 24 24 8l16 16-2.1 2.1-12.4-12.4V40Z" />
-                        </svg>
-                    </div>
                 </div>
                 {% endif %} {% endfor %}
             </div>
         </main>
+        <div id="options">
+            <div class="options-status" onclick="setStatus('pending')">
+                <div class="status-color" data-group="pending"></div>
+                <div>Pending</div>
+            </div>
+            <div class="options-status" onclick="setStatus('preparing')">
+                <div class="status-color" data-group="preparing"></div>
+                <div>Preparing</div>
+            </div>
+            <div class="options-status" onclick="setStatus('ready')">
+                <div class="status-color" data-group="ready"></div>
+                <div>Ready</div>
+            </div>
+            <div class="options-status" onclick="setStatus('delivered')">
+                <div class="status-color" data-group="delivered"></div>
+                <div>Delivered</div>
+            </div>
+            <div class="options-status" onclick="setStatus('cancelled')">
+                <div class="status-color" data-group="cancelled"></div>
+                <div>Cancel</div>
+            </div>
+        </div>
     </body>
     <script>
         const orders = JSON.parse(`{{ orders | tojson}}`);
