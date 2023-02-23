@@ -71,3 +71,48 @@ function moveElement(id, target) {
     let movedElement = document.getElementById(`id-${id}`);
     targetElement.appendChild(movedElement);
 }
+
+let currentFocusedItem = null;
+
+function showOptions(element, id) {
+    if (currentFocusedItem) {
+        if (currentFocusedItem.id === element.id) {
+            hideContext(element);
+            return;
+        } else {
+            currentFocusedItem.classList.remove("more-items-focused");
+        }
+    }
+
+    let bound = element.getBoundingClientRect();
+    let context = document.getElementById("options");
+
+    if (bound.x > window.innerWidth - 200) {
+        let contextBound = context.getBoundingClientRect();
+        context.style.top = `${bound.y + window.scrollY - (contextBound.height + 20)}px`;
+        context.style.left = `${bound.x - contextBound.width / 2}px`;
+    } else {
+        context.style.top = `${bound.y + window.scrollY}px`;
+        context.style.left = `${bound.x + 50}px`;
+    }
+
+    context.style.opacity = "1";
+    context.style.pointerEvents = "all";
+
+    element.classList.add("more-items-focused");
+    currentFocusedItem = element;
+}
+
+function hideContext(element) {
+    let context = document.getElementById("options");
+    context.style.opacity = "0";
+    context.style.pointerEvents = "none";
+    if (element) element.classList.remove("more-items-focused");
+    currentFocusedItem = null;
+}
+
+function setStatus(status) {
+    let tag = currentFocusedItem.parentNode.children[0];
+    tag.innerText = status;
+    tag.setAttribute(`data-group`, status);
+}

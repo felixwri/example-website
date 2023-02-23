@@ -74,6 +74,21 @@
             <div id="active-orders" class="all-orders">
                 {% for order in orders %} {% if order.status != 'cancelled' %}
                 <div id="id-{{ order.id }}" class="order-group">
+                    <div class="group-status">
+                        <div class="status-tag" data-group="{{order.status}}">{{order.status}}</div>
+                        <svg
+                            onclick="showOptions(this, {{ order.id }})"
+                            class="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewbox="0 0 48 48"
+                        >
+                            <path
+                                d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                            />
+                        </svg>
+                    </div>
                     <div class="group-title">
                         <div class="order-title-left">
                             <svg
@@ -102,7 +117,7 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="order-actions">
+                    <!-- <div class="order-actions">
                         <svg
                             class="edit-order-icon action-icon"
                             xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +141,7 @@
                                 d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
                             />
                         </svg>
-                    </div>
+                    </div> -->
                 </div>
                 {% endif%} {% endfor %}
             </div>
@@ -134,6 +149,21 @@
             <div id="cancelled-orders" class="all-orders">
                 {% for order in orders %} {% if order.status == 'cancelled' %}
                 <div id="id-{{ order.id }}" class="order-group">
+                    <div class="group-status">
+                        <div class="status-tag" data-group="{{order.status}}">{{order.status}}</div>
+                        <svg
+                            onclick="showOptions(this, {{ order.id }})"
+                            class="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewbox="0 0 48 48"
+                        >
+                            <path
+                                d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                            />
+                        </svg>
+                    </div>
                     <div class="group-title">
                         <div class="order-title-left">
                             <svg
@@ -162,7 +192,7 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="order-actions">
+                    <!-- <div class="order-actions">
                         <svg
                             onclick="changeStatus({{ order.id }}, 'pending')"
                             class="restore-order action-icon"
@@ -173,11 +203,33 @@
                         >
                             <path d="M22.5 40V13.7L10.1 26.1 8 24 24 8l16 16-2.1 2.1-12.4-12.4V40Z" />
                         </svg>
-                    </div>
+                    </div> -->
                 </div>
                 {% endif %} {% endfor %}
             </div>
         </main>
+        <div id="options">
+            <div class="options-status" onclick="setStatus('pending')">
+                <div class="status-color" data-group="pending"></div>
+                <div>Pending</div>
+            </div>
+            <div class="options-status" onclick="setStatus('preparing')">
+                <div class="status-color" data-group="preparing"></div>
+                <div>Preparing</div>
+            </div>
+            <div class="options-status" onclick="setStatus('ready')">
+                <div class="status-color" data-group="ready"></div>
+                <div>Ready</div>
+            </div>
+            <div class="options-status" onclick="setStatus('delivered')">
+                <div class="status-color" data-group="delivered"></div>
+                <div>Delivered</div>
+            </div>
+            <div class="options-status" onclick="setStatus('cancelled')">
+                <div class="status-color" data-group="cancelled"></div>
+                <div>Cancel</div>
+            </div>
+        </div>
     </body>
     <script>
         const orders = JSON.parse(`{{ orders | tojson}}`);
