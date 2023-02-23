@@ -6,6 +6,9 @@ import string, random, secrets
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
+app.config["SESSION_TYPE"] = "filesystem"
+
+Session(app)
 CORS(app, support_credentials=True)
  
 
