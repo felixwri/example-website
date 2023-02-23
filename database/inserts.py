@@ -1,6 +1,7 @@
 import menu_database as db
+import login_database as users
 
-def run(reset_table=False):
+def insert_into_menu(reset_table=False):
     if reset_table:
         db.create_mains_table()
 
@@ -34,3 +35,6 @@ def run(reset_table=False):
     db.add_items("Corona 4.5% ABV", "Beers", 5.50, 175, None, None, None)
     db.add_items("Stella Cidre", "Ciders", 6.50, 150, None, None, None)
     db.add_items("Stella Cidre Raspberry", "Ciders", 7.00, 190, None, None, None)
+
+def insert_admin_account():
+    users.add_user("admin", "password1234#")

@@ -75,6 +75,9 @@ def register():
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    
     if request.method == 'GET':
         return render_template('orders.html', orders=db.get_orders())
     else:
@@ -93,10 +96,16 @@ def cancel_order():
 
 @app.route('/staff/menu', methods=['GET'])
 def editable_menu():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
 @app.route('/staff/menu/add', methods=['POST'])
 def add_item():
+    if session.get('username') != 'staff':
+        return jsonify(success= "false")
+    
     json = request.get_json()
     item = json['item']
     db.add_items(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
@@ -104,6 +113,9 @@ def add_item():
 
 @app.route('/staff/menu/delete', methods=['POST'])
 def delete_item():
+    if session.get('username') != 'staff':
+        return jsonify(success= "false")
+    
     json = request.get_json()
     items_id = json['id']
     db.delete_items(items_id)
