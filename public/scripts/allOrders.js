@@ -1,3 +1,11 @@
+const StatusTypes = {
+    pending: "pending",
+    preparing: "preparing",
+    ready: "ready",
+    delivered: "delivered",
+    cancelled: "cancelled",
+};
+
 updateTimes();
 setInterval(() => {
     updateTimes();
@@ -62,7 +70,6 @@ async function changeStatus(id, status) {
 
     if (content.success) {
         if (status === "cancelled") moveElement(id, "cancelled-orders");
-        else if (status !== "cancelled") moveElement(id, "active-orders");
     }
 }
 
@@ -80,7 +87,7 @@ function showOptions(element, id) {
             hideContext(element);
             return;
         } else {
-            currentFocusedItem.classList.remove("more-items-focused");
+            currentFocusedItem.element.classList.remove("more-items-focused");
         }
     }
 
@@ -89,30 +96,50 @@ function showOptions(element, id) {
 
     if (bound.x > window.innerWidth - 200) {
         let contextBound = context.getBoundingClientRect();
-        context.style.top = `${bound.y + window.scrollY - (contextBound.height + 20)}px`;
-        context.style.left = `${bound.x - contextBound.width / 2}px`;
+        context.style.top = `${bound.y + bound.height + window.scrollY}px`;
+        context.style.left = `${bound.x + bound.width - contextBound.width}px`;
     } else {
         context.style.top = `${bound.y + window.scrollY}px`;
         context.style.left = `${bound.x + 50}px`;
     }
 
-    context.style.opacity = "1";
-    context.style.pointerEvents = "all";
+    context.dataset.showing = "true";
 
     element.classList.add("more-items-focused");
-    currentFocusedItem = element;
+
+    currentFocusedItem = {
+        element: element,
+        id: id,
+    };
 }
 
 function hideContext(element) {
     let context = document.getElementById("options");
-    context.style.opacity = "0";
-    context.style.pointerEvents = "none";
+
+    context.dataset.showing = "false";
     if (element) element.classList.remove("more-items-focused");
     currentFocusedItem = null;
 }
 
 function setStatus(status) {
-    let tag = currentFocusedItem.parentNode.children[0];
+    let tag = currentFocusedItem.element.parentNode.children[0];
     tag.innerText = status;
     tag.setAttribute(`data-group`, status);
+
+    console.log(currentFocusedItem);
+    changeStatus(currentFocusedItem.id, status);
 }
+
+document.addEventListener("click", (e) => {
+    if (document.querySelector(`[data-showing="true"]`)) {
+        if (
+            e.target.id !== "options" &&
+            e.target.parentNode.id !== "options" &&
+            e.target.parentNode.parentNode.id !== "options" &&
+            e.target !== currentFocusedItem.element &&
+            e.target !== currentFocusedItem.element.children[0]
+        ) {
+            hideContext(currentFocusedItem.element);
+        }
+    }
+});

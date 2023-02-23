@@ -18,7 +18,7 @@ main {
 
 .title {
     width: 100%;
-    padding: 2rem 0rem;
+    padding: 2rem 0rem 1rem 0rem;
     margin: 2rem 0rem;
     border-bottom: 3px solid var(--light-grey);
 }
@@ -54,7 +54,7 @@ main {
 .order-ref {
     margin-left: 1rem;
     font-size: 1rem;
-    color: var(--primary-alt);
+    /* color: var(--primary-alt); */
     font-weight: bold;
 }
 
@@ -100,13 +100,21 @@ main {
 }
 
 @media screen and (max-width: 900px) {
-    #all-orders {
+    #active-orders {
+        grid-template-columns: repeat(2, 2fr);
+    }
+
+    #cancelled-orders {
         grid-template-columns: repeat(2, 2fr);
     }
 }
 
 @media screen and (max-width: 500px) {
-    #all-orders {
+    #active-orders {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #cancelled-orders {
         grid-template-columns: repeat(1, 1fr);
     }
 }
@@ -137,7 +145,7 @@ main {
     pointer-events: none;
     padding: 1rem;
 
-    transition: top 0.3s ease, left 0.3s ease, opacity 0.3s ease;
+    transition: top 0.5s ease, left 0.5s ease, opacity 0.5s ease;
 }
 
 .options-status {
@@ -183,4 +191,42 @@ main {
 
 [data-group="cancelled"] {
     background-color: rgb(220, 23, 23);
+}
+
+[data-highlight="pending"] {
+    color: rgb(80, 80, 80);
+}
+
+[data-highlight="preparing"] {
+    color: rgb(23, 151, 194);
+}
+
+[data-highlight="ready"] {
+    color: rgb(37, 77, 207);
+}
+
+[data-highlight="delivered"] {
+    color: rgb(83, 94, 125);
+}
+
+[data-highlight="cancelled"] {
+    color: rgb(220, 23, 23);
+}
+
+[data-showing="true"] {
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+.more-items-focused {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.icon {
+    margin: 5px;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
