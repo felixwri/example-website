@@ -131,7 +131,8 @@
                         <div class="menu-title-container">
                             <div class="menu-title">
                                 <div class="menu-name">{{ item.name }}</div>
-                                <div class="menu-price">£{{ item.price }}</div>
+                              
+                                <div class="menu-price">£{{ '{:,.2f}'.format(item.price) }}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
