@@ -85,7 +85,13 @@ function setCounter(id, amount) {
 let popup = document.getElementById("popup");
 
 function openCallStaff(){
-    
+    popup.classList.add("open-popup");
+
+}
+
+function closeCallStaff(){
+    popup.classList.remove("open-popup");
+
 }
 
 
