@@ -242,10 +242,15 @@ section {
 .popup{
     width: 600px;
     
-    background-color: var(--primary);
-    border-radius: 6px;
+  
+    background-color: white;
+    border-radius: 10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--primary);
     position: absolute;
    
+  
     left: 50%;
     transform: translate(-50%,-50%) scale(0.1);
     text-align: center;
@@ -257,7 +262,8 @@ section {
 
 .open-popup{
     visibility: visible;
-    top: 40%;
+    position: fixed;
+    top: 30%;
     transform: translate(-50%,50%) scale(1);
 }
 
@@ -607,6 +613,22 @@ br {
     color: var(--primary-alt);
     fill: var(--primary-alt);
 }
+
+.button {
+    background-color: var(--primary);
+    /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
 
 @keyframes open {
     0% {

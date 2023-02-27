@@ -584,8 +584,18 @@
       
             <div id="call-staff" onclick="openCallStaff()">Call Staff</div>
             <div class="popup" id="popup">
-                <h1> Staff has been called</h1>
-                <button type="button"  onclick="closeCallStaff()">OK</button> 
+
+                <h1 style="padding-bottom: 20px;"> Staff has been called</h1><br>
+
+                <form style="padding-bottom: 20px;">
+                <label for="fname">WHY?</label>
+                <input type="text" id="fname" name="fname">
+                </form>
+
+                
+
+               
+                <button type="button" class="button"  onclick="closeCallStaff()">OK</button> 
             </div>
         
         
