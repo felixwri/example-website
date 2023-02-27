@@ -83,7 +83,7 @@ def staff_home():
         return redirect("/")
     
 
-    return render_template('staffHomePage.html', orders=db.get_orders())
+    return render_template('staffHome.html', orders=db.get_orders())
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():

@@ -1,6 +1,6 @@
 import psycopg2, bcrypt, re
-
-connection = psycopg2.connect("postgres://judajuxuiirttb:2b479b982ee432dbf30816d4f26d87aa3e2c2b458628cba8311be031d295dddb@ec2-52-17-81-195.eu-west-1.compute.amazonaws.com:5432/d9qjkvssoft7iu")
+from . import connection
+# connection = psycopg2.connect("postgres://obxjzakcoxgnuh:e1ee2bcadafbb550f8a7822769383fff92154bbfadac785bb0fec0ea1b3e928a@ec2-34-249-181-187.eu-west-1.compute.amazonaws.com:5432/ddrj5381iapr8u")
 
 def create_users_table():
         # create a cursor for navigating the postgres e
