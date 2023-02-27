@@ -208,6 +208,61 @@ section {
     background-color: black;
 }
 
+#call-staff {
+    position: fixed;
+
+    bottom: 3rem;
+    right: 25vw;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    height: 4rem;
+    width: 10rem;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: var(--primary);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#call-staff:hover {
+    transform: scale(105%);
+}
+
+
+
+.popup{
+    width: 400px;
+    background-color: #ffff;
+    border-radius: 6px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 30px 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,50%) scale(1);
+}
+
+
+
+
 #start-order {
     position: fixed;
 

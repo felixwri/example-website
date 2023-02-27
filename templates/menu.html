@@ -580,7 +580,18 @@
         </div>
         {% endif %}
         <div id="cancel-order" onclick="cancelOrder()">Cancel</div>
+
+      
+            <div id="call-staff" onclick="openCallStaff()">Call Staff</div>
+            <div class="popup" id="popup">
+                <h1> Staff has been called</h1>
+                <button type="button">OK</button> 
+            </div>
+        
+        
+
         <div id="start-order" onclick="startOrder()">Start your order</div>
+        
     </body>
     <script>
         const menu = {{ menu_items | tojson }};

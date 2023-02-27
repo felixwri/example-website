@@ -82,6 +82,13 @@ function setCounter(id, amount) {
     return true;
 }
 
+let popup = document.getElementById("popup");
+
+function openCallStaff(){
+    
+}
+
+
 function clearCounters() {
     let counters = document.getElementsByClassName("order-quantity");
     for (counter of counters) {
