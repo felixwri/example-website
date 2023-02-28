@@ -110,7 +110,7 @@ def cancel_order():
 def editable_menu():
     if session.get('username') != 'staff':
         return redirect("/")
-    
+    print(db.get_items())
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
 @app.route('/staff/menu/add', methods=['POST'])
@@ -120,7 +120,9 @@ def add_item():
     
     json = request.get_json()
     item = json['item']
-    db.add_items(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
+    print(json)
+    print(item)
+    db.add_item(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
     return jsonify(success = "true")
 
 @app.route('/staff/menu/delete', methods=['POST'])
@@ -132,6 +134,18 @@ def delete_item():
     items_id = json['id']
     db.delete_items(items_id)
     return jsonify(success = "true")
+
+@app.route('/staff/upload', methods=['POST'])
+def upload_image():
+    if session.get('username') != 'staff':
+        return jsonify(success= "false")
+    
+    json = request.get_json()
+    items_id = json['id']
+    db.delete_items(items_id)
+    return jsonify(success = "true")
+
+
 
 
 # Content delivery routes

@@ -13,9 +13,10 @@ def create_mains_table():
         cursor.execute(f"DROP TABLE IF EXISTS " + table_name + " CASCADE")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute("""CREATE TABLE IF NOT EXISTS " + table_name + " (
+        cursor.execute(f"""CREATE TABLE IF NOT EXISTS {table_name} (
             id serial PRIMARY KEY,
             name text,
+            image_url text,
             dish_type text,
             price real,
             calories integer,
@@ -40,12 +41,29 @@ def create_mains_table():
 
 
 
-def add_items(name, dish_type, price, calories, vegetarian, allergies, description):
+def add_item(name, image_url, dish_type, price, calories, vegetarian, allergies, description):
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "INSERT INTO " + table_name + " (name, dish_type, price, calories, vegetarian, allergies, description) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            (name, dish_type, price, calories, vegetarian, allergies, description)
+            "INSERT INTO " + table_name + " (name, image_url, dish_type, price, calories, vegetarian, allergies, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+            (name, image_url, dish_type, price, calories, vegetarian, allergies, description)
+        )
+        connection.commit()
+
+        cursor.close()
+
+    except Exception as e:
+        print("Insertion failed.")
+        print(e)
+
+        connection.rollback()
+
+def update_item(id, name, image_url, dish_type, price, calories, vegetarian, allergies, description):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(
+            "UPDATE " + table_name + " SET (name=%s, image_url=%s, dish_type=%s, price=%s, calories=%s, vegetarian=%s, allergies=%s, description=%s) WHERE id=%s",
+            (name, image_url, dish_type, price, calories, vegetarian, allergies, description, id)
         )
         connection.commit()
 
@@ -112,12 +130,13 @@ def get_items(filter_vegetarian=False, filter_no_allergies=False):
             {
                 'id': item[0],
                 'name': item[1],
-                'type': item[2],
-                'price': item[3],
-                'calories': item[4],
-                'vegetarian': item[5],
-                'allergies': item[6],
-                'description': item[7],
+                'image_url': item[2],
+                'type': item[3],
+                'price': item[4],
+                'calories': item[5],
+                'vegetarian': item[6],
+                'allergies': item[7],
+                'description': item[8],
             }
             for item in items
         ]
