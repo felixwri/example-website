@@ -1,5 +1,4 @@
-import menu_database as db
-import login_database as users
+import database as db
 
 def insert_into_menu(reset_table=False):
     if reset_table:
@@ -37,5 +36,5 @@ def insert_into_menu(reset_table=False):
     db.add_items("Stella Cidre Raspberry", "Ciders", 7.00, 190, None, None, None)
 
 def insert_admin_account():
-    users.add_user("test", "password1234#")
-    users.add_user("admin", "@dmin123456")
+    db.add_user("test", "password1234#")
+    db.add_user("admin", "@dmin123456")
