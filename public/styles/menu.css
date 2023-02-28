@@ -13,7 +13,32 @@ main {
 .menu-item {
     padding: 1rem;
     border-radius: 5px;
+    display: flex;
     transition: background-color 0.3s ease;
+}
+
+.menu-image {
+    min-width: 12rem;
+    height: 11rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.image {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.menu-text {
+    flex-grow: 1;
 }
 
 .food-section {
@@ -23,7 +48,7 @@ main {
 }
 
 section {
-    margin: 4rem 10vw 1rem 10vw;
+    margin: 4rem 4rem 1rem 4rem;
 }
 
 .menu-name {
@@ -239,32 +264,32 @@ section {
 
 
 
-.popup{
+.popup {
     width: 600px;
-    
-  
+
+
     background-color: white;
     border-radius: 10px;
     border-width: 6px;
     border-style: solid;
     border-color: var(--primary);
     position: absolute;
-   
-  
+
+
     left: 50%;
-    transform: translate(-50%,-50%) scale(0.1);
+    transform: translate(-50%, -50%) scale(0.1);
     text-align: center;
     padding: 30px 30px 30px;
-    
+
     visibility: hidden;
     transition: transform 0.4s, top 0.4s;
 }
 
-.open-popup{
+.open-popup {
     visibility: visible;
     position: fixed;
     top: 30%;
-    transform: translate(-50%,50%) scale(1);
+    transform: translate(-50%, 50%) scale(1);
 }
 
 
@@ -630,11 +655,11 @@ br {
 }
 
 
-  .form__input {
+.form__input {
     font-family: 'Roboto', sans-serif;
     color: #333;
     font-size: 16px;
-      margin: 0 auto;
+    margin: 0 auto;
     padding: 1.5rem 2rem;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
@@ -642,10 +667,10 @@ br {
     width: 90%;
     display: block;
     border-bottom: 0.3rem solid transparent;
-    
-  }
-  
- 
+
+}
+
+
 
 
 
