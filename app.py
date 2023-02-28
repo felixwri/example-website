@@ -148,11 +148,7 @@ def upload_image():
 
     return jsonify(success = result["success"], url = result["url"])
 
-
-
-
 # Content delivery routes
-
 
 @app.route('/styles/<path:path>')
 def send_css(path):

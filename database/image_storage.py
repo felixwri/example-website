@@ -4,14 +4,10 @@ load_dotenv()
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import json
 
 config = cloudinary.config(secure=True)
 
 print("Cloud name: " + config.cloud_name)
-
-result = cloudinary.Search().expression('folder:oaxaca/*').sort_by("public_id","desc").execute()
-
 
 def get_all_urls():
     result = cloudinary.Search().expression('folder:oaxaca/*').sort_by("public_id","desc").execute()
@@ -32,3 +28,10 @@ def upload_image(id, image):
         return {"success": True, "url": result["secure_url"]}
     else:
         return {"success": False, "url": None}
+    
+def delete_image(url):
+    public_name = url.split("/")[-1]
+    public_id = public_name.split(".")[0]
+    print(public_id)
+    result = cloudinary.uploader.destroy(public_id)
+    print(result)
