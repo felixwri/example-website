@@ -2,18 +2,21 @@ import psycopg2
 from . import connection
 # connection = psycopg2.connect("postgres://obxjzakcoxgnuh:e1ee2bcadafbb550f8a7822769383fff92154bbfadac785bb0fec0ea1b3e928a@ec2-34-249-181-187.eu-west-1.compute.amazonaws.com:5432/ddrj5381iapr8u")
 
+table_name = "mains_table"
+
 def create_mains_table():
     # create a cursor for navigating the postgres e
     cursor = connection.cursor()
 
     try:
         # delete the table to not have any duplication of data
-        cursor.execute(f"DROP TABLE IF EXISTS mains_table CASCADE")
+        cursor.execute(f"DROP TABLE IF EXISTS " + table_name + " CASCADE")
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute("""CREATE TABLE IF NOT EXISTS mains_table (
+        cursor.execute(f"""CREATE TABLE IF NOT EXISTS {table_name} (
             id serial PRIMARY KEY,
             name text,
+            image_url text,
             dish_type text,
             price real,
             calories integer,
@@ -31,19 +34,36 @@ def create_mains_table():
         
 
     except Exception as e:
-        print("Failed to build the mains_table")
+        print("Failed to build the " + table_name)
         print(e)
         # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
 
 
-def add_items(name, dish_type, price, calories, vegetarian, allergies, description):
+def add_item(name, image_url, dish_type, price, calories, vegetarian, allergies, description):
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "INSERT INTO mains_table (name, dish_type, price, calories, vegetarian, allergies, description) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            (name, dish_type, price, calories, vegetarian, allergies, description)
+            "INSERT INTO " + table_name + " (name, image_url, dish_type, price, calories, vegetarian, allergies, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+            (name, image_url, dish_type, price, calories, vegetarian, allergies, description)
+        )
+        connection.commit()
+
+        cursor.close()
+
+    except Exception as e:
+        print("Insertion failed.")
+        print(e)
+
+        connection.rollback()
+
+def update_item(id, name, image_url, dish_type, price, calories, vegetarian, allergies, description):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(
+            "UPDATE " + table_name + " SET (name=%s, image_url=%s, dish_type=%s, price=%s, calories=%s, vegetarian=%s, allergies=%s, description=%s) WHERE id=%s",
+            (name, image_url, dish_type, price, calories, vegetarian, allergies, description, id)
         )
         connection.commit()
 
@@ -59,7 +79,7 @@ def delete_items(id):
 
     cursor = connection.cursor()
     try:
-        cursor.execute(f"Delete from mains_table where id = %s", (id))
+        cursor.execute(f"Delete from " + table_name + " where id = %s", (id))
 
         connection.commit()
 
@@ -76,7 +96,7 @@ def update_price(price, id):
     
     cursor = connection.cursor()
     try:
-        cursor.execute(f"Update mains_table set price = %s where id = %s", (price, id))
+        cursor.execute(f"Update " + table_name + " set price = %s where id = %s", (price, id))
 
         connection.commit()
 
@@ -89,7 +109,7 @@ def update_price(price, id):
         connection.rollback() 
 
 def get_items(filter_vegetarian=False, filter_no_allergies=False):
-    query_start = "SELECT * FROM mains_table"
+    query_start = "SELECT * FROM " + table_name + ""
     query_filters = ""
     query_end = ";"
     filter_strings = ["vegetarian = TRUE", "allergies = 'None'"]
@@ -110,12 +130,13 @@ def get_items(filter_vegetarian=False, filter_no_allergies=False):
             {
                 'id': item[0],
                 'name': item[1],
-                'type': item[2],
-                'price': item[3],
-                'calories': item[4],
-                'vegetarian': item[5],
-                'allergies': item[6],
-                'description': item[7],
+                'image_url': item[2],
+                'type': item[3],
+                'price': item[4],
+                'calories': item[5],
+                'vegetarian': item[6],
+                'allergies': item[7],
+                'description': item[8],
             }
             for item in items
         ]
