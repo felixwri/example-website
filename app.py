@@ -135,11 +135,14 @@ def delete_item():
     db.delete_items(items_id)
     return jsonify(success = "true")
 
-@app.route('/staff/upload', methods=['POST'])
+@app.route('/staff/upload', methods=['GET', 'POST'])
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
-    
+    urls = db.get_all_urls()
+    if request.method == "GET":
+        return render_template("uploader.html", image_urls = db.get_all_urls())
+
     json = request.get_json()
     items_id = json['id']
     db.delete_items(items_id)
