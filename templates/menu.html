@@ -131,7 +131,8 @@
                         <div class="menu-title-container">
                             <div class="menu-title">
                                 <div class="menu-name">{{ item.name }}</div>
-                                <div class="menu-price">£{{ item.price }}</div>
+                              
+                                <div class="menu-price">£{{ '{:,.2f}'.format(item.price) }}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
@@ -232,7 +233,7 @@
                         <div class="menu-title-container">
                             <div class="menu-title">
                                 <div class="menu-name">{{ item.name }}</div>
-                                <div class="menu-price">£{{ item.price }}</div>
+                                <div class="menu-price">£{{ '{:,.2f}'.format(item.price) }}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
@@ -334,7 +335,7 @@
                         <div class="menu-title-container">
                             <div class="menu-title">
                                 <div class="menu-name">{{ item.name }}</div>
-                                <div class="menu-price">£{{ item.price }}</div>
+                                <div class="menu-price">£{{ '{:,.2f}'.format(item.price)}}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
@@ -435,7 +436,7 @@
                         <div class="menu-title-container">
                             <div class="menu-title">
                                 <div class="menu-name">{{ item.name }}</div>
-                                <div class="menu-price">£{{ item.price }}</div>
+                                <div class="menu-price">£{{ '{:,.2f}'.format(item.price) }}</div>
                             </div>
                             <div class="order-counter-container">
                                 <div class="order-counter">
@@ -579,7 +580,33 @@
         </div>
         {% endif %}
         <div id="cancel-order" onclick="cancelOrder()">Cancel</div>
+
+      
+            <div id="call-staff" onclick="openCallStaff()">Call Staff</div>
+            <div class="popup" id="popup">
+
+                <h1 style="padding-bottom: 20px;"> Staff has been called</h1><br>
+
+                <div class="form__group">
+                    
+                    <form>
+
+                    <input type="text" class="form__input" name="requestStaff" id="requestStaff" placeholder="Why?" required="" />
+                
+                    <form>
+
+                  </div>
+
+                
+
+               
+                <button type="button" class="button"  onclick="closeCallStaff()">OK</button> 
+            </div>
+        
+        
+
         <div id="start-order" onclick="startOrder()">Start your order</div>
+        
     </body>
     <script>
         const menu = {{ menu_items | tojson }};

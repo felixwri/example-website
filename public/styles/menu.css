@@ -208,6 +208,68 @@ section {
     background-color: black;
 }
 
+#call-staff {
+    position: fixed;
+
+    bottom: 3rem;
+    right: 25vw;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 1.2rem;
+    padding: 0.5rem;
+
+    height: 4rem;
+    width: 10rem;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: var(--primary);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#call-staff:hover {
+    transform: scale(105%);
+}
+
+
+
+.popup{
+    width: 600px;
+    
+  
+    background-color: white;
+    border-radius: 10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--primary);
+    position: absolute;
+   
+  
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 30px 30px 30px;
+    
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup{
+    visibility: visible;
+    position: fixed;
+    top: 30%;
+    transform: translate(-50%,50%) scale(1);
+}
+
+
+
+
 #start-order {
     position: fixed;
 
@@ -551,6 +613,42 @@ br {
     color: var(--primary-alt);
     fill: var(--primary-alt);
 }
+
+.button {
+    background-color: var(--primary);
+    /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+  .form__input {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 16px;
+      margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 90%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    
+  }
+  
+ 
+
+
+
 
 @keyframes open {
     0% {
