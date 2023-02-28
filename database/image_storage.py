@@ -20,3 +20,15 @@ def get_all_urls():
     return urls
 
 # get_all_urls()
+
+def upload_image(id, image):
+    # print(image)
+    print("Upload")
+
+    result = cloudinary.uploader.upload(image, folder="oaxaca")
+    print(result["secure_url"])
+
+    if result is not None:
+        return {"success": True, "url": result["secure_url"]}
+    else:
+        return {"success": False, "url": None}

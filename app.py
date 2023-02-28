@@ -144,9 +144,9 @@ def upload_image():
         return render_template("uploader.html", image_urls = db.get_all_urls())
 
     json = request.get_json()
-    items_id = json['id']
-    db.delete_items(items_id)
-    return jsonify(success = "true")
+    result = db.upload_image(json["id"], json["image"])
+
+    return jsonify(success = result["success"], url = result["url"])
 
 
 
