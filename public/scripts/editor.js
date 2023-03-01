@@ -1,4 +1,5 @@
 let edits = [];
+let imageStrings = {};
 
 async function startEditing() {
     if (currentlyOrdering) cancelOrder();
@@ -116,9 +117,45 @@ function editItem(id) {
 
     vegatarian.classList.add("toggle-veg");
 
+    let image = parent.children[0].children[0];
+    image.innerHTML = `
+        <div class="image-upload-overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+                <path d="M180 936q-24.75 0-42.375-17.625T120 876V276q0-24.75 17.625-42.375T180 216h409v60H180v600h600V468h60v408q0 24.75-17.625 42.375T780 936H180Zm520-498v-81h-81v-60h81v-81h60v81h81v60h-81v81h-60ZM240 774h480L576 582 449 749l-94-124-115 149Zm-60-498v600-600Z"/>
+            </svg>
+        </div>
+        <input data-id="${id}" type="file" class="image-upload" onchange="updateImage(this, ${id})"/>
+    `;
+
     document.getElementById(`start-${id}`).style.width = "0rem";
     document.getElementById(`save-${id}`).style.width = "2rem";
     document.getElementById(`more-${id}`).style.width = "2rem";
+}
+
+function updateImage(element, id) {
+    console.log(element.files);
+    if (!element.files || !element.files[0]) return;
+
+    let file = element.files[0];
+
+    if (file.size > 1000000) {
+        console.log("File too big");
+        return;
+    }
+    if (!file.type.startsWith("image/")) {
+        console.log("Not an image");
+        return;
+    }
+
+    const FR = new FileReader();
+
+    FR.addEventListener("load", function (e) {
+        console.log(e);
+        element.parentNode.style.backgroundImage = `url(${e.target.result})`;
+        imageStrings[id] = e.target.result;
+    });
+
+    FR.readAsDataURL(file);
 }
 
 function saveItem(id) {
@@ -148,6 +185,11 @@ function saveItem(id) {
         vegatarian: vegatarian.dataset.veg === "true",
         allergens: allergens.innerText,
     };
+
+    if (imageStrings[id]) {
+        item.dataURL = imageStrings[id];
+    }
+
     console.log(item);
     postSave(item);
 }
@@ -227,6 +269,9 @@ function stopEditingItem(id) {
     calories.removeAttribute("contentEditable");
 
     vegatarian.classList.remove("toggle-veg");
+
+    let image = parent.children[0].children[0];
+    image.innerHTML = ``;
 
     document.getElementById(`start-${id}`).removeAttribute("style");
     document.getElementById(`save-${id}`).style.width = "0rem";

@@ -15,11 +15,8 @@ def get_all_urls():
     urls = [i['secure_url'] for i in resources]
     return urls
 
-# get_all_urls()
-
-def upload_image(id, image):
-    # print(image)
-    print("Upload")
+def upload_image(image):
+    print("Attempting to upload image")
 
     result = cloudinary.uploader.upload(image, folder="oaxaca")
     print(result["secure_url"])

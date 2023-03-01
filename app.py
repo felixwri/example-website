@@ -119,6 +119,12 @@ def add_item():
     
     json = request.get_json()
 
+
+    if "dataURL" in json:
+        json["imageURL"] = db.upload_image(json["dataURL"])["url"]
+
+        print("New image uploaded")
+
     success = False 
     if json["new"]:
         success = db.add_item(json["name"], 
@@ -161,7 +167,7 @@ def upload_image():
         return render_template("uploader.html", image_urls = db.get_all_urls())
 
     json = request.get_json()
-    result = db.upload_image(json["id"], json["image"])
+    result = db.upload_image(json["image"])
 
     return jsonify(success = result["success"], url = result["url"])
 
