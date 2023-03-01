@@ -18,10 +18,9 @@ main {
 }
 
 .menu-image {
-    min-width: 12rem;
+    min-width: 10rem;
     height: 11rem;
-    padding: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.5rem 0.5rem 0.5rem 0rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -237,7 +236,7 @@ section {
     position: fixed;
 
     bottom: 3rem;
-    right: 25vw;
+    right: calc(10vw + 10rem + 2rem);
 
     border-radius: 5px;
     border: none;
@@ -384,82 +383,12 @@ section {
     fill: var(--primary);
 }
 
-@media screen and (max-width: 400px) {
-    .menu-name {
-        font-size: 1rem;
-    }
-
-    #filters>span {
-        display: none;
-    }
-
-    #filters {
-        width: 4rem;
-    }
-
-    #quick-select-container {
-        padding: 0.5rem;
-    }
-
-    .quick-select {
-        font-size: 0.8rem;
-    }
-
-    .filter-option {
-        font-size: 0.8rem
-    }
-
-    #filter-container {
-        padding: 0.5rem;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    #quick-select-container {
-        padding: 0.5rem;
-    }
-
-    .quick-select {
-        width: 6rem;
-        margin: 5px;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    .food-section {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1rem;
-    }
-
-    #filter-container {
-        display: grid;
-        grid-template-columns: repeat(2, 2fr);
-        grid-template-rows: repeat(2, 50%);
-        height: 6rem;
-    }
-
-    [data-showing="false"] {
-        top: -6rem;
-    }
-
-    .relative-container {
-        height: 6rem;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    section {
-        margin: 4rem 5vw 1rem 5vw;
-    }
-}
-
 
 
 #edit-menu {
     position: fixed;
     bottom: 3rem;
-    right: calc(10vw + 10rem + 2rem);
+    right: calc(10vw + 20rem + 4rem);
     width: 10rem;
     height: 4rem;
     background-color: white;
@@ -485,7 +414,7 @@ section {
 #stop-edit-menu {
     position: fixed;
     bottom: 3rem;
-    right: calc(10vw + 10rem + 2rem);
+    right: calc(10vw + 20rem + 4rem);
     width: 10rem;
     height: 4rem;
     background-color: white;
@@ -547,6 +476,10 @@ br {
     margin: 5px;
     border-radius: 5px;
     padding: 1rem 5px;
+}
+
+.edit-item {
+    display: flex;
 }
 
 .edit-icon {
@@ -792,4 +725,120 @@ br {
 .finish-button:hover {
     background-color: var(--primary-alt);
     color: white;
+}
+
+@media screen and (max-width: 400px) {
+    .menu-name {
+        font-size: 1rem;
+    }
+
+    .menu-item {
+        padding: 0.5rem;
+    }
+
+    .menu-image {
+        min-width: 4rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .menu-description {
+        padding: 0.5rem 0rem;
+    }
+
+    .image {
+        height: 4rem;
+    }
+
+    .menu-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #filters>span {
+        display: none;
+    }
+
+    #filters {
+        width: 4rem;
+    }
+
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        font-size: 0.8rem;
+    }
+
+    .filter-option {
+        font-size: 0.8rem
+    }
+
+    #filter-container {
+        padding: 0.5rem;
+    }
+
+    #basket-left,
+    #basket-right {
+        height: 1.2rem;
+    }
+
+    #start-order,
+    #cancel-order,
+    #call-staff,
+    #edit-menu,
+    #stop-edit-menu {
+        width: 5rem;
+        height: 3rem;
+        font-size: 1rem;
+        padding: 0.25rem;
+    }
+
+    #call-staff {
+        right: calc(10vw + 5rem + 1rem);
+    }
+
+    #edit-menu,
+    #stop-edit-menu {
+        right: calc(10vw + 10rem + 2rem);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #quick-select-container {
+        padding: 0.5rem;
+    }
+
+    .quick-select {
+        width: 6rem;
+        margin: 5px;
+    }
+
+    .food-section {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+    #filter-container {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        grid-template-rows: repeat(2, 50%);
+        height: 6rem;
+    }
+
+    [data-showing="false"] {
+        top: -6rem;
+    }
+
+    .relative-container {
+        height: 6rem;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    section {
+        margin: 4rem 2vw 1rem 2vw;
+    }
 }
