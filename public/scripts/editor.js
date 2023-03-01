@@ -167,9 +167,6 @@ function saveItem(id) {
         createNewElement(parent.parentElement.parentElement.id);
     }
 
-    hideContext();
-    stopEditingItem(id);
-
     price = price.innerText.replace("£", "");
     calories = calories.innerText.replace("kcal", "");
 
@@ -478,6 +475,11 @@ function ctxRemove() {
 }
 
 async function postSave(item) {
+    document.getElementById(`save-${item.id}`).style.width = "0rem";
+    let sync = document.getElementById(`sync-${item.id}`);
+    sync.style.width = "2rem";
+    sync.classList.add("spin");
+
     const response = await fetch(`http://localhost:5000/staff/menu/add`, {
         method: "POST",
         headers: {
@@ -489,6 +491,14 @@ async function postSave(item) {
 
     const content = await response.json();
     console.log(content);
+
+    sync.style.width = "0rem";
+    sync.classList.remove("spin");
+
+    if (content.success) {
+        hideContext();
+        stopEditingItem(item.id);
+    }
 }
 
 async function postDelete(id) {
