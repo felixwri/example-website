@@ -42,6 +42,7 @@ def submit_order():
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -73,7 +74,12 @@ def register():
         else:
             return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
 
-
+@app.route('/payment', methods=['GET', 'POST'])
+def payment():
+    if request.method == 'GET':
+        return render_template('payment.html')
+    else:
+        return jsonify(success="false", error="Bad method")
 # Staff Pages
 
 
