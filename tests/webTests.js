@@ -25,4 +25,16 @@ test('Adding item should update cart total', () => {
   expect(cart.total).toBe(10);
 });
 
+//Case 4: When the user removes an item from the cart, the cart should update and remove the selected item.
+
+test('Removing item should update cart', () => {
+  const cart = new Cart();
+  const item1 = new Item('Product 1', 10);
+  const item2 = new Item('Product 2', 20);
+  addToCart(item1, cart);
+  addToCart(item2, cart);
+  removeFromCart(item1, cart);
+  expect(cart.items.length).toBe(1);
+  expect(cart.items[0].name).toBe('Product 2');
+});
 
