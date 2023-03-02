@@ -9,7 +9,6 @@ app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 CORS(app, support_credentials=True)
- 
 
 @app.route('/')
 def home():
@@ -56,6 +55,10 @@ def login():
             return redirect('/staff/')
         else:
             return render_template("login.html", error = "Invalid Credentials")
+
+def logout():
+    session['username'] = ''
+    return redirect('/')
 
 
 @app.route('/register', methods=['GET', 'POST'])
