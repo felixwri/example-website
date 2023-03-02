@@ -595,7 +595,11 @@
                     <div>
                     <input type="text" class="form__input" name="requestStaff" id="requestStaff" placeholder="Why?" required="" />
                     </div>
-                    <button type="submit" class="button"  onclick="closeCallStaff(); callStaffReason();">OK</button> 
+
+                    <form onsubmit="return logFormValues()"></form>
+                    <button type="submit" class="button"  onclick="closeCallStaff(); logFormValues();">OK</button> 
+
+                    
                     <form>
 
                   </div>
@@ -605,6 +609,8 @@
                
                 
             </div>
+
+           
         
         
 
