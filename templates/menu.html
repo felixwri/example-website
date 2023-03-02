@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
         <link rel="stylesheet" href="{{url_for('send_css', path='nav.css')}}" />
         <link rel="stylesheet" href="{{url_for('send_css', path='menu.css')}}" />
+       
+
     </head>
     <body>
         <nav>
@@ -590,16 +592,10 @@
                 <div class="form__group">
                     
                     <form>
-
-
                     <div>
-
                     <input type="text" class="form__input" name="requestStaff" id="requestStaff" placeholder="Why?" required="" />
-                
                     </div>
-
-
-                    <button type="submit" class="button"  onclick="closeCallStaff()">OK</button> 
+                    <button type="submit" class="button"  onclick="closeCallStaff(); callStaffReason();">OK</button> 
                     <form>
 
                   </div>
@@ -624,6 +620,7 @@
     <script src="{{url_for('send_js', path='editor.js')}}"></script>
     {% endif %}
 
+    <script src="{{url_for('send_js', path='callStaff.js')}}"></script>
     <script src="{{url_for('send_js', path='menu.js')}}"></script>
     <script src="{{url_for('send_js', path='filter.js')}}"></script>
 </html>
