@@ -4,6 +4,9 @@ from flask_cors import CORS, cross_origin
 import database as db
 import string, random, secrets
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
@@ -16,6 +19,7 @@ def home():
     return render_template('home.html', page_name="home")
 
 @app.route('/menu', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def menu():
     return render_template('menu.html', menu_items=db.get_items(), editable=False)
 
@@ -27,6 +31,7 @@ def basket():
         return jsonify(success="false", error="Bad method")
 
 @app.route('/submit-order', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def submit_order():
     items = []
     obj = request.get_json()
@@ -43,6 +48,7 @@ def submit_order():
     return jsonify(success = "false", reference = "Bad method")
 
 @app.route('/login', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def login():
     if request.method == 'GET':
         return render_template("login.html")
@@ -59,6 +65,7 @@ def login():
 
 
 @app.route('/register', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def register():
     username = request.form['username']
     password = request.form['password']
@@ -86,6 +93,7 @@ def staff_home():
     return render_template('staffHome.html', orders=db.get_orders())
 
 @app.route('/staff/orders', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def view_all_orders():
     if session.get('username') != 'staff':
         return redirect("/")
@@ -96,6 +104,7 @@ def view_all_orders():
         return jsonify(success="false", error="Bad method")
     
 @app.route('/staff/order-status', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def cancel_order():
     if request.method == 'POST':
         req = request.get_json()
@@ -113,6 +122,7 @@ def editable_menu():
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
 @app.route('/staff/menu/add', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def add_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
@@ -149,6 +159,7 @@ def add_item():
     return jsonify(success)
 
 @app.route('/staff/menu/delete', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def delete_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
@@ -159,10 +170,10 @@ def delete_item():
     return jsonify(success)
 
 @app.route('/staff/upload', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
-    urls = db.get_all_urls()
     if request.method == "GET":
         return render_template("uploader.html", image_urls = db.get_all_urls())
 
@@ -192,5 +203,4 @@ def generate_reference():
     return reference
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()
