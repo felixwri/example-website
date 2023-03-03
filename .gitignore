@@ -1,4 +1,5 @@
 __pycache__/
+database/__pycache__
 .pytest_cache
 .vscode
 node_modules
