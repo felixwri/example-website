@@ -5,7 +5,7 @@ def insert_into_menu(reset_table=False):
         db.create_mains_table()
 
 
-    default_image = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677508244/oaxaca/cat_l4vhvx.jpg'
+    default_image = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
 
     #Starters
     db.add_item('Tortilla Chips & Salsas', default_image, 'Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')

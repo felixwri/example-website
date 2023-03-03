@@ -3,4 +3,4 @@ __pycache__/
 .vscode
 node_modules
 flask_session
-flask_session/*
+flask_session/
