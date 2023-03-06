@@ -119,6 +119,23 @@ main {
     padding: 20px;
   }
 
+  #close-overlay-btn {
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 3px solid rgba(255, 255, 255, 0);
+    font-size: 1.2rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #payment:hover {
+    color: black;
+    background-color: white;
+    border-color: var(--primary);
+  }
+
 @media screen and (max-width: 1000px) {
     #title {
         width: 70%;
