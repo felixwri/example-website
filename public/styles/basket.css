@@ -119,7 +119,7 @@ main {
     padding: 20px;
   }
 
-  #close-overlay-btn {
+  #pay-btn {
     background-color: var(--primary);
     cursor: pointer;
     color: white;
@@ -130,7 +130,7 @@ main {
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   }
 
-  #payment:hover {
+  #pay-btn:hover {
     color: black;
     background-color: white;
     border-color: var(--primary);
