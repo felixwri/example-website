@@ -1,20 +1,15 @@
-
 var calls = [];
 
-
-
-
 function logFormValues() {
-    let form = document.querySelector('form');
-    var reason = document.getElementById('requestStaff').value;
+  let form = document.querySelector('form');
+  var reason = document.getElementById('requestStaff').value;
 
-    calls.push(reason);
+  calls.push(reason);
 
-    console.log(calls);
+  console.log(calls);
 
-    for (let i = 0; i < calls.length; i++) {
-      console.log(calls[i]);
-    }
+ 
+  localStorage.setItem('calls', JSON.stringify(calls));
 
-    return false;
-  }
+  return false;
+}

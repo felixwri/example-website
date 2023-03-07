@@ -1,44 +1,36 @@
-const Order = require("./order");
+var calls = JSON.parse(localStorage.getItem('calls')) || [];
+var callsList = document.getElementById('callsList');
 
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+for (let i = 0; i < calls.length; i++) {
+  
+  var callItem = document.createElement('div');
+  callItem.classList.add('call-item');
 
-import Order from "./order";
-function drawChart() {
+  var callTitle = document.createElement('div');
+  callTitle.classList.add('box-title');
+  var callTitleText = document.createTextNode('Customer Call #' + (i+1));
+  callTitle.appendChild(callTitleText);
+  callItem.appendChild(callTitle);
 
+  var callDetails = document.createElement('div');
+  callDetails.classList.add('call-details');
+  var callDetailsText = document.createTextNode('Reason: ' + calls[i]);
+  callDetails.appendChild(callDetailsText);
+  callItem.appendChild(callDetails);
 
-  const orders = JSON.parse(` {{ orders | tojson }} `)
+  var deleteButton = document.createElement('button');
+  deleteButton.classList.add('delete-button');
+  deleteButton.innerText = 'Delete';
+  deleteButton.addEventListener('click', function() {
+    deleteCall(i);
+    callItem.remove();
+  });
+  callItem.appendChild(deleteButton);
 
+  callsList.appendChild(callItem);
+}
 
-  for (order in orders){
-
-    
-    for (item in order["items"]){
-      console.log("amad")
-    }
-  }
-
-
-
-
-  var data = google.visualization.arrayToDataTable([
-  ['Status', 'Status of order'],
-  ['Ordered', 8],
-  ['Cancelled', 2],
-  ['Cooking', 4],
- 
-]);
-
-
-
-
-
-
-
-
-  var options = {'title':'Orders', 'width':700, 'height':500};
-
-
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  chart.draw(data, options);
+function deleteCall(index) {
+  calls.splice(index, 1);
+  localStorage.setItem('calls', JSON.stringify(calls));
 }
