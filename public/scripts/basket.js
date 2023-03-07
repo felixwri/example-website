@@ -79,7 +79,7 @@ async function submitOrder() {
 
 function payment() {
     const paymentBtn = document.getElementById('payment');
-    const closeOverlayBtn = document.getElementById('pay-btn');
+    const closeOverlayBtn = document.getElementById('cancel-btn');
     const overlay = document.getElementById('overlay');
     
     paymentBtn.addEventListener('click', function() {
