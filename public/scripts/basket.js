@@ -59,6 +59,8 @@ async function showConfirmation(ref) {
 async function submitOrder() {
     const basket = order.getIds();
     console.log(basket);
+    const paybtn = document.getElementById('pay-btn')
+    const overlay = document.getElementById('overlay')
     const response = await fetch(`http://localhost:5000/submit-order`, {
         method: "POST",
         headers: {
@@ -69,6 +71,10 @@ async function submitOrder() {
             basket: basket,
         }),
     });
+
+    paybtn.addEventListener('click', function() {
+        overlay.style.display = 'none';
+      });
 
     const content = await response.json();
 
