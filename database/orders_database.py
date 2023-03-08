@@ -58,6 +58,17 @@ def add_order(user_id, dish_ids):
         print(e)
         connection.rollback()
 
+def delete_order(order_id):
+    cursor = connection.cursor()
+    try:
+        cursor.execute("DELETE FROM order_items WHERE order_id = %s;", (order_id,))
+        cursor.execute("DELETE FROM orders_table WHERE id = %s;", (order_id,))
+        connection.commit()
+        cursor.close()
+    except Exception as e:
+        print(f"Error while deleting an order - {e}")
+        connection.rollback()
+
 def get_orders(limit=None):
     cursor = connection.cursor()
     try:

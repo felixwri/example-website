@@ -143,7 +143,7 @@
             #images {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(10rem, 20rem));
-                grid-template-rows: repeat(auto-fill, 25rem);
+                /* grid-template-rows: repeat(auto-fill, 25rem); */
                 gap: 1rem;
             }
 
@@ -179,6 +179,22 @@
 
             .url {
                 overflow-wrap: break-word;
+            }
+
+            @media screen and (max-width: 768px) {
+                #images {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(5rem, 10rem));
+                    gap: 1rem;
+                }
+
+                .image {
+                    height: 10rem;
+                }
+
+                .url {
+                    font-size: 0.8rem;
+                }
             }
         </style>
 

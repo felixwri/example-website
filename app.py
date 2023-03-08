@@ -4,11 +4,15 @@ from flask_cors import CORS, cross_origin
 import database as db
 import string, random, secrets
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
+app.url_map.strict_slashes = False
 Session(app)
-CORS(app, support_credentials=True)
+CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "http://localhost:5000"}})
  
 
 @app.route('/')
@@ -16,6 +20,7 @@ def home():
     return render_template('home.html', page_name="home")
 
 @app.route('/menu', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def menu():
     return render_template('menu.html', menu_items=db.get_items(), editable=False)
 
@@ -27,6 +32,7 @@ def basket():
         return jsonify(success="false", error="Bad method")
 
 @app.route('/submit-order', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def submit_order():
     items = []
     obj = request.get_json()
@@ -44,6 +50,7 @@ def submit_order():
 
 
 @app.route('/login', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def login():
     if request.method == 'GET':
         return render_template("login.html")
@@ -60,6 +67,7 @@ def login():
 
 
 @app.route('/register', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def register():
     username = request.form['username']
     password = request.form['password']
@@ -92,6 +100,7 @@ def staff_home():
     return render_template('staffHome.html', orders=db.get_orders())
 
 @app.route('/staff/orders', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def view_all_orders():
     if session.get('username') != 'staff':
         return redirect("/")
@@ -102,6 +111,7 @@ def view_all_orders():
         return jsonify(success="false", error="Bad method")
     
 @app.route('/staff/order-status', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def cancel_order():
     if request.method == 'POST':
         req = request.get_json()
@@ -116,41 +126,66 @@ def cancel_order():
 def editable_menu():
     if session.get('username') != 'staff':
         return redirect("/")
-    print(db.get_items())
     return render_template('menu.html', menu_items=db.get_items(), editable=True)
 
 @app.route('/staff/menu/add', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def add_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
     
     json = request.get_json()
-    item = json['item']
-    print(json)
-    print(item)
-    db.add_item(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
-    return jsonify(success = "true")
+
+
+    if "dataURL" in json:
+        json["imageURL"] = db.upload_image(json["dataURL"])["url"]
+
+        print("New image uploaded")
+
+    success = False 
+    if json["new"]:
+        success = db.add_item(json["name"], 
+                    json["imageURL"], 
+                    json["type"], 
+                    json["price"], 
+                    json["calories"], 
+                    json["vegatarian"], 
+                    json["allergens"], 
+                    json["description"])
+    else:
+        success = db.update_item(
+                    json["id"],
+                    json["name"], 
+                    json["imageURL"], 
+                    json["type"], 
+                    json["price"], 
+                    json["calories"], 
+                    json["vegatarian"], 
+                    json["allergens"], 
+                    json["description"])
+    return jsonify(success)
 
 @app.route('/staff/menu/delete', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def delete_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
     
     json = request.get_json()
     items_id = json['id']
-    db.delete_items(items_id)
-    return jsonify(success = "true")
+    success = db.delete_items(items_id)
+    return jsonify(success)
 
 @app.route('/staff/upload', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True, origin='localhost',headers=['Content- Type','Authorization'])
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
-    urls = db.get_all_urls()
     if request.method == "GET":
         return render_template("uploader.html", image_urls = db.get_all_urls())
 
     json = request.get_json()
-    result = db.upload_image(json["id"], json["image"])
+    result = db.upload_image(json["image"])
 
     return jsonify(success = result["success"], url = result["url"])
 
@@ -175,5 +210,4 @@ def generate_reference():
     return reference
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()

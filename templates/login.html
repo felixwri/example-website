@@ -48,11 +48,8 @@
                     </div>
                     <div id="nav-right">
                         <a href="/" class="nav-page link">Home</a>
-                        <div id="nav-hidden-menu">
-                            <a href="/menu" id="nav-revealed-menu" class="link">Menu</a>
-                        </div>
+                        <a href="/menu" class="nav-page link" class="link">Menu</a>
                         <a href="/basket" class="nav-page link">Basket</a>
-                        <a href="/login" class="nav-page link">Login</a>
                     </div>
                 </div>
                 <div id="mobile-nav-right">
@@ -83,7 +80,6 @@
                         </svg>
 
                         <a href="/basket" class="mobile-nav-page link">Basket</a>
-                        <a href="/login" class="mobile-nav-page link">Login</a>
                     </div>
                 </div>
             </div>
@@ -92,16 +88,16 @@
         </nav>
 
         <div class="login-container">
-            <div class="login-form">
+            <div class="login-form-fields">
                 <h2>
-                    <label for="login-header">Login</label>
+                    <label for="login-header"><b>Login</b></label>
                 </h2>
                 <br />
                 <form method="post" action="">
                     <div class="form-fields">
                         <input
                             type="text"
-                            id="username"
+                            id="username-field"
                             name="username"
                             required
                             placeholder="Username"
@@ -117,7 +113,7 @@
                     <div class="form-fields">
                         <input
                             type="password"
-                            id="password"
+                            id="password-field"
                             name="password"
                             required
                             placeholder="Password"
@@ -129,7 +125,6 @@
                             value=""
                         />
                     </div>
-                    <br />
                     <div class="login-button">
                         <input id="login-button" type="submit" value="Login" />
                     </div>

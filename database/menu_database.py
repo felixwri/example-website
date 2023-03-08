@@ -52,38 +52,47 @@ def add_item(name, image_url, dish_type, price, calories, vegetarian, allergies,
 
         cursor.close()
 
+        return {"success": True}
+
     except Exception as e:
         print("Insertion failed.")
         print(e)
 
         connection.rollback()
 
+        return {"success": False}
+
 def update_item(id, name, image_url, dish_type, price, calories, vegetarian, allergies, description):
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "UPDATE " + table_name + " SET (name=%s, image_url=%s, dish_type=%s, price=%s, calories=%s, vegetarian=%s, allergies=%s, description=%s) WHERE id=%s",
+            "UPDATE " + table_name + " SET name=%s, image_url=%s, dish_type=%s, price=%s, calories=%s, vegetarian=%s, allergies=%s, description=%s WHERE id=%s",
             (name, image_url, dish_type, price, calories, vegetarian, allergies, description, id)
         )
         connection.commit()
 
         cursor.close()
 
+        return {"success": True}
+
     except Exception as e:
         print("Insertion failed.")
         print(e)
 
         connection.rollback()
 
-def delete_items(id):
+        return {"success": False}
 
+def delete_items(id):
     cursor = connection.cursor()
     try:
-        cursor.execute(f"Delete from " + table_name + " where id = %s", (id))
+        cursor.execute(f"DELETE FROM {table_name} WHERE id={id}")
 
         connection.commit()
 
         cursor.close()
+
+        return {"success": True}
 
 
     except Exception as e:
@@ -91,6 +100,7 @@ def delete_items(id):
         print(e)
 
         connection.rollback()
+        return {"success": False}
 
 def update_price(price, id):
     

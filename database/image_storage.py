@@ -7,19 +7,14 @@ import cloudinary.api
 
 config = cloudinary.config(secure=True)
 
-print("Cloud name: " + config.cloud_name)
-
 def get_all_urls():
     result = cloudinary.Search().expression('folder:oaxaca/*').sort_by("public_id","desc").execute()
     resources = result["resources"]
     urls = [i['secure_url'] for i in resources]
     return urls
 
-# get_all_urls()
-
-def upload_image(id, image):
-    # print(image)
-    print("Upload")
+def upload_image(image):
+    print("Attempting to upload image")
 
     result = cloudinary.uploader.upload(image, folder="oaxaca")
     print(result["secure_url"])

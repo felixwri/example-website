@@ -3,12 +3,17 @@
 h2 {
   margin-top: 8rem;
   font-size: large;
-  letter-spacing: 0.1em;
-  color: rgb(255, 100, 34);
+  letter-spacing: 0;
+  color: black;
   font-weight: 500;
-}
+  font-size: 28px;
+  line-height: 1.2;
+  display: block;
+  text-align: center;
+  }
 
 body {
+  margin-top: 8rem;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -17,44 +22,16 @@ body {
   overflow-x: hidden;
 }
 
-.forget-pass {
-  color: rgb(255, 100, 34);
-  font-weight: 600;
-}
-
-.forget-pass hover {
-  color: #c5e5ed;
-  font-weight: 600;
-}
-
-.login-form {
+.login-container {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 28px;
   color: #333;
   text-align: center;
   width: 100%;
   display: block;
-  padding-top: 64px
-}
-
-.login-container {
-  width: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 500px;
+  padding-top: 5%;
+  padding-bottom: 10%;
   background: white;
-  border-radius: 0px 0px 25px 0px;
   overflow: hidden;
 }
 
@@ -73,103 +50,44 @@ body {
   justify-content: center;
   align-items: center;
   padding-bottom: 54px;
-
-  /* background: rgb(222, 94, 3); */
-  /* background: -webkit-linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222), rgb(225, 235, 31));
-  background: -o-linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222), rgb(225, 235, 31));
-  background: -moz-linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222), rgb(225, 235, 31));
-  background: linear-gradient(right, rgb(222, 94, 3), rgb(124, 222, 3), rgb(3, 216, 222), rgb(225, 235, 31)); */
-
 }
 
-#login-button {
-
-
-  /* font-family: Poppins-Medium;
+#login-button {  
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  color: #fff;
-  line-height: 1.2;
-  text-transform: uppercase;
-
+  color: white;
+  font-weight: 300;
+  margin-top: 5rem;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
-  display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
-  width: 100%;
-  height: 50px;
-  */
-  /* font-family: Poppins-Medium; */
-  /* text-transform: uppercase; */
-
-  font-size: 1rem;
-  font-weight: bold;
-  margin-top: 2rem;
-  padding: 0.5rem 1rem;
-
+  background-color: var(--primary);
   border-radius: 5px;
-
-
-  cursor: pointer;
-  background: -webkit-linear-gradient(right, rgb(222, 94, 3), rgb(232, 199, 14));
-  /* background: -o-linear-gradient(right, rgb(222, 94, 3), rgb(235, 204, 31));
-  background: -moz-linear-gradient(right, rgb(222, 94, 3), rgb(235, 204, 31));
-  background: linear-gradient(right, rgb(222, 94, 3), rgb(235, 204, 31)); */
-  color: white;
+  border: 3px solid rgba(255, 255, 255, 0);
 }
 
-.password-field {
-  color: color rgb(3, 216, 222);
+#password-field {
+  background-color: #FFCC33;
+  border: 0;
+  padding: 10px;
+  width: 30%;
+  font-size: medium;
 }
 
-.username-field {
-  background-color: color rgb(3, 216, 222);
-}
-
-
-
-/*font*/
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: bold;
-  font-weight: 100;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUQjIg1_i6t8kCHKm459WxRxC7m0dR9pBOi.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-body,
-html {
-  height: 100%;
-  font-family: Poppins-Regular, sans-serif;
-}
-
-a.login-form {
-  font-family: Poppins-Regular;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #666666;
-  margin: 0px;
-  transition: all 0.4s;
-}
-
-a:focus {
-  outline: none !important;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #a64bf4;
+#username-field {
+  background-color: #FFCC33;
+  border: 0;
+  padding: 10px;
+  width: 30%;
+  font-size: medium;
 }
 
 h1,
@@ -181,43 +99,24 @@ h6 {
   margin: 0px;
 }
 
-h4 {
-  font-family: Poppins-Regular;
-  font-size: 14px;
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
   line-height: 1.7;
-  color: #666666;
+  color: black;
   margin: 0px;
+  border: none;
+  font-weight: 600;
+  background: transparent;
 }
 
 input {
+  font-size: small;
   outline: none;
-  border: none;
-}
-
-button {
-  outline: none !important;
-  border: none;
-  background: transparent;
 }
 
 button:hover {
   cursor: pointer;
-}
-
-
-.txt1 {
-  font-family: Poppins-Regular;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #666666;
-}
-
-.txt2 {
-  font-family: Poppins-Regular;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #333333;
-  text-transform: uppercase;
 }
 
 
@@ -227,84 +126,11 @@ button:hover {
   margin: 0 auto;
 }
 
-.container-login100 {
-  width: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
 
 /* Form */
 
 .login-form {
   width: 100%;
-}
-
-h1 {
-  display: block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 39px;
-  color: #333333;
-  line-height: 1.2;
-  text-align: center;
-}
-
-/* [ Input ]*/
-
-.wrap-input100 {
-  width: 100%;
-  position: relative;
-  border-bottom: 2px solid #d9d9d9;
-}
-
-.label-input100 {
-  font-family: Poppins-Regular;
-  font-size: 14px;
-  color: #333333;
-  line-height: 1.5;
-  padding-left: 7px;
-}
-
-.input100 {
-  font-family: Poppins-Medium;
-  font-size: 16px;
-  color: #333333;
-  line-height: 1.2;
-
-  display: block;
-  width: 100%;
-  height: 55px;
-  background: transparent;
-  padding: 0 7px 0 43px;
-}
-
-.focus-input100 {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.focus-input100::after {
-  content: attr(data-symbol);
-  font-family: Material-Design-Iconic-Font;
-  color: #adadad;
-  font-size: 22px;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -318,73 +144,10 @@ h1 {
   left: 0;
   padding-left: 13px;
   padding-top: 3px;
-}
 
-.focus-input100::before {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #7f7f7f;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-
-.input100:focus+.focus-input100::before {
-  width: 100%;
-}
-
-.has-val.input100+.focus-input100::before {
-  width: 100%;
-}
-
-.input100:focus+.focus-input100::after {
-  color: #eef44b;
-}
-
-.has-val.input100+.focus-input100::after {
-  color: #a64bf4;
-}
-
-
-/* Button */
-#container-login-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#wrap-login-button {
-  width: 100%;
-  display: block;
-  position: relative;
-  z-index: 1;
-  border-radius: 25px;
-  overflow: hidden;
-  margin: 0 auto;
-
-  box-shadow: 0 5px 30px 0px rgb(222, 94, 3);
-  -moz-box-shadow: 0 5px 30px 0px rgb(124, 222, 3);
-  -webkit-box-shadow: 0 5px 30px 0px rgb(3, 216, 222);
-  -o-box-shadow: 0 5px 30px 0px rgb(225, 235, 31);
-  -ms-box-shadow: 0 5px 30px 0px rgb(222, 94, 3);
-}
-
-#login-button {
-
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
+  box-shadow: 0 5px 30px 0px,
+  rgb(222, 94, 3),
+  rgb(124, 222, 3), 
+  rgb(3, 216, 222), 
+  rgb(225, 235, 31);
 }
