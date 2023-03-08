@@ -11,7 +11,7 @@ function init() {
         document.getElementById(
             "title-hint"
         ).innerHTML = `<span style="color: red">Add an item on the menu to submit an order</span>`;
-        document.getElementById("Payment").style.display = "none";
+        document.getElementById("order-payment").style.display = "none";
     }
 
     for (let item of order.getItems()) {
@@ -48,7 +48,7 @@ async function showConfirmation(ref) {
     reference.innerText = ref;
 
     document.getElementById("title-hint").style.display = "none";
-    let submitButton = document.getElementById("Payment");
+    let submitButton = document.getElementById("order-payment");
     submitButton.style.opacity = "0";
     submitButton.style.pointerEvents = "none";
 
@@ -59,8 +59,6 @@ async function showConfirmation(ref) {
 async function submitOrder() {
     const basket = order.getIds();
     console.log(basket);
-    const paybtn = document.getElementById('pay-btn')
-    const overlay = document.getElementById('overlay')
     const response = await fetch(`http://localhost:5000/submit-order`, {
         method: "POST",
         headers: {
@@ -86,6 +84,7 @@ async function submitOrder() {
 function payment() {
     const paymentBtn = document.getElementById('payment');
     const closeOverlayBtn = document.getElementById('cancel-btn');
+    const payBtn = document.getElementById('pay-btn')
     const overlay = document.getElementById('overlay');
     
     paymentBtn.addEventListener('click', function() {
@@ -95,4 +94,8 @@ function payment() {
     closeOverlayBtn.addEventListener('click', function() {
       overlay.style.display = 'none';
     });
+
+    payBtn.addEventListener('click', function() {
+        overlay.style.display = 'none';
+      });
 }
