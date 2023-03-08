@@ -70,10 +70,6 @@ async function submitOrder() {
         }),
     });
 
-    paybtn.addEventListener('click', function() {
-        overlay.style.display = 'none';
-      });
-
     const content = await response.json();
 
     if (content.success) {
