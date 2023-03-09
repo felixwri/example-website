@@ -37,7 +37,7 @@ def insert_into_menu(reset_table=False):
     #Desserts
     db.add_item('Ice Cream', default_image, 'Desserts', 4.00, 145, False, 'Milk', 'Two scoops, choose from vanilla, strawberry, chocolate, mint, mango or toffee.')
     db.add_item('Bunuelos', bunuelos, 'Desserts', 6.00, 212, False, 'None', 'Fried dough ball dusted with cinnamon sugar served with Dulce de Leche & chocolate fudge sauce.')
-    db.add_item('Fudge Brownie', brownie, 'Desserts', 6.00, 200, False, 'Milk', 'Warm chocolate fudge brownie with a choice of topping from rasberries, strawbberries or bananas. Served with vanilla ice cream and chocolate/toffee sauce.')
+    db.add_item('Fudge Brownie', brownie, 'Desserts', 6.50, 368, False, 'Milk', 'Warm chocolate fudge brownie with a choice of topping from rasberries, strawbberries or bananas. Served with vanilla ice cream and chocolate/toffee sauce.')
     db.add_item('Churros', churros, 'Desserts', 6.50, 256, False, 'Milk', 'Mexican doughnut fried and dusted with cinnamon sugar with a side of Dulce de Leche & vanilla ice cream.')
     db.add_item('Banana Chimichanga', default_image, 'Desserts', 6.50, 200, False, 'Milk', 'A cinnamon flour tortilla filled with banana, deep fried and served with Dulce de Leche & vanilla ice cream.')
     #Soft Drinks, Beers, Ciders
