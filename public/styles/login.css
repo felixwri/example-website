@@ -22,11 +22,6 @@ body {
   overflow-x: hidden;
 }
 
-.forget-pass {
-  color: rgb(255, 100, 34);
-  font-weight: 600;
-}
-
 .login-container {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 28px;
@@ -57,8 +52,9 @@ body {
   padding-bottom: 54px;
 }
 
-#login-button {
-  font-size: 1rem, bold;
+#login-button {  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
   color: white;
   font-weight: 300;
   margin-top: 5rem;
@@ -82,14 +78,16 @@ body {
   background-color: #FFCC33;
   border: 0;
   padding: 10px;
-  width: 50%;
+  width: 30%;
+  font-size: medium;
 }
 
 #username-field {
   background-color: #FFCC33;
   border: 0;
   padding: 10px;
-  width: 50%;
+  width: 30%;
+  font-size: medium;
 }
 
 h1,
@@ -105,9 +103,10 @@ button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.7;
-  color: white;
+  color: black;
   margin: 0px;
   border: none;
+  font-weight: 600;
   background: transparent;
 }
 

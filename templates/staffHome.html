@@ -79,10 +79,13 @@
                 <button class="button1" onclick="location.href='/staff/upload'">Image Database</button>
             </div>
 
-            <div id="piechart"></div>
+            <ul id="callsList">
+             
+              </ul>
 
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script src="{{url_for('send_js', path='statusPiChart.js')}}"></script>
+
+            <script src="{{url_for('send_js', path='staffHome.js')}}"></script>
+            
         </main>
     </body>
 </html>

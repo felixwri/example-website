@@ -7,8 +7,6 @@ import cloudinary.api
 
 config = cloudinary.config(secure=True)
 
-print("Cloud name: " + config.cloud_name)
-
 def get_all_urls():
     result = cloudinary.Search().expression('folder:oaxaca/*').sort_by("public_id","desc").execute()
     resources = result["resources"]
