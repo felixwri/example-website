@@ -212,7 +212,7 @@ section {
     position: fixed;
 
     bottom: 3rem;
-    right: 25vw;
+    right: 85%;
 
     border-radius: 5px;
     border: none;
@@ -264,7 +264,7 @@ section {
     visibility: visible;
     position: fixed;
     top: 30%;
-    transform: translate(-50%,50%) scale(1);
+    transform: translate(-50%,20%) scale(1);
 }
 
 
