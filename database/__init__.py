@@ -8,5 +8,6 @@ connection = psycopg2.connect(os.getenv('DATABASE_URI'))
 from .login_database import *
 from .menu_database import *
 from .orders_database import *
+from .tables_database import *
 from .image_storage import *
 from .inserts import *
