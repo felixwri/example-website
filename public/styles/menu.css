@@ -264,7 +264,7 @@ section {
     position: fixed;
 
     bottom: 3rem;
-    right: calc(10vw + 10rem + 2rem);
+    right: 25vw;
 
     border-radius: 5px;
     border: none;
@@ -316,7 +316,7 @@ section {
     visibility: visible;
     position: fixed;
     top: 30%;
-    transform: translate(-50%, 50%) scale(1);
+    transform: translate(-50%,50%) scale(1);
 }
 
 
