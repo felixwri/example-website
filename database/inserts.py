@@ -7,7 +7,8 @@ def insert_into_menu(reset_table=False):
 
     default_image = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
     #starters images
-    tortilla_chips = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784599/oaxaca/typtnwf3zbkyyyjlnhmk.png'
+    tortilla_chips_salsa = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784599/oaxaca/typtnwf3zbkyyyjlnhmk.png'
+    tortilla_chips_guacamole = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372078/oaxaca/Tortilla_Chips_and_Guacamole_ewbnzw.png' 
     southwest_rolls = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784726/oaxaca/juhqhaqi4z4vpaotqurt.png'
     grilled_wings = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784617/oaxaca/jkf38hutu4tgfsskhno0.png'
     #mains images
@@ -30,8 +31,8 @@ def insert_into_menu(reset_table=False):
     coke_zero = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Coke_Zero_qibtx1.png'
 
     #Starters
-    db.add_item('Tortilla Chips & Salsas', tortilla_chips, 'Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')
-    db.add_item('Tortilla Chips & Guacamole', default_image, 'Starters', 6.00, 200, True,'None', 'Our famous guacamole is freshly made every day using fresh ingredients.')
+    db.add_item('Tortilla Chips & Salsas', tortilla_chips_salsa, 'Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')
+    db.add_item('Tortilla Chips & Guacamole', tortilla_chips_guacamole, 'Starters', 6.00, 200, True,'None', 'Our famous guacamole is freshly made every day using fresh ingredients.')
     db.add_item('Nachos', 'Starters', default_image, 7.00, 306, True, 'Cheese, Jalapeños', 'Tortilla chips topped with jack cheese, roasted salsa, jalapeño cream cheese, sour cream and our famous guacamole.')
     db.add_item('Southwest Spring Rolls', southwest_rolls,'Starters', 7.00, 239, True, 'Cheese', 'Chipotle Mexican chicken, peppers & jack cheese folded in a flour tortilla, deep fried & served with our famous guacamole.')
     db.add_item('Grilled Chicken Wings', grilled_wings, 'Starters', 7.50, 312, False, 'None', 'Grilled chicken with Lousiana Hot sauce.')
