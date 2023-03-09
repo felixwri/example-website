@@ -756,6 +756,10 @@ br {
     animation: spin 1s linear infinite;
 }
 
+.contained {
+    background-size: contain;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

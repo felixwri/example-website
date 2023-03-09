@@ -489,7 +489,7 @@
                     {% for item in menu_items %} {% if item.type == "Soft Drinks"%}
                     <div id="item-{{ item.id }}" class="menu-item" data-type="Drinks" data-url="{{item.image_url}}">
                         <div class="menu-image">
-                            <div class="image" style="background-image: url({{item.image_url}})"></div>
+                            <div class="image contained" style="background-image: url({{item.image_url}})"></div>
                         </div>
                         <div class="menu-text">
                             <div class="menu-title-container">
