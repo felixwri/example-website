@@ -16,10 +16,18 @@ def insert_into_menu(reset_table=False):
     meat_paella = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784625/oaxaca/cktpuybybttxubbunlpv.png'
     poblano_chicken = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784546/oaxaca/qyjln0yxjnyy4mdmsq7u.png'
     mex_burger = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784538/oaxaca/m0dbuyo83rgisdwyfiqf.png'
+    enchiladas = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372078/oaxaca/Beef_Carnitas_Enchiladas_sjdwkc.png'
     #desserts images
+    icecream = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Icecream_on1lwr.png'
     brownie = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677794360/oaxaca/Brownie_liikqq.png'
     churros = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677794369/oaxaca/Churros_vmce5b.png'
     bunuelos = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677794365/oaxaca/Bunuelos_yagtd1.png'
+    chimichanga = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Banana_Chimichanga_uakow3.png'
+    #drinks images
+    coca_cola = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Coca_Cola_rhhmf5.png'
+    sprite = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Sprite_hwvxsa.png'
+    fanta = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Fanta_cgqjrw.png'
+    coke_zero = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Coke_Zero_qibtx1.png'
 
     #Starters
     db.add_item('Tortilla Chips & Salsas', tortilla_chips, 'Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')
@@ -31,20 +39,20 @@ def insert_into_menu(reset_table=False):
     db.add_item('Mexican Paella', mexican_paella, 'Mains', 15.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
     db.add_item('Seafood Paella', seafood_paella, 'Mains', 15.00, 200, False, 'Prawns, Nuts', 'Mexican rice cooked with chorizo, seafood cocktail, black tiger prawns, roasted salsa, peas, sweet corn and fresh coriander. (Hot)')
     db.add_item('Meat Paella', meat_paella, 'Mains', 15.00, 400, False, 'None', 'Slow cooked Mexican rice with chicken, chorizo, red salsa, peas & sweetcorn topped with grilled steak & bacon. (Hot)')
-    db.add_item('Beef Carnitas Enchilada', default_image, 'Mains', 14.50, 410, False, 'None', 'Rolled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
+    db.add_item('Beef Carnitas Enchilada', enchiladas, 'Mains', 14.50, 410, False, 'None', 'Rolled flour or white corn tortillas (GF) filled with jack cheese, poblano chilli peppers and topped with creamy salsa, jalapeños & cheese. Oven baked and served over a bed of Mexican rice & our famous guacamole.')
     db.add_item('Poblano Chicken', poblano_chicken, 'Mains', 14.50, 350, False, 'None', 'Grilled chicken breast topped with red salsa, poblano chilli peppers, melted jack cheese, served with seasoned fries.')
     db.add_item('Mex Burger', mex_burger, 'Mains', 14.50, 600, False, 'Cheese', 'Beef burger folded in a flour tortilla with jack cheese, poblano chilli peppers & Chilli con Carne, served with pico de gallo, sour cream, our famous guacamole & Mexican rice.')
     #Desserts
-    db.add_item('Ice Cream', default_image, 'Desserts', 4.00, 145, False, 'Milk', 'Two scoops, choose from vanilla, strawberry, chocolate, mint, mango or toffee.')
+    db.add_item('Ice Cream', icecream, 'Desserts', 4.00, 145, False, 'Milk', 'Two scoops, choose from vanilla, strawberry, chocolate, mint, mango or toffee.')
     db.add_item('Bunuelos', bunuelos, 'Desserts', 6.00, 212, False, 'None', 'Fried dough ball dusted with cinnamon sugar served with Dulce de Leche & chocolate fudge sauce.')
     db.add_item('Fudge Brownie', brownie, 'Desserts', 6.50, 368, False, 'Milk', 'Warm chocolate fudge brownie with a choice of topping from rasberries, strawbberries or bananas. Served with vanilla ice cream and chocolate/toffee sauce.')
     db.add_item('Churros', churros, 'Desserts', 6.50, 256, False, 'Milk', 'Mexican doughnut fried and dusted with cinnamon sugar with a side of Dulce de Leche & vanilla ice cream.')
-    db.add_item('Banana Chimichanga', default_image, 'Desserts', 6.50, 200, False, 'Milk', 'A cinnamon flour tortilla filled with banana, deep fried and served with Dulce de Leche & vanilla ice cream.')
+    db.add_item('Banana Chimichanga', chimichanga, 'Desserts', 6.50, 200, False, 'Milk', 'A cinnamon flour tortilla filled with banana, deep fried and served with Dulce de Leche & vanilla ice cream.')
     #Soft Drinks, Beers, Ciders
-    db.add_item("Coke Zero", default_image, "Soft Drinks", 3.30, 0, None, None, None)
-    db.add_item("Coca-Cola", default_image, "Soft Drinks", 3.50, 139, None, None, None)
-    db.add_item("Sprite", default_image, "Soft Drinks", 3.30, 110, None, None, None)
-    db.add_item("Fanta", default_image, "Soft Drinks", 3.30, 120, None, None, None)
+    db.add_item("Coke Zero", coke_zero, "Soft Drinks", 3.30, 0, None, None, None)
+    db.add_item("Coca-Cola", coca_cola, "Soft Drinks", 3.50, 139, None, None, None)
+    db.add_item("Sprite", sprite, "Soft Drinks", 3.30, 110, None, None, None)
+    db.add_item("Fanta", fanta, "Soft Drinks", 3.30, 120, None, None, None)
     db.add_item("Orange Juice", default_image, "Soft Drinks", 4.00, 30, None, None, None)
     db.add_item("Budweiser 4.5% ABV", default_image, "Beers", 5.50, 186, None, None, None)
     db.add_item("Mahou 5.1% ABV", default_image, "Beers", 6.50, 190, None, None, None)
