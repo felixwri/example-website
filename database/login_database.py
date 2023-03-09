@@ -36,6 +36,7 @@ def create_users_table():
         connection.rollback()
 
 def add_user(username, password, user_type='basic'):
+    assert user_type in ['basic', 'waiter', 'kitchen']
 
     cursor = connection.cursor()
 
