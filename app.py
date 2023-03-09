@@ -90,8 +90,9 @@ def staff_home():
     if session.get('username') != 'staff':
         return redirect("/")
     
+    
 
-    return render_template('staffHome.html', orders=db.get_orders())
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables())
 
 @app.route('/staff/orders', methods=['GET'])
 @cross_origin(supports_credentials=True)

@@ -81,8 +81,22 @@
 
             <div id="piechart"></div>
 
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script src="{{url_for('send_js', path='statusPiChart.js')}}"></script>
+            <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="{{url_for('send_js', path='statusPiChart.js')}}"></script> -->
+
+            <section id="active-tables">
+                <h2>Active tables</h2>
+                <div id="tables-container">
+                    {% if tables %} {% for table in tables %}
+                    <div>{{ table.table_number}}</div>
+                    {% endfor %}{% endif %}
+                </div>
+            </section>
+
+            <script>
+                const tables = JSON.parse(`{{ tables | tojson }}`);
+            </script>
+            <script src="{{url_for('send_js', path='tables.js')}}"></script>
         </main>
     </body>
 </html>
