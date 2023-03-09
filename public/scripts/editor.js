@@ -302,9 +302,9 @@ function createNewElement(selector) {
     }
 
     parent.innerHTML += `
-    <div id="item-${temporaryID}" data-id="${temporaryID}" data-type="${type}" data-url="https://res.cloudinary.com/djukm4fut/image/upload/v1677508244/oaxaca/cat_l4vhvx.jpg" class="menu-item temporary-item">
+    <div id="item-${temporaryID}" data-id="${temporaryID}" data-type="${type}" data-url="https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png" class="menu-item temporary-item">
         <div class="menu-image">
-            <div class="image" style="background-image: url(https://res.cloudinary.com/djukm4fut/image/upload/v1677508244/oaxaca/cat_l4vhvx.jpg)"></div>
+            <div class="image" style="background-image: url(https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png)"></div>
         </div>
         <div class="menu-text">
             <div class="menu-title-container">

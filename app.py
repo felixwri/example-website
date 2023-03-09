@@ -10,8 +10,9 @@ load_dotenv()
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
+app.url_map.strict_slashes = False
 Session(app)
-CORS(app, support_credentials=True)
+CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "http://localhost:5000"}})
  
 
 @app.route('/')
@@ -170,7 +171,7 @@ def delete_item():
     return jsonify(success)
 
 @app.route('/staff/upload', methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
+@cross_origin(supports_credentials=True, origin='localhost',headers=['Content- Type','Authorization'])
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")

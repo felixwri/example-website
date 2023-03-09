@@ -5,7 +5,7 @@ def insert_into_menu(reset_table=False):
         db.create_mains_table()
 
 
-    default_image = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677508244/oaxaca/cat_l4vhvx.jpg'
+    default_image = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
     #starters images
     tortilla_chips = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784599/oaxaca/typtnwf3zbkyyyjlnhmk.png'
     southwest_rolls = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677784726/oaxaca/juhqhaqi4z4vpaotqurt.png'
