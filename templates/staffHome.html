@@ -86,14 +86,21 @@
 
             <section id="active-tables">
                 <h2>Active tables</h2>
+                <div id="tables-nav">
+                    <div>Tables in use: 0</div>
+                    <div id="assign-new" onclick="assignNewTable()">Assign new table</div>
+                </div>
                 <div id="tables-container">
                     {% if tables %} {% for table in tables %}
-                    <div>{{ table.table_number}}</div>
+                    <div class="table">
+                        <div class="table-number">{{ table.table_number}}</div>
+                    </div>
                     {% endfor %}{% endif %}
                 </div>
             </section>
 
             <script>
+                const name = `{{ name }}`;
                 const tables = JSON.parse(`{{ tables | tojson }}`);
             </script>
             <script src="{{url_for('send_js', path='tables.js')}}"></script>

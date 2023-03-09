@@ -52,6 +52,60 @@
     padding: 0rem 5rem;
 }
 
+#tables-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5rem 0rem;
+    margin: 1rem 0rem;
+
+
+    border-bottom: 3px solid var(--light-grey);
+}
+
+#assign-new {
+    background-color: var(--primary-alt);
+    color: white;
+    font-size: bold;
+    border-radius: 5px;
+    padding: 1rem;
+    cursor: pointer;
+}
+
 #no-tables {
     color: grey;
+}
+
+#tables-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 4fr);
+    gap: 1rem;
+}
+
+.table {
+    aspect-ratio: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    max-width: 8rem;
+    position: relative;
+    border-radius: 5px;
+}
+
+.table-number {
+    position: relative;
+    left: calc(50% - 1rem);
+    top: -1rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    color: var(--primary-alt);
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

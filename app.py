@@ -59,6 +59,7 @@ def login():
         password = request.form['password']
 
         if db.check_password(username, password):
+            session["name"] = username
             session['username'] = 'staff'
             return redirect('/staff/')
         else:
@@ -85,14 +86,18 @@ def register():
 # Staff Pages
 
 
-@app.route('/staff/', methods=['GET'])
+@app.route('/staff/', methods=['GET', 'POST'])
 def staff_home():
     if session.get('username') != 'staff':
         return redirect("/")
     
+    if request.method == 'POST':
+        json = request.get_json()
+        db.add_table(json["number"])
+        return jsonify(success=True)
     
 
-    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables())
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), name=session.get("name"))
 
 @app.route('/staff/orders', methods=['GET'])
 @cross_origin(supports_credentials=True)
