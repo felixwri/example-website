@@ -13,16 +13,25 @@ CORS(app, support_credentials=True)
 
 @app.route('/')
 def home():
-    return render_template('home.html', page_name="home")
+    if 'loggedin' in session:
+        return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
+    else:
+        return render_template('home.html', page_name="home", user_option="Log In")
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu.html', menu_items=db.get_items(), editable=False)
+    if 'loggedin' in session:
+        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log Out")
+    else:
+        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log In")
 
 @app.route('/basket', methods=['GET'])
 def basket():
     if request.method == 'GET':
-        return render_template('basket.html')
+        if 'loggedin' in session:
+            return render_template('basket.html', user_option="Log Out")
+        else:
+            return render_template('basket.html', user_option="Log In")
     else:
         return jsonify(success="false", error="Bad method")
 
@@ -44,6 +53,10 @@ def submit_order():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'loggedin' in session:
+        logout()
+        return redirect('/')
+
     if request.method == 'GET':
         return render_template("login.html")
     else:
@@ -53,9 +66,16 @@ def login():
 
         if db.check_password(username, password):
             session['username'] = 'staff'
+            session['loggedin'] = True
             return redirect('/staff/')
         else:
             return render_template("login.html", error = "Invalid Credentials")
+
+def logout():
+    # Removing session data logs out user
+    session.pop('loggedin', None)
+    session.pop('username', None)
+    return render_template("login.html")
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -83,7 +103,7 @@ def staff_home():
         return redirect("/")
     
 
-    return render_template('staffHome.html', orders=db.get_orders())
+    return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():
@@ -91,7 +111,7 @@ def view_all_orders():
         return redirect("/")
     
     if request.method == 'GET':
-        return render_template('orders.html', orders=db.get_orders())
+        return render_template('orders.html', orders=db.get_orders(), user_option="Log Out")
     else:
         return jsonify(success="false", error="Bad method")
     
@@ -110,7 +130,7 @@ def cancel_order():
 def editable_menu():
     if session.get('username') != 'staff':
         return redirect("/")
-    return render_template('menu.html', menu_items=db.get_items(), editable=True)
+    return render_template('menu.html', menu_items=db.get_items(), editable=True, user_option="Log Out")
 
 @app.route('/staff/menu/add', methods=['POST'])
 def add_item():
@@ -164,7 +184,7 @@ def upload_image():
         return jsonify(success= "false")
     urls = db.get_all_urls()
     if request.method == "GET":
-        return render_template("uploader.html", image_urls = db.get_all_urls())
+        return render_template("uploader.html", image_urls = db.get_all_urls(), user_option="Log Out")
 
     json = request.get_json()
     result = db.upload_image(json["image"])
