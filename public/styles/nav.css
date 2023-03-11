@@ -94,31 +94,6 @@ nav {
     cursor: pointer;
 }
 
-@media screen and (max-width: 400px) {
-    .nav-display {
-        padding: 0rem 0.5rem;
-    }
-
-    #basket-container {
-        flex-direction: column;
-
-        width: auto !important;
-    }
-
-    #nav-title {
-        margin: 0rem;
-    }
-}
-
-@media screen and (max-width: 550px) {
-    #mobile-nav-right {
-        display: initial;
-    }
-
-    #nav-right {
-        display: none;
-    }
-}
 
 #nav-hidden-menu {
     position: relative;
@@ -267,4 +242,85 @@ nav {
 
 .bt-higher {
     top: -100%;
+}
+
+@media screen and (max-width: 850px) and (min-width: 750px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #status-name {
+        display: none;
+    }
+
+    #basket-ordered {
+        margin-right: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #basket-container {
+        flex-direction: column;
+
+        height: auto;
+        width: auto !important;
+    }
+
+    #basket-left {
+        height: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #basket-container {
+        flex-direction: column;
+
+        height: auto;
+        width: auto !important;
+    }
+
+    #nav-title {
+        margin: 0rem;
+    }
+
+    #mobile-nav-right {
+        display: initial;
+    }
+
+    #nav-right {
+        display: none;
+    }
+
+    #basket-left {
+        height: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #nav-title {
+        font-size: 2rem;
+    }
+
+    #burger-menu {
+        margin: 1rem 0.5rem;
+    }
+
+    #basket-ordered {
+        display: none;
+    }
 }
