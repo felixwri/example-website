@@ -120,3 +120,17 @@ def update_order_table_status(table_id, status):
         cursor.close()
     except Exception as e:
         print(f"Error while updating status for item - {e}")
+
+def get_order_status(table_id):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(f"SELECT orders_table.status FROM orders_table WHERE user_id = '{table_id}'")
+        status = cursor.fetchone()
+        cursor.close()
+
+        return {"success": True, "status": status[0]}
+
+    except Exception as e:
+        print(f"Error while updating status for item - {e}")
+
+        return {"success": False, "status": "unknown"}

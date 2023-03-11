@@ -17,6 +17,8 @@ CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "htt
 
 @app.route('/')
 def home():
+    print("SESS")
+    print(session.get("ordered"))
     return render_template('home.html', page_name="home")
 
 @app.route('/menu', methods=['GET', 'POST'])
@@ -44,6 +46,11 @@ def submit_order():
             items.append(item)
 
         db.add_order(reference, items)
+
+        session["ordered"] = reference
+        print(reference)
+        inSession = session.get("ordered")
+        print(inSession)
 
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
@@ -88,6 +95,15 @@ def payment():
         return render_template('payment.html')
     else:
         return jsonify(success="false", error="Bad method")
+    
+@app.route('/order-status', methods=['POST'])
+def get_order_status():
+    reference = session.get("ordered")
+    print(reference)
+    if reference:
+        return jsonify(db.get_order_status(reference))
+    return jsonify({"success": False, "error": "No order"})
+
 # Staff Pages
 
 

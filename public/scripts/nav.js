@@ -19,7 +19,7 @@ let navSettings = {
 
 navInit();
 
-function navInit() {
+async function navInit() {
     if (!document.getElementById("nav-revealed-menu")) navSettings.navPopMenu = false;
 
     let order = new Order(null);
@@ -29,6 +29,26 @@ function navInit() {
         let items = order.getStorage();
         basketQuantity.innerText = items.quantity;
         basketTotal.innerText = order.priceToString(items.total);
+    }
+
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/order-status`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ get: "data" }),
+        });
+
+        const content = await response.json();
+        console.log(content);
+        if (content.success) {
+            document.getElementById("status-name").innerText = content.status;
+            document.getElementById("basket-ordered").style.opacity = "1";
+        }
+    } catch (err) {
+        console.log(err);
     }
 }
 

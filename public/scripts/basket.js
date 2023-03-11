@@ -59,7 +59,7 @@ async function showConfirmation(ref) {
 async function submitOrder() {
     const basket = order.getIds();
     console.log(basket);
-    const response = await fetch(`http://localhost:5000/submit-order`, {
+    const response = await fetch(`http://127.0.0.1:5000/submit-order`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -71,6 +71,7 @@ async function submitOrder() {
     });
 
     const content = await response.json();
+    console.log(content);
 
     if (content.success) {
         showConfirmation(content.reference);

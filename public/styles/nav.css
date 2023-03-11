@@ -168,23 +168,31 @@ nav {
     width: 1.6rem;
 }
 
+#status-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    margin-left: 0.5rem;
+}
+
 #basket-ordered {
-    width: 3rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-right: 2rem;
 
-    margin-right: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-#basket-container:hover {
+/* #basket-container:hover {
     background-color: var(--primary);
     color: white;
 }
 
 #basket-container:hover #basket-icon {
     fill: white;
-}
+} */
 
 #basket-left {
     display: flex;
