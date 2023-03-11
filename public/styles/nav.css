@@ -20,7 +20,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     height: 100%;
     padding: 0rem 2rem;
 }
@@ -44,6 +44,7 @@ nav {
 
 #nav-icons {
     display: flex;
+    align-items: center;
 }
 
 .nav-page {
@@ -151,8 +152,38 @@ nav {
     justify-content: space-between;
     align-items: center;
 
+    cursor: pointer;
+
     width: 8rem;
     color: var(--primary);
+    height: 2.5rem;
+
+    border-radius: 15px;
+
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#status-icon {
+    fill: var(--primary);
+    width: 1.6rem;
+}
+
+#basket-ordered {
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-right: 0.5rem;
+}
+
+#basket-container:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+#basket-container:hover #basket-icon {
+    fill: white;
 }
 
 #basket-left {
@@ -165,6 +196,7 @@ nav {
 #basket-icon {
     width: 1.6rem;
     fill: var(--primary);
+    transition: fill 0.5s ease;
 }
 
 #basket-qty {

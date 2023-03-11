@@ -16,7 +16,20 @@
                     <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
                 <div id="nav-icons">
-                    <div id="basket-container" class="nav-icon">
+                    <div id="basket-ordered">
+                        <svg
+                            id="status-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M6 43.6V4.3h.125q.125 0 .375.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.375-.25H42v39.3l-.125.05q-.125.05-.375-.2l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.375.2L6 43.6Zm7.35-10.4h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.7h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.75h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425ZM9 38.9h30V9.1H9ZM9 9.1v29.8Z"
+                            />
+                        </svg>
+                    </div>
+                    <div id="basket-container" class="nav-icon" onclick="location.href='/basket'">
                         <div id="basket-left">
                             <div id="basket-qty">
                                 <div class="bq-higher bq-value">1</div>
@@ -106,13 +119,13 @@
             <div id="about" class="sub-section">
                 <div id="about-explanation">
                     <h1 id="about-title">About Us</h1>
-                    <p> We are proud to have been preparing our iconic mexican dishes for 10 years. 
-                        <br>
+                    <p>
+                        We are proud to have been preparing our iconic mexican dishes for 10 years.
+                        <br />
                         All our ingredients are sustainably sourced so you can dine in peace of mind.
-                        <br>
-                        Our dishes incorporate flavours from various regions of Mexico, 
-                        ranging from intense heat to mild, you choose!
-
+                        <br />
+                        Our dishes incorporate flavours from various regions of Mexico, ranging from intense heat to
+                        mild, you choose!
                     </p>
                 </div>
                 <div id="about-image"></div>
@@ -123,14 +136,13 @@
                     <h1 id="location-title">Find our resturants</h1>
                     <p>We have 25 stores based in and around London</p>
                     <p>Find your closest restaurant</p>
-               
 
-
-                    <button id="location-button" onclick="window.location.href='https://www.google.com/maps/dir//Royal+Holloway,+Egham+Hill,+Egham+TW20+0EX/@51.425673,-0.5630625,15z/data=!4m9!4m8!1m0!1m5!1m1!1s0x48767755f3ce74c9:0xd04339084bd84568!2m2!1d-0.5630625!2d51.425673!3e0';"> Maps</button>
-
-              
-
-                    
+                    <button
+                        id="location-button"
+                        onclick="window.location.href='https://www.google.com/maps/dir//Royal+Holloway,+Egham+Hill,+Egham+TW20+0EX/@51.425673,-0.5630625,15z/data=!4m9!4m8!1m0!1m5!1m1!1s0x48767755f3ce74c9:0xd04339084bd84568!2m2!1d-0.5630625!2d51.425673!3e0';"
+                    >
+                        Maps
+                    </button>
                 </div>
             </div>
         </section>
@@ -168,11 +180,13 @@
                     />
                 </svg>
                 <svg class="footer-icon" width="40" height="40">
-                    <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><image
-                        xlink:href="https://res.cloudinary.com/djukm4fut/image/upload/v1674567657/Icons/youtube_icon_kcwrfk.svg"
-                        width="40"
-                        height="40"
-                    /></a>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                        <image
+                            xlink:href="https://res.cloudinary.com/djukm4fut/image/upload/v1674567657/Icons/youtube_icon_kcwrfk.svg"
+                            width="40"
+                            height="40"
+                        />
+                    </a>
                 </svg>
             </div>
         </div>

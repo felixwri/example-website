@@ -74,24 +74,25 @@ async function submitOrder() {
 
     if (content.success) {
         showConfirmation(content.reference);
+        order.submitted(content.reference);
     }
 }
 
 function payment() {
-    const paymentBtn = document.getElementById('payment');
-    const closeOverlayBtn = document.getElementById('cancel-btn');
-    const payBtn = document.getElementById('pay-btn')
-    const overlay = document.getElementById('overlay');
-    
-    paymentBtn.addEventListener('click', function() {
-      overlay.style.display = 'block';
-    });
-    
-    closeOverlayBtn.addEventListener('click', function() {
-      overlay.style.display = 'none';
+    const paymentBtn = document.getElementById("payment");
+    const closeOverlayBtn = document.getElementById("cancel-btn");
+    const payBtn = document.getElementById("pay-btn");
+    const overlay = document.getElementById("overlay");
+
+    paymentBtn.addEventListener("click", function () {
+        overlay.style.display = "block";
     });
 
-    payBtn.addEventListener('click', function() {
-        overlay.style.display = 'none';
-      });
+    closeOverlayBtn.addEventListener("click", function () {
+        overlay.style.display = "none";
+    });
+
+    payBtn.addEventListener("click", function () {
+        overlay.style.display = "none";
+    });
 }
