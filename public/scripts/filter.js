@@ -1,4 +1,6 @@
+// This function takes an id parameter to apply a filter on the menu items.
 function applyFilter(id) {
+    // If the id is 'veg-filter', find all non-vegetarian items and make them less opaque.
     if (id === "veg-filter") {
         let inValidIds = [];
 
@@ -12,6 +14,7 @@ function applyFilter(id) {
             let element = document.getElementById(`item-${inValidIds[i]}`);
             if (element) element.style.opacity = "0.2";
         }
+    // If the id is 'allergy-filter', find all items with allergy information and make them less opaque.
     } else if (id === "allergy-filter") {
         let inValidIds = [];
 
@@ -25,6 +28,7 @@ function applyFilter(id) {
             let element = document.getElementById(`item-${inValidIds[i]}`);
             if (element) element.style.opacity = "0.2";
         }
+    // If the id is 'low-price-filter', sort the menu items by price and rearrange them in the DOM.
     } else if (id === "low-price-filter") {
         let menuArray = [];
         for (let item of menu) {
@@ -57,6 +61,8 @@ function applyFilter(id) {
                 drinks.appendChild(document.getElementById(`item-${result[i].id}`));
             }
         }
+
+    // If the id is 'low-calorie-filter', sort the menu items by calories and rearrange them in the DOM.
     } else if (id === "low-calorie-filter") {
         let menuArray = [];
         for (let item of menu) {
@@ -92,29 +98,36 @@ function applyFilter(id) {
     }
 }
 
+// This function is used to remove a previously applied filter based on the provided ID.
 function removeFilter(id) {
+    // Check if the ID matches the "veg-filter" filter
     if (id === "veg-filter") {
         let inValidIds = [];
 
+        // Loop through each menu item and check if it is not vegetarian.
+        // If it's not vegetarian, add its ID to the inValidIds array.
         for (let item of menu) {
             if (!item.vegetarian) {
                 inValidIds.push(item.id);
             }
         }
-
+        // Loop through the inValidIds array and set the opacity of each menu item with a matching ID to 1.
         for (let i = 0; i < inValidIds.length; i++) {
             let element = document.getElementById(`item-${inValidIds[i]}`);
             if (element) element.style.opacity = "1";
         }
+        // Check if the ID matches the "allergy-filter" filter
     } else if (id === "allergy-filter") {
         let inValidIds = [];
 
+        // Loop through each menu item and check if it has allergies.
+        // If it has allergies, add its ID to the inValidIds array.
         for (let item of menu) {
             if (!(item.allergies === "None" || !item.allergies)) {
                 inValidIds.push(item.id);
             }
         }
-
+        // Loop through the inValidIds array and set the opacity of each menu item with a matching ID to 1.
         for (let i = 0; i < inValidIds.length; i++) {
             let element = document.getElementById(`item-${inValidIds[i]}`);
             if (element) element.style.opacity = "1";
