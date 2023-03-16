@@ -29,6 +29,27 @@
         <p class="title" style="text-align: center">Manage Staff</p>
 
         <div style="text-align: center; margin-top: 2rem">
+            <p class="title" style="text-align: left">Register New Staff</p>
+
+            <a href="{{ url_for('register') }}" class="active">Register</a>
+
+            <form action="{{ url_for('register') }}" method="post" autocomplete="off">
+                <div class="form-fields">
+                    <input type="text" placeholder="Username" id="username" name="username" required/>
+
+                </div>
+                <br />
+                <div class="form-fields">
+                    <input type="password" placeholder="Password" id="password" name="password" required/>
+
+                </div>
+                <div class="msg">{{msg}}</div>
+                <div class="register-button">
+                    <input id="register-button" type="submit" value="Register" />
+                </div>
+
+
+            </form>
 
         </div>
 

@@ -78,20 +78,6 @@ def logout():
     return render_template("login.html")
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    username = request.form['username']
-    password = request.form['password']
-   
-
-    if db.exisiting_user(username):
-        return "User already exists!"
-    else:
-        if db.password_strength(password):
-            db.add_user(username, password)
-            return "Registration successful!"
-        else:
-            return "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
 
 
 # Staff Pages
@@ -196,6 +182,22 @@ def manage_staff():
         return jsonify(success= "false")
     if request.method == "GET":
         return render_template("manageStaff.html", user_option="Log Out")
+
+@app.route('/staff/manageStaff/register', methods=['GET', 'POST'])
+def register():
+    msg=""
+    username = request.form['username']
+    password = request.form['password']
+
+    if db.existing_user(username):
+        return render_template("manageStaff.html", user_option="Log Out", msg="User already exists!")
+    else:
+        if db.password_strength(password):
+            db.add_user(username, password)
+            return render_template("manageStaff.html", user_option="Log Out", msg="Registration successful!")
+        else:
+            return render_template("manageStaff.html", user_option="Log Out",
+                                   msg="Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit.")
 
 
 # Content delivery routes
