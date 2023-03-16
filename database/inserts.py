@@ -29,6 +29,9 @@ def insert_into_menu(reset_table=False):
     sprite = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Sprite_hwvxsa.png'
     fanta = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Fanta_cgqjrw.png'
     coke_zero = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Coke_Zero_qibtx1.png'
+    #kids menu images
+    beef_taco_cups = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
+
 
     #Starters
     db.add_item('Tortilla Chips & Salsas', tortilla_chips_salsa, 'Starters', 5.50, 150, True, 'None', 'Served with our homemade roasted salsa and pico de gallo.')
@@ -60,6 +63,8 @@ def insert_into_menu(reset_table=False):
     db.add_item("Corona 4.5% ABV", default_image, "Beers", 5.50, 175, None, None, None)
     db.add_item("Stella Cidre", default_image, "Ciders", 6.50, 150, None, None, None)
     db.add_item("Stella Cidre Raspberry", default_image, "Ciders", 7.00, 190, None, None, None)
+    #Kids Menu
+    db.add_item('Beef Taco Cups', beef_taco_cups, 'Kids', 6.00, 300, False, 'Prawns', 'Slow cooked Mexican rice with tiger prawns, chicken, chorizo, red salsa, peas & sweetcorn. (Hot)')
 
 def insert_admin_account():
     db.add_user("test", "password1234#")
