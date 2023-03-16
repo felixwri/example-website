@@ -190,6 +190,13 @@ def upload_image():
     result = db.upload_image(json["image"])
 
     return jsonify(success = result["success"], url = result["url"])
+@app.route('/staff/manageStaff', methods=['GET', 'POST'])
+def manage_staff():
+    if session.get('username') != 'staff':
+        return jsonify(success= "false")
+    if request.method == "GET":
+        return render_template("manageStaff.html", user_option="Log Out")
+
 
 # Content delivery routes
 
