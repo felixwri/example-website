@@ -59,6 +59,7 @@ async function showConfirmation(ref) {
 async function submitOrder() {
     const basket = order.getIds();
     console.log(basket);
+
     const response = await fetch(`http://127.0.0.1:5000/submit-order`, {
         method: "POST",
         headers: {
@@ -70,6 +71,7 @@ async function submitOrder() {
         }),
     });
 
+
     const content = await response.json();
 
     if (content.success) {
@@ -80,8 +82,21 @@ async function submitOrder() {
 function payment() {
     const paymentBtn = document.getElementById('payment');
     const closeOverlayBtn = document.getElementById('cancel-btn');
-    const payBtn = document.getElementById('pay-btn')
+    const payBtn = document.getElementById('pay-btn');
     const overlay = document.getElementById('overlay');
+    const warning = document.getElementById('warning');
+    const cardNumber = document.getElementById('cardNumber');
+
+    cardNumber.addEventListener('input', function(){
+        const input = cardNumber.value;
+        if (/^\d{16,}$/.test(input)) {
+            payBtn.disabled = false;
+            warning.style.display = 'none';
+        } else {
+            payBtn.disabled = true;
+            warning.style.display = 'inline';
+        }
+    })
     
     paymentBtn.addEventListener('click', function() {
       overlay.style.display = 'block';
@@ -91,7 +106,22 @@ function payment() {
       overlay.style.display = 'none';
     });
 
+    cardNumber.addEventListener('input', function(){
+        const input = cardNumber.value;
+        if (/^\d{16}$/.test(input)) {
+            payBtn.disabled = false;
+            warning.style.display = 'none';
+        } else {
+            payBtn.disabled = true;
+            warning.style.display = 'inline';
+        }
+    })
+
     payBtn.addEventListener('click', function() {
         overlay.style.display = 'none';
       });
+
+    
+
+    
 }

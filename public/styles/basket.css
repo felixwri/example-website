@@ -115,10 +115,13 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 30%;
+    height: 52%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
-    font-family: 'Rubik', sans-serif;
+    border-radius: 10px;
+    overflow-y: auto;
   }
 
   #pay-btn {
@@ -155,6 +158,10 @@ main {
     border-color: var(--primary);
   }
 
+  #warning {
+    display: inline-flex;
+    margin-top: 50px;
+  }
 
   .form-group {
     margin-bottom: 20px;
