@@ -109,6 +109,7 @@ main {
     background-color: rgba(0,0,0,0.5);
     display: none;
   }
+
   
   #overlay-content {
     position: absolute;
@@ -117,6 +118,7 @@ main {
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
+    font-family: 'Rubik', sans-serif;
   }
 
   #pay-btn {
@@ -173,7 +175,7 @@ main {
   }
 
   #overlay-content h1 {
-    border-bottom: 2px dashed black;
+    border-bottom: 2px solid black;
     padding: 1px;
     margin-bottom: 1rem;
   }
