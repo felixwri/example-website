@@ -88,6 +88,7 @@
                 <div class="quick-select" onclick="scrollToElement('mains')">Mains</div>
                 <div class="quick-select" onclick="scrollToElement('desserts')">Desserts</div>
                 <div class="quick-select" onclick="scrollToElement('drinks')">Drinks</div>
+                <div class="quick-select" onclick="scrollToElement('kids')">Kids</div>
                 <div id="filters" onclick="toggleFilters()">
                     <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
                         <path
@@ -609,7 +610,7 @@
                 <h2 class="section-title">Kids</h2>
                 <div class="food-section">
                     {% for item in menu_items %} {% if item.type == "Kids"%}
-                    <div id="item-{{ item.id }}" class="menu-item" data-type="Mains" data-url="{{item.image_url}}">
+                    <div id="item-{{ item.id }}" class="menu-item" data-type="Kids" data-url="{{item.image_url}}">
                         <div class="menu-image">
                             <div class="image" style="background-image: url({{item.image_url}})"></div>
                         </div>
