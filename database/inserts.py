@@ -29,13 +29,15 @@ def insert_into_menu(reset_table=False):
     sprite = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Sprite_hwvxsa.png'
     fanta = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Fanta_cgqjrw.png'
     coke_zero = 'https://res.cloudinary.com/djukm4fut/image/upload/v1678372077/oaxaca/Coke_Zero_qibtx1.png'
+    orange_juice = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163533/oaxaca/Screenshot_2023-03-18_at_17.51.11_andosb.png'
+    apple_juice = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163533/oaxaca/Screenshot_2023-03-18_at_17.52.12_uz7etk.png'
     #kids menu images
-    beef_taco_cups = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
-    mac_and_cheese = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
-    chicken_nuggets = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
-    taco_bites = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
-    bean_burritos = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
-    quesadillas = 'https://res.cloudinary.com/djukm4fut/image/upload/v1677854073/oaxaca/eiqeecrmuinmlfsimvqz.png'
+    beef_taco_cups = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Beef_Taco_Cups_bnrlbj.png'
+    mac_and_cheese = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Nacho_Mac_and_Cheese_qfbp3u.png'
+    chicken_nuggets = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Chicken_Nuggets_and_Wedges_fwb2rh.png'
+    taco_bites = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Taco_Fish_Bites_osmdxc.png'
+    bean_burritos = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Chicken_and_Bean_Burrito_rkgopi.png'
+    quesadillas = 'https://res.cloudinary.com/djukm4fut/image/upload/v1679163514/oaxaca/Mini_Quesadillas_b6gaoq.png'
     
     #Starters
     db.add_item('Tortilla Chips & Salsas', tortilla_chips_salsa, 'Starters', 5.50, 150, True, 'None', 'Tortilla chips served with our homemade roasted salsa and pico de gallo.')
@@ -56,12 +58,12 @@ def insert_into_menu(reset_table=False):
     db.add_item('Churros', churros, 'Desserts', 6.50, 256, False, 'Milk', 'Mexican doughnut fried and dusted with cinnamon sugar with a side of Dulce de Leche & vanilla ice cream.')
     db.add_item('Banana Chimichanga', chimichanga, 'Desserts', 6.50, 200, False, 'Milk', 'A cinnamon flour tortilla filled with banana, deep fried and served with Dulce de Leche & vanilla ice cream.')
     #Soft Drinks, Beers, Ciders
-    db.add_item("Coke Zero", coke_zero, "Soft Drinks", 3.30, 2, None, 'None', None)
-    db.add_item("Coca-Cola", coca_cola, "Soft Drinks", 3.50, 139, None, 'None', None)
-    db.add_item("Sprite", sprite, "Soft Drinks", 3.30, 110, None, 'None', None)
-    db.add_item("Fanta", fanta, "Soft Drinks", 3.30, 120, None, 'None', None)
-    db.add_item("Orange Juice", default_image, "Soft Drinks", 4.00, 30, None, 'None', 'Made from freshly squeezed oranges.')
-    db.add_item("Apple Juice", default_image, "Soft Drinks", 4.00, 30, None, 'None', 'Pressed apple juice.')
+    db.add_item("Coke Zero", coke_zero, "Soft Drinks", 3.30, 2, None, 'None', '355ml bottle')
+    db.add_item("Coca-Cola", coca_cola, "Soft Drinks", 3.50, 139, None, 'None', '355ml bottle')
+    db.add_item("Sprite", sprite, "Soft Drinks", 3.30, 110, None, 'None', '355ml bottle')
+    db.add_item("Fanta", fanta, "Soft Drinks", 3.30, 120, None, 'None', '355ml bottle')
+    db.add_item("Orange Juice", orange_juice, "Soft Drinks", 4.00, 30, None, 'None', 'Made from freshly squeezed oranges')
+    db.add_item("Apple Juice", apple_juice, "Soft Drinks", 4.00, 30, None, 'None', 'Pressed apple juice')
     db.add_item("Budweiser 4.5% ABV", default_image, "Beers", 5.50, 186, None, None, None)
     db.add_item("Mahou 5.1% ABV", default_image, "Beers", 6.50, 190, None, None, None)
     db.add_item("Corona 4.5% ABV", default_image, "Beers", 5.50, 175, None, None, None)
@@ -69,11 +71,11 @@ def insert_into_menu(reset_table=False):
     db.add_item("Stella Cider Raspberry", default_image, "Ciders", 7.00, 190, None, None, None)
     #Kids Menu
     db.add_item('Beef Taco Cups', beef_taco_cups, 'Kids', 7.00, 378, False, 'None', 'Soft taco cups layered with minced beef, sliced bell peppers, jalapeños, jack cheese, sour cream and tomatoes.')
-    db.add_item('Nacho Mac and Cheese', mac_and_cheese, 'Kids', 6.00, 346, True, 'Cheese', 'A classic macaroni and cheese dish, made with parmesan and chedder cheese.')
+    db.add_item('Nacho Mac and Cheese', mac_and_cheese, 'Kids', 6.00, 346, True, 'Cheese, Milk', 'A classic macaroni and cheese dish, made with parmesan and cheddar cheese.')
     db.add_item('Chicken Nuggets and Wedges', chicken_nuggets, 'Kids', 6.00, 280, False, 'None', 'Air-fried chicken nuggets with a side of lightly spiced wedges, served with our chef-prepared tomato ketchup.')
-    db.add_item('Taco Fish Bites with Tomato Salsa', taco_bites, 'Kids', 7.00, 317, False, 'Fish', 'A mix of cod, salmon and seabass, enclosed within corn tortilla taco shells, topped with Monterey Jack cheese, avocado slices, bell peppers and red onions.')
-    db.add_item('Chicken and Bean Burritos', bean_burritos, 'Kids', 5.50, 253, False, 'None', 'Toasted tortilla wrap with a filling of white rice, black turtle beans, red bell peppers, cheese and 100% chicken breast.')
-    db.add_item('Mini Quesadillas', quesadillas, 'Kids', 6.00, 320, True, 'Cheese, Milk', 'Oaxaca cheese and mozarella filled tortilla wraps, toasted and served with a sour cream.')
+    db.add_item('Taco Fish Bites with Tomato Salsa', taco_bites, 'Kids', 7.00, 317, False, 'Fish', 'A mix of cod, salmon and sea bass, enclosed within corn tortilla taco shells, topped with Monterey Jack cheese, avocado slices, bell peppers and red onions.')
+    db.add_item('Chicken and Bean Burritos', bean_burritos, 'Kids', 5.50, 253, False, 'None', 'Toasted tortilla wrap with a filling of white rice, black turtle beans, red bell peppers, cheese, avocado and 100% chicken breast.')
+    db.add_item('Mini Quesadillas', quesadillas, 'Kids', 6.00, 320, True, 'Cheese', 'Oaxaca cheese and mozarella filled tortilla wraps, toasted and served with a sour cream.')
 
 def insert_admin_account():
     db.add_user("test", "password1234#")
