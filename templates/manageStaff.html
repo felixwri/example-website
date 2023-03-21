@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
     <link rel="stylesheet" href="{{url_for('send_css', path='staffNav.css')}}" />
-    <link rel="stylesheet" href="{{url_for('send_css', path='staffHome.css')}}" />
+    <link rel="stylesheet" href="{{url_for('send_css', path='staffManage.css')}}" />
 
 </head>
 <body>
@@ -29,7 +29,19 @@
         <p class="title" style="text-align: center">Manage Staff</p>
 
         <div style="text-align: center; margin-top: 2rem">
-            <p class="title" style="text-align: left">Register New Staff</p>
+            <p class="subtitle" style="text-align: left">Active Staff</p>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem">
+            <p class="subtitle" style="text-align: left">All Staff</p>
+
+            <p>{{users}}</p>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem">
+            <p class="subtitle" style="text-align: left">Register New Staff</p>
 
             <a href="{{ url_for('register') }}" class="active">Register</a>
 

@@ -114,8 +114,14 @@ def existing_user(username):
 def print_users():
     cursor = connection.cursor()
     try:
-        cursor.execute("SELECT * FROM users_table;")
-        print(cursor.fetchall())
+        user_list=[]
+        cursor.execute("SELECT username FROM users_table")
+        users = cursor.fetchall()
+        for user in users:
+            user_list.append(user[0])
+            #print(user[0])
+        return user_list
+        #print(cursor.fetchall())
         
         cursor.close()
     except Exception as e:

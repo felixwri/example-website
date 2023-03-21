@@ -180,8 +180,9 @@ def upload_image():
 def manage_staff():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
+
     if request.method == "GET":
-        return render_template("manageStaff.html", user_option="Log Out")
+        return render_template("manageStaff.html", users=db.print_users(), user_option="Log Out")
 
 @app.route('/staff/manageStaff/register', methods=['GET', 'POST'])
 def register():
