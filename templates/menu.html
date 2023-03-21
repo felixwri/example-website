@@ -88,6 +88,7 @@
                 <div class="quick-select" onclick="scrollToElement('mains')">Mains</div>
                 <div class="quick-select" onclick="scrollToElement('desserts')">Desserts</div>
                 <div class="quick-select" onclick="scrollToElement('drinks')">Drinks</div>
+                <div class="quick-select" onclick="scrollToElement('kids')">Kids</div>
                 <div id="filters" onclick="toggleFilters()">
                     <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 48 48">
                         <path
@@ -604,6 +605,128 @@
                     {% endif%} {% endfor %}
                 </div>
             </section>
+
+            <section id="kids">
+                <h2 class="section-title">Kids</h2>
+                <div class="food-section">
+                    {% for item in menu_items %} {% if item.type == "Kids"%}
+                    <div id="item-{{ item.id }}" class="menu-item" data-type="Kids" data-url="{{item.image_url}}">
+                        <div class="menu-image">
+                            <div class="image" style="background-image: url({{item.image_url}})"></div>
+                        </div>
+                        <div class="menu-text">
+                            <div class="menu-title-container">
+                                <div class="menu-title">
+                                    <div class="menu-name">{{ item.name }}</div>
+
+                                    <div class="menu-price">£{{ '{:,.2f}'.format(item.price) }}</div>
+                                </div>
+                                <div class="order-counter-container">
+                                    <div class="order-counter">
+                                        <svg
+                                            class="order-decrease order-icon"
+                                            onclick="decreaseCounter({{ item.id }})"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            height="48"
+                                            width="48"
+                                            viewBox="0 0 48 48"
+                                        >
+                                            <path
+                                                d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"
+                                            />
+                                        </svg>
+                                        <div id="quantity-{{ item.id }}" class="order-quantity">0</div>
+                                        <svg
+                                            class="order-increase order-icon"
+                                            onclick="increaseCounter({{ item.id }})"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            height="48"
+                                            width="48"
+                                            viewBox="0 0 48 48"
+                                        >
+                                            <path
+                                                d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="edit-item">
+                                    <svg
+                                        id="start-{{ item.id }}"
+                                        onclick="editItem({{ item.id }})"
+                                        class="edit-icon start-editing-item"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"
+                                        />
+                                    </svg>
+
+                                    <svg
+                                        id="save-{{ item.id }}"
+                                        onclick="saveItem({{ item.id }})"
+                                        class="edit-icon save-item"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewBox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M42 13.85V39q0 1.2-.9 2.1-.9.9-2.1.9H9q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h25.15Zm-3 1.35L32.8 9H9v30h30ZM24 35.75q2.15 0 3.675-1.525T29.2 30.55q0-2.15-1.525-3.675T24 25.35q-2.15 0-3.675 1.525T18.8 30.55q0 2.15 1.525 3.675T24 35.75ZM11.65 18.8h17.9v-7.15h-17.9ZM9 15.2V39 9Z"
+                                        />
+                                    </svg>
+
+                                    <svg
+                                        id="sync-{{ item.id }}"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        viewBox="0 96 960 960"
+                                        width="48"
+                                        class="edit-icon save-item"
+                                    >
+                                        <path
+                                            d="M451 934q-123-10-207-101t-84-216q0-77 35.5-145T295 361l43 43q-56 33-87 90.5T220 617q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741 617q0-109-75.5-184.5T481 357h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801 617q0 125-83.5 216T511 934Z"
+                                        />
+                                    </svg>
+
+                                    <svg
+                                        id="more-{{ item.id }}"
+                                        onclick="showContext(this, {{ item.id }})"
+                                        class="edit-icon more-items"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="48"
+                                        width="48"
+                                        viewbox="0 0 48 48"
+                                    >
+                                        <path
+                                            d="M10.4 26.4q-1 0-1.7-.7T8 24q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7t.7 1.7q0 1-.7 1.7t-1.7.7Zm13.6 0q-1 0-1.7-.7t-.7-1.7q0-1 .7-1.7t1.7-.7q1 0 1.7.7T40 24q0 1-.7 1.7t-1.7.7Z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="menu-description">{{ item.description }}</div>
+                            <div class="menu-extras">
+                                {% if item.allergies != "None" %}
+                                <div class="menu-alg">{{ item.allergies }}</div>
+                                {% else %}
+                                <div class="menu-alg empty-alg"></div>
+                                {% endif %} {% if item.vegeterian == True %}
+                                <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="true">Veg</div>
+                                {% else %}
+                                <div onclick="toggleVegatarian(this)" class="menu-veg" data-veg="false">Veg</div>
+                                {% endif %}
+                                <div class="menu-cal">{{ item.calories }}kcal</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif%} {% endfor %}
+                </div>
+            </section>
+
+
         </main>
         {% if editable %}
         <div id="context-menu">

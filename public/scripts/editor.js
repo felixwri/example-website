@@ -480,7 +480,7 @@ async function postSave(item) {
     sync.style.width = "2rem";
     sync.classList.add("spin");
 
-    const response = await fetch(`http://localhost:5000/staff/menu/add`, {
+    const response = await fetch(`http://127.0.0.1:5000/staff/menu/add`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -502,7 +502,7 @@ async function postSave(item) {
 }
 
 async function postDelete(id) {
-    const response = await fetch(`http://localhost:5000/staff/menu/delete`, {
+    const response = await fetch(`http://127.0.0.1:5000/staff/menu/delete`, {
         method: "POST",
         headers: {
             Accept: "application/json",
