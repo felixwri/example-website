@@ -182,7 +182,7 @@ def manage_staff():
         return jsonify(success= "false")
 
     if request.method == "GET":
-        return render_template("manageStaff.html", users=db.print_users(), user_option="Log Out")
+        return render_template("manageStaff.html", users=db.get_all_users(), user_option="Log Out")
 
 @app.route('/staff/manageStaff/register', methods=['GET', 'POST'])
 def register():

@@ -35,8 +35,25 @@
 
         <div style="text-align: center; margin-top: 2rem">
             <p class="subtitle" style="text-align: left">All Staff</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.type}}</td>
+                </tr>
+                {% endfor %}
+            </table>
 
-            <p>{{users}}</p>
+            <script>
+                const users = JSON.parse(`{{ users | tojson}}`);
+            </script>
+
 
         </div>
 
