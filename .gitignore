@@ -5,3 +5,4 @@ database/__pycache__
 node_modules
 flask_session
 flask_session/
+flask_session.*

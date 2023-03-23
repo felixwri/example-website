@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
         <link rel="stylesheet" href="{{url_for('send_css', path='nav.css')}}" />
         <link rel="stylesheet" href="{{url_for('send_css', path='menu.css')}}" />
-       
-
     </head>
     <body>
         <nav>
@@ -18,7 +16,21 @@
                     <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
                 <div id="nav-icons">
-                    <div id="basket-container" class="nav-icon">
+                    <div id="basket-ordered">
+                        <svg
+                            id="status-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M6 43.6V4.3h.125q.125 0 .375.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.375-.25H42v39.3l-.125.05q-.125.05-.375-.2l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.375.2L6 43.6Zm7.35-10.4h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.7h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.75h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425ZM9 38.9h30V9.1H9ZM9 9.1v29.8Z"
+                            />
+                        </svg>
+                        <div id="status-name"></div>
+                    </div>
+                    <div id="basket-container" class="nav-icon" onclick="location.href='/basket'">
                         <div id="basket-left">
                             <div id="basket-qty">
                                 <div class="bq-higher bq-value">1</div>
@@ -778,35 +790,27 @@
 
         <div id="call-staff" onclick="openCallStaff()">Call Staff</div>
         <div class="popup" id="popup">
-            <h1 style="padding-bottom: 20px">Staff has been called</h1>
+            <h1 style="padding-bottom: 2rem">Staff has been called</h1>
             <br />
 
-                <h1 style="padding-bottom: 20px;"> Staff has been called</h1><br>
-
-                <div class="form__group">
-                    
-                    <form>
+            <div class="form__group">
+                <form>
                     <div>
-                    <input type="text" class="form__input" name="requestStaff" id="requestStaff" placeholder="Why?" required="" />
+                        <input
+                            type="text"
+                            class="form__input"
+                            name="requestStaff"
+                            id="requestStaff"
+                            placeholder="Why?"
+                            required=""
+                        />
                     </div>
 
                     <form onsubmit="return logFormValues()"></form>
-                    <button type="submit" class="button"  onclick="closeCallStaff(); logFormValues();">OK</button> 
-
-                    
-                    <form>
-
-                  </div>
-
-                
-
-               
-                
+                    <button type="submit" class="button" onclick="closeCallStaff(); logFormValues();">OK</button>
+                </form>
             </div>
-
-           
-        
-        
+        </div>
 
         <div id="start-order" onclick="startOrder()">Start your order</div>
     </body>

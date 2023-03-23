@@ -16,7 +16,21 @@
                     <a href="/" id="nav-title" class="link">Oaxaca</a>
                 </div>
                 <div id="nav-icons">
-                    <div id="basket-container" class="nav-icon">
+                    <div id="basket-ordered">
+                        <svg
+                            id="status-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M6 43.6V4.3h.125q.125 0 .375.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.5-.25t.5.25l2 2q.25.25.5.25t.5-.25l2-2q.25-.25.375-.25H42v39.3l-.125.05q-.125.05-.375-.2l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.5.25t-.5-.25l-2-2q-.25-.25-.5-.25t-.5.25l-2 2q-.25.25-.375.2L6 43.6Zm7.35-10.4h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.7h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425Zm0-7.75h21.5q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-21.5q-.65 0-1.075.425-.425.425-.425 1.075 0 .65.425 1.075.425.425 1.075.425ZM9 38.9h30V9.1H9ZM9 9.1v29.8Z"
+                            />
+                        </svg>
+                        <div id="status-name"></div>
+                    </div>
+                    <div id="basket-container" class="nav-icon" onclick="location.href='/basket'">
                         <div id="basket-left">
                             <div id="basket-qty">
                                 <div class="bq-higher bq-value">1</div>
@@ -31,7 +45,7 @@
                                 viewBox="0 0 48 48"
                             >
                                 <path
-                                    d="M9.8 42q-.8 0-1.425-.475T7.55 40.3L1.9 19.95q-.2-.75.275-1.35.475-.6 1.275-.6h10L22.7 4.5q.25-.3.55-.475.3-.175.7-.175.4 0 .7.175.3.175.55.475L34.4 18h10.25q.75 0 1.225.6.475.6.275 1.35l-5.7 20.35q-.2.75-.825 1.225Q39 42 38.2 42Zm.5-3h27.4l5.05-18H5.3ZM24 33q1.25 0 2.125-.875T27 30q0-1.25-.875-2.125T24 27q-1.25 0-2.125.875T21 30q0 1.25.875 2.125T24 33Zm-6.9-15h13.65l-6.8-10Zm-6.8 21h27.4Z"
+                                    d="M9.9 42.3q-.9 0-1.6-.525-.7-.525-.9-1.375L1.65 19.85q-.2-.85.325-1.5T3.4 17.7h9.95l9.1-13.35q.3-.4.675-.6.375-.2.825-.2.45 0 .825.2.375.2.675.6L34.5 17.7h10.2q.85 0 1.375.65t.325 1.5L40.65 40.4q-.25.85-.95 1.375t-1.55.525Zm.6-3.4h27l5-17.8H5.55ZM24 33.05q1.3 0 2.175-.875.875-.875.875-2.175 0-1.3-.875-2.175Q25.3 26.95 24 26.95q-1.3 0-2.175.875-.875.875-.875 2.175 0 1.3.875 2.175.875.875 2.175.875ZM17.45 17.7H30.4l-6.45-9.45ZM10.5 38.9h27Z"
                                 />
                             </svg>
                         </div>
@@ -106,13 +120,13 @@
             <div id="about" class="sub-section">
                 <div id="about-explanation">
                     <h1 id="about-title">About Us</h1>
-                    <p> We are proud to have been preparing our iconic mexican dishes for 10 years. 
-                        <br>
+                    <p>
+                        We are proud to have been preparing our iconic mexican dishes for 10 years.
+                        <br />
                         All our ingredients are sustainably sourced so you can dine in peace of mind.
-                        <br>
-                        Our dishes incorporate flavours from various regions of Mexico, 
-                        ranging from intense heat to mild, you choose!
-
+                        <br />
+                        Our dishes incorporate flavours from various regions of Mexico, ranging from intense heat to
+                        mild, you choose!
                     </p>
                 </div>
                 <div id="about-image"></div>
@@ -123,14 +137,13 @@
                     <h1 id="location-title">Find our resturants</h1>
                     <p>We have 25 stores based in and around London</p>
                     <p>Find your closest restaurant</p>
-               
 
-
-                    <button id="location-button" onclick="window.location.href='https://www.google.com/maps/dir//Royal+Holloway,+Egham+Hill,+Egham+TW20+0EX/@51.425673,-0.5630625,15z/data=!4m9!4m8!1m0!1m5!1m1!1s0x48767755f3ce74c9:0xd04339084bd84568!2m2!1d-0.5630625!2d51.425673!3e0';"> Maps</button>
-
-              
-
-                    
+                    <button
+                        id="location-button"
+                        onclick="window.location.href='https://www.google.com/maps/dir//Royal+Holloway,+Egham+Hill,+Egham+TW20+0EX/@51.425673,-0.5630625,15z/data=!4m9!4m8!1m0!1m5!1m1!1s0x48767755f3ce74c9:0xd04339084bd84568!2m2!1d-0.5630625!2d51.425673!3e0';"
+                    >
+                        Maps
+                    </button>
                 </div>
             </div>
         </section>
@@ -168,11 +181,13 @@
                     />
                 </svg>
                 <svg class="footer-icon" width="40" height="40">
-                    <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><image
-                        xlink:href="https://res.cloudinary.com/djukm4fut/image/upload/v1674567657/Icons/youtube_icon_kcwrfk.svg"
-                        width="40"
-                        height="40"
-                    /></a>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                        <image
+                            xlink:href="https://res.cloudinary.com/djukm4fut/image/upload/v1674567657/Icons/youtube_icon_kcwrfk.svg"
+                            width="40"
+                            height="40"
+                        />
+                    </a>
                 </svg>
             </div>
         </div>

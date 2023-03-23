@@ -7,6 +7,7 @@
 :root {
     --light-grey: rgb(200, 200, 200);
     --dark-grey: rgb(100, 100, 100);
+    --primary-light: rgba(255, 100, 34, 0.4);
     --primary: rgb(255, 100, 34);
     --primary-alt: rgb(255, 60, 34);
     --blue: rgb(34, 229, 255);
