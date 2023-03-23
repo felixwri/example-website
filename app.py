@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-CORS(app, support_credentials=True)
+CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "http://127.0.0.1:5000"}})
  
 
 @app.route('/')
@@ -201,6 +201,7 @@ def delete_item():
     return jsonify(success)
 
 @app.route('/staff/upload', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True, origin='127.0.0.1',headers=['Content- Type','Authorization'])
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")

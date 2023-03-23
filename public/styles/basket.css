@@ -109,14 +109,19 @@ main {
     background-color: rgba(0,0,0,0.5);
     display: none;
   }
+
   
   #overlay-content {
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 40%;
+    height: 52%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
   }
 
   #pay-btn {
@@ -153,6 +158,10 @@ main {
     border-color: var(--primary);
   }
 
+  #warning {
+    display: inline-flex;
+    margin-top: 50px;
+  }
 
   .form-group {
     margin-bottom: 20px;
@@ -173,10 +182,42 @@ main {
   }
 
   #overlay-content h1 {
-    border-bottom: 2px dashed black;
+    border-bottom: 2px solid black;
     padding: 1px;
     margin-bottom: 1rem;
   }
+
+  .scroll-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 1.2em;
+}
+
+select {
+  width: 49%;
+  height: 30px;
+  background-color: white;
+  outline: none;
+  border: white;
+  font-size: medium;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+#cvv {
+  width: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content:space-evenly;
+}
 
 @media screen and (max-width: 1000px) {
     #title {

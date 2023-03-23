@@ -70,6 +70,7 @@ async function submitOrder() {
         }),
     });
 
+
     const content = await response.json();
     console.log(content);
 
@@ -80,20 +81,45 @@ async function submitOrder() {
 }
 
 function payment() {
-    const paymentBtn = document.getElementById("payment");
-    const closeOverlayBtn = document.getElementById("cancel-btn");
-    const payBtn = document.getElementById("pay-btn");
-    const overlay = document.getElementById("overlay");
+    const paymentBtn = document.getElementById('payment');
+    const closeOverlayBtn = document.getElementById('cancel-btn');
+    const payBtn = document.getElementById('pay-btn');
+    const overlay = document.getElementById('overlay');
+    const warning = document.getElementById('warning');
+    const cardNumber = document.getElementById('cardNumber');
+    const cvv = document.getElementById('cvv');
 
-    paymentBtn.addEventListener("click", function () {
-        overlay.style.display = "block";
+    cvv.addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9]/g, '').substring(0, 3);
+    });
+
+    cardNumber.addEventListener('input', function(){
+        this.value = this.value.replace(/[^0-9]/g, '').substring(0, 16);
+        const input = cardNumber.value;
+        if (/^\d{16,}$/.test(input)) {
+            payBtn.disabled = false;
+            warning.style.display = 'none';
+        } else {
+            payBtn.disabled = true;
+            warning.style.display = 'inline';
+        }
+    })
+    
+    paymentBtn.addEventListener('click', function() {
+      overlay.style.display = 'block';
     });
 
     closeOverlayBtn.addEventListener("click", function () {
         overlay.style.display = "none";
     });
 
-    payBtn.addEventListener("click", function () {
-        overlay.style.display = "none";
-    });
+    payBtn.addEventListener('click', function() {
+        overlay.style.display = 'none';
+      });
+
+    
+
+    
+
+    
 }
