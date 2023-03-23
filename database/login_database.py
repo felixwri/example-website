@@ -121,6 +121,18 @@ def get_user(id):
     except Exception as e:
         print(f"Error while getting users - {e}")
 
+def get_all_users():
+    cursor = connection.cursor()
+    try:
+        cursor.execute(f"SELECT id, type, username FROM users_table;")
+        result = cursor.fetchall()
+        cursor.close()
+        return {"success": True, "result": result}
+    
+
+    except Exception as e:
+        print(f"Error while getting users - {e}")
+
 def print_users():
     cursor = connection.cursor()
     try:

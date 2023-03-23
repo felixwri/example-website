@@ -90,14 +90,21 @@ def register():
 def staff_home():
     if session.get('username') != 'staff':
         return redirect("/")
-    
+
     if request.method == 'POST':
-        json = request.get_json()
-        db.add_table(json["number"])
-        return jsonify(success=True)
+        all_table_numbers = db.get_taken_tables()
+        i = 0
+        while True:
+            if i not in all_table_numbers:
+                break
+            else:
+                i += 1
+
+        result = db.add_table(i)
+        return jsonify(result)
     
 
-    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), name=session.get("name"))
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_users(), name=session.get("name"))
 
 @app.route('/staff/orders', methods=['GET'])
 @cross_origin(supports_credentials=True)

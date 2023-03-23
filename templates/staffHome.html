@@ -87,13 +87,14 @@
             <section id="active-tables">
                 <h2>Active tables</h2>
                 <div id="tables-nav">
-                    <div>Tables in use: 0</div>
+                    <div id="tables-in-use">Tables in use: 0</div>
                     <div id="assign-new" onclick="assignNewTable()">Assign new table</div>
                 </div>
                 <div id="tables-container">
                     {% if tables %} {% for table in tables %}
-                    <div class="table">
+                    <div class="table" data-id="{{ table.table_number }}" data-waiterID="{{ table.waiter_id }}">
                         <div class="table-number">{{ table.table_number}}</div>
+                        <div class="table-waiter" data-waiter="{{ table.waiter_id }}"></div>
                     </div>
                     {% endfor %}{% endif %}
                 </div>
@@ -102,6 +103,8 @@
             <script>
                 const name = `{{ name }}`;
                 const tables = JSON.parse(`{{ tables | tojson }}`);
+                let users = JSON.parse(`{{ users | tojson }}`);
+                if (users) users = users.result;
             </script>
             <script src="{{url_for('send_js', path='tables.js')}}"></script>
         </main>
