@@ -112,17 +112,6 @@ function payment() {
       overlay.style.display = 'none';
     });
 
-    cardNumber.addEventListener('input', function(){
-        const input = cardNumber.value;
-        if (/^\d{16}$/.test(input)) {
-            payBtn.disabled = false;
-            warning.style.display = 'none';
-        } else {
-            payBtn.disabled = true;
-            warning.style.display = 'inline';
-        }
-    })
-
     payBtn.addEventListener('click', function() {
         overlay.style.display = 'none';
       });
