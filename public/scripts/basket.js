@@ -93,6 +93,7 @@ function payment() {
     });
 
     cardNumber.addEventListener('input', function(){
+        this.value = this.value.replace(/[^0-9]/g, '').substring(0, 16);
         const input = cardNumber.value;
         if (/^\d{16,}$/.test(input)) {
             payBtn.disabled = false;
