@@ -20,20 +20,15 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    if 'loggedin' in session:
-        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log Out")
-    else:
-        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log In")
+    user_option = "Log Out" if 'loggedin' in session else "Log In"
+
+    return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option=user_option)
 
 @app.route('/basket', methods=['GET'])
 def basket():
-    if request.method == 'GET':
-        if 'loggedin' in session:
-            return render_template('basket.html', user_option="Log Out")
-        else:
-            return render_template('basket.html', user_option="Log In")
-    else:
-        return jsonify(success="false", error="Bad method")
+    user_option = "Log Out" if 'loggedin' in session else "Log In"
+
+    return render_template('basket.html', user_option=user_option)
 
 @app.route('/submit-order', methods=['POST'])
 def submit_order():
@@ -181,6 +176,7 @@ def upload_image():
 def manage_staff():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
+
 
     if request.method == "GET":
         return render_template("manageStaff.html", users=db.get_all_users(), types=db.get_user_types(), user_option="Log Out")
