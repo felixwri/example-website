@@ -59,7 +59,6 @@ async function showConfirmation(ref) {
 async function submitOrder() {
     const basket = order.getIds();
     console.log(basket);
-
     const response = await fetch(`http://127.0.0.1:5000/submit-order`, {
         method: "POST",
         headers: {
@@ -73,9 +72,11 @@ async function submitOrder() {
 
 
     const content = await response.json();
+    console.log(content);
 
     if (content.success) {
         showConfirmation(content.reference);
+        order.submitted(content.reference);
     }
 }
 
@@ -107,9 +108,9 @@ function payment() {
     paymentBtn.addEventListener('click', function() {
       overlay.style.display = 'block';
     });
-    
-    closeOverlayBtn.addEventListener('click', function() {
-      overlay.style.display = 'none';
+
+    closeOverlayBtn.addEventListener("click", function () {
+        overlay.style.display = "none";
     });
 
     payBtn.addEventListener('click', function() {

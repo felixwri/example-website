@@ -20,7 +20,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     height: 100%;
     padding: 0rem 2rem;
 }
@@ -44,6 +44,7 @@ nav {
 
 #nav-icons {
     display: flex;
+    align-items: center;
 }
 
 .nav-page {
@@ -93,31 +94,6 @@ nav {
     cursor: pointer;
 }
 
-@media screen and (max-width: 400px) {
-    .nav-display {
-        padding: 0rem 0.5rem;
-    }
-
-    #basket-container {
-        flex-direction: column;
-
-        width: auto !important;
-    }
-
-    #nav-title {
-        margin: 0rem;
-    }
-}
-
-@media screen and (max-width: 550px) {
-    #mobile-nav-right {
-        display: initial;
-    }
-
-    #nav-right {
-        display: none;
-    }
-}
 
 #nav-hidden-menu {
     position: relative;
@@ -151,9 +127,47 @@ nav {
     justify-content: space-between;
     align-items: center;
 
+    cursor: pointer;
+
     width: 8rem;
     color: var(--primary);
+    height: 2.5rem;
+
+    border-radius: 15px;
+
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
+
+#status-icon {
+    fill: var(--primary);
+    width: 1.6rem;
+}
+
+#status-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    margin-left: 0.5rem;
+}
+
+#basket-ordered {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* #basket-container:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+#basket-container:hover #basket-icon {
+    fill: white;
+} */
 
 #basket-left {
     display: flex;
@@ -165,6 +179,7 @@ nav {
 #basket-icon {
     width: 1.6rem;
     fill: var(--primary);
+    transition: fill 0.5s ease;
 }
 
 #basket-qty {
@@ -227,4 +242,85 @@ nav {
 
 .bt-higher {
     top: -100%;
+}
+
+@media screen and (max-width: 850px) and (min-width: 750px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #status-name {
+        display: none;
+    }
+
+    #basket-ordered {
+        margin-right: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #basket-container {
+        flex-direction: column;
+
+        height: auto;
+        width: auto !important;
+    }
+
+    #basket-left {
+        height: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .nav-display {
+        padding: 0rem 0.5rem;
+    }
+
+    #basket-container {
+        flex-direction: column;
+
+        height: auto;
+        width: auto !important;
+    }
+
+    #nav-title {
+        margin: 0rem;
+    }
+
+    #mobile-nav-right {
+        display: initial;
+    }
+
+    #nav-right {
+        display: none;
+    }
+
+    #basket-left {
+        height: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #nav-title {
+        font-size: 2rem;
+    }
+
+    #burger-menu {
+        margin: 1rem 0.5rem;
+    }
+
+    #basket-ordered {
+        display: none;
+    }
 }

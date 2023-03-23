@@ -297,7 +297,7 @@ section {
 
     background-color: white;
     border-radius: 10px;
-    border-width: 6px;
+    border-width: 3px;
     border-style: solid;
     border-color: var(--primary);
     position: absolute;
@@ -315,10 +315,13 @@ section {
 .open-popup {
     visibility: visible;
     position: fixed;
-    top: 30%;
+    top: 20%;
     transform: translate(-50%, 50%) scale(1);
 }
 
+.form__group>form {
+    margin-bottom: 2rem;
+}
 
 
 
@@ -754,6 +757,10 @@ br {
 
 .spin {
     animation: spin 1s linear infinite;
+}
+
+.contained {
+    background-size: contain;
 }
 
 @keyframes spin {

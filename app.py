@@ -4,35 +4,38 @@ from flask_cors import CORS, cross_origin
 import database as db
 import string, random, secrets
 
-from dotenv import load_dotenv
-load_dotenv()
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
-app.url_map.strict_slashes = False
 Session(app)
 CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "http://127.0.0.1:5000"}})
  
 
 @app.route('/')
 def home():
-    return render_template('home.html', page_name="home")
+    if 'loggedin' in session:
+        return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
+    else:
+        return render_template('home.html', page_name="home", user_option="Log In")
 
 @app.route('/menu', methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
 def menu():
-    return render_template('menu.html', menu_items=db.get_items(), editable=False)
+    if 'loggedin' in session:
+        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log Out")
+    else:
+        return render_template('menu.html', menu_items=db.get_items(), editable=False, user_option="Log In")
 
 @app.route('/basket', methods=['GET'])
 def basket():
     if request.method == 'GET':
-        return render_template('basket.html')
+        if 'loggedin' in session:
+            return render_template('basket.html', user_option="Log Out")
+        else:
+            return render_template('basket.html', user_option="Log In")
     else:
         return jsonify(success="false", error="Bad method")
 
 @app.route('/submit-order', methods=['POST'])
-@cross_origin(supports_credentials=True)
 def submit_order():
     items = []
     obj = request.get_json()
@@ -45,13 +48,20 @@ def submit_order():
 
         db.add_order(reference, items)
 
+        session["ordered"] = reference
+        print(reference)
+        inSession = session.get("ordered")
+        print(inSession)
+
         return jsonify(success = "true", reference=reference)
     return jsonify(success = "false", reference = "Bad method")
 
-
 @app.route('/login', methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
 def login():
+    if 'loggedin' in session:
+        logout()
+        return redirect('/')
+
     if request.method == 'GET':
         return render_template("login.html")
     else:
@@ -61,13 +71,19 @@ def login():
 
         if db.check_password(username, password):
             session['username'] = 'staff'
+            session['loggedin'] = True
             return redirect('/staff/')
         else:
             return render_template("login.html", error = "Invalid Credentials")
 
+def logout():
+    # Removing session data logs out user
+    session.pop('loggedin', None)
+    session.pop('username', None)
+    return render_template("login.html")
+
 
 @app.route('/register', methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
 def register():
     username = request.form['username']
     password = request.form['password']
@@ -88,6 +104,18 @@ def payment():
         return render_template('payment.html')
     else:
         return jsonify(success="false", error="Bad method")
+    
+@app.route('/order-status', methods=['POST'])
+def get_order_status():
+    reference = session.get("ordered")
+
+    if reference is None:
+        reference = request.get_json()["ref"]
+    print(reference)
+    if reference:
+        return jsonify(db.get_order_status(reference))
+    return jsonify({"success": False, "error": "No order"})
+
 # Staff Pages
 
 
@@ -97,21 +125,19 @@ def staff_home():
         return redirect("/")
     
 
-    return render_template('staffHome.html', orders=db.get_orders())
+    return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
 
 @app.route('/staff/orders', methods=['GET'])
-@cross_origin(supports_credentials=True)
 def view_all_orders():
     if session.get('username') != 'staff':
         return redirect("/")
     
     if request.method == 'GET':
-        return render_template('orders.html', orders=db.get_orders())
+        return render_template('orders.html', orders=db.get_orders(), user_option="Log Out")
     else:
         return jsonify(success="false", error="Bad method")
     
 @app.route('/staff/order-status', methods=['POST'])
-@cross_origin(supports_credentials=True)
 def cancel_order():
     if request.method == 'POST':
         req = request.get_json()
@@ -126,10 +152,9 @@ def cancel_order():
 def editable_menu():
     if session.get('username') != 'staff':
         return redirect("/")
-    return render_template('menu.html', menu_items=db.get_items(), editable=True)
+    return render_template('menu.html', menu_items=db.get_items(), editable=True, user_option="Log Out")
 
 @app.route('/staff/menu/add', methods=['POST'])
-@cross_origin(supports_credentials=True)
 def add_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
@@ -166,7 +191,6 @@ def add_item():
     return jsonify(success)
 
 @app.route('/staff/menu/delete', methods=['POST'])
-@cross_origin(supports_credentials=True)
 def delete_item():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
@@ -181,8 +205,9 @@ def delete_item():
 def upload_image():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
+    urls = db.get_all_urls()
     if request.method == "GET":
-        return render_template("uploader.html", image_urls = db.get_all_urls())
+        return render_template("uploader.html", image_urls = db.get_all_urls(), user_option="Log Out")
 
     json = request.get_json()
     result = db.upload_image(json["image"])
@@ -210,4 +235,5 @@ def generate_reference():
     return reference
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()

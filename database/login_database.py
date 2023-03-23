@@ -9,9 +9,17 @@ def create_users_table():
     try:
         # delete the table to not have any duplication of data
         cursor.execute(f"DROP TABLE IF EXISTS users_table CASCADE")
+        cursor.execute("DROP TYPE IF EXISTS user_type")
+
         # any postgres sql statement can be run by the execute method
         # the result is stored in the cursor object
-        cursor.execute(f"CREATE TABLE IF NOT EXISTS users_table (id serial PRIMARY KEY, username VARCHAR(252) UNIQUE, password VARCHAR(252))")
+        cursor.execute("CREATE TYPE user_type AS ENUM ('basic', 'waiter', 'kitchen');")
+        cursor.execute("""CREATE TABLE IF NOT EXISTS users_table (
+            id serial PRIMARY KEY,
+            type user_type,
+            username VARCHAR(252) UNIQUE,
+            password VARCHAR(252)
+        )""")
 
         print(f"Table created.")
 
@@ -27,7 +35,8 @@ def create_users_table():
         # this will rollback the state of the e to before any changes were made by the cursor
         connection.rollback()
 
-def add_user(username, password):
+def add_user(username, password, user_type='basic'):
+    assert user_type in ['basic', 'waiter', 'kitchen']
 
     cursor = connection.cursor()
 
@@ -37,7 +46,10 @@ def add_user(username, password):
         #Convert the hashed password to bytes from string to use it in check_password function
         encrypted_password = encrypted_password.decode()
         #Add the hashed password and the username details to the e    
-        cursor.execute(f"INSERT INTO users_table (username, password) VALUES (%s, %s)", (username, encrypted_password))
+        cursor.execute(
+            f"INSERT INTO users_table (type, username, password) VALUES (%s, %s, %s)",
+            (user_type, username, encrypted_password)
+        )
         
         connection.commit()
         cursor.close()
