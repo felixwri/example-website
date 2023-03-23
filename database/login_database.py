@@ -121,11 +121,12 @@ def get_user(id):
     except Exception as e:
         print(f"Error while getting users - {e}")
 
-def get_all_users():
+def get_all_usernames():
     cursor = connection.cursor()
     try:
-        cursor.execute(f"SELECT id, type, username FROM users_table;")
+        cursor.execute(f"SELECT id, username FROM users_table;")
         result = cursor.fetchall()
+        print(result)
         cursor.close()
         return {"success": True, "result": result}
     

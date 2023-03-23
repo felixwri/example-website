@@ -105,7 +105,7 @@ def get_order_status():
 def staff_home():
     if session.get('username') != 'staff':
         return redirect("/")
-    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_users(), name=session.get("name"))
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_usernames(), name=session.get("name"))
 
 @app.route('/staff/add', methods=['POST'])
 def staff_add_table():

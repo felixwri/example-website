@@ -119,7 +119,9 @@
                 const name = `{{ name }}`;
                 const tables = JSON.parse(`{{ tables | tojson }}`);
                 let users = JSON.parse(`{{ users | tojson }}`);
+                console.log(users);
                 if (users) users = users.result;
+                console.log(users);
             </script>
             <script src="{{url_for('send_js', path='tables.js')}}"></script>
         </main>

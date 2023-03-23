@@ -17,7 +17,7 @@ function init() {
 
     let waiters = document.getElementsByClassName("table-waiter");
     for (let element of waiters) {
-        element.innerText = users[element.dataset.waiter][2];
+        element.innerText = users[element.dataset.waiter][1];
     }
 
     tablesInUse();
@@ -47,7 +47,7 @@ function addTable(content) {
     container.innerHTML += `
     <div class="table" data-id="${content.table_number}" data-waiterID="${content.waiter_id}">
         <div class="table-number">${content.table_number}</div>
-        <div class="table-waiter" data-waiter="${content.waiter_id}">${users[content.waiter_id][2]}</div>
+        <div class="table-waiter" data-waiter="${content.waiter_id}">${users[content.waiter_id][1]}</div>
         <svg
             onclick="clearTable(this)"
             class="table-clear"

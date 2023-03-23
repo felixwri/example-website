@@ -1,8 +1,12 @@
-# Team Project
+# Team Project | Group 17
 
-This repository has been created to store your Team Project.
+## Admin account
+
+username: admin \
+password: @dmin123456
 
 ## Setting up the project
+
 This clones the project, creates a branch and pulls the gitlab branch to your local folder
 
 `git clone https://gitlab.cim.rhul.ac.uk/TeamProject17/PROJECT.git`\
@@ -13,6 +17,7 @@ This clones the project, creates a branch and pulls the gitlab branch to your lo
 Run the code with `python app.py` in your terminal after you have installed the requirements
 
 ## Adding code to the gitlab
+
 Save your changes\
 `git add *` or `git add [file-name]`\
 `git commit -m "[message]"`\
@@ -24,6 +29,14 @@ Publish changes to the remote\
 `git push origin [branch-name]`
 
 ## Requirements
-* python 3.6+
-* flask
-* psycopg2
+
+Get the requiremnents with \
+`pip install -r ./requirements.txt`
+
+-   Flask 1.1.2
+-   flask_session 0.4.0
+-   flask_cors 3.0.10
+-   psycopg2 2.9.5
+-   bcrypt 4.0.1
+-   cloudinary 1.32.0
+-   python-dotenv 0.17.1
