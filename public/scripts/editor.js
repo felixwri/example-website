@@ -1,19 +1,27 @@
 let edits = [];
 let imageStrings = {};
 
+// This function starts the editing process
 async function startEditing() {
+    
+    // If an order is currently being placed, it cancels the order
     if (currentlyOrdering) cancelOrder();
     const root = document.querySelector(":root");
     root.style.setProperty("--primary", "rgb(255, 60, 34)");
 
+    // Modifies some CSS properties for editing mode
     root.style.setProperty("--edit-icon-width", "2rem");
     root.style.setProperty("--price-margin-right", "1rem");
 
+    // Hides and disables the quick-select-container and relative-container
     document.getElementById("quick-select-container").style.opacity = "0";
     document.getElementById("quick-select-container").style.pointerEvents = "none";
     document.querySelector(".relative-container").style.pointerEvents = "none";
+    
+    // Changes the margin of main to make room for editing
     document.querySelector("main").style.marginTop = "8rem";
 
+    // Hides the edit button
     let editButton = document.getElementById("edit-menu");
     editButton.style.opacity = "0";
     editButton.style.pointerEvents = "none";
@@ -29,10 +37,15 @@ async function startEditing() {
 
     document.getElementById("start-order").style.opacity = 0.5;
     document.getElementById("cancel-order").style.opacity = 0;
-    editing = true;
+    
+// Sets the editing flag to true
+editing = true;
 }
 
+// This function checks whether any edits have been made to the order and takes appropriate actions
 function checkIfSaved() {
+
+     // If no edits have been made, clears the styles and removes any temporary items
     if (edits.length === 0) {
         clearStyles();
         let temporaryItems = document.querySelectorAll(".temporary-item");
@@ -43,46 +56,57 @@ function checkIfSaved() {
         return;
     }
 
+    // If edits have been made, shows a warning message
     let warning = document.getElementById("fixed-finish");
     warning.style.height = "12rem";
 }
 
+// This function saves all the edits made to the order and clears any temporary items
 function saveAll() {
+    // Removes all the temporary items and their corresponding edits
     let temporaryItems = document.querySelectorAll(".temporary-item");
     for (tempItem of temporaryItems) {
         tempItem.remove();
         removeEdit(parseInt(tempItem.dataset.id));
     }
-
+    // Saves all the edits made to the order
     let allEdits = [...edits];
     for (let edit of allEdits) {
         saveItem(edit);
     }
+     // Clears the styles and cancels any ongoing edit   
     clearStyles();
     cancel();
 }
 
+// This function resets all unsaved changes made to the order
 function resetUnsaved() {
+    // Removes all the temporary items and their corresponding edits
     let temporaryItems = document.querySelectorAll(".temporary-item");
     for (tempItem of temporaryItems) {
         tempItem.remove();
         removeEdit(parseInt(tempItem.dataset.id));
     }
-
+    // Resets all unsaved edits made to the order
     let allEdits = [...edits];
     for (let edit of allEdits) {
         resetItem(edit);
     }
+     // Clears the styles and cancels any ongoing edit   
     clearStyles();
     cancel();
 }
 
+// This function cancels any ongoing edit by hiding the warning message
 function cancel() {
     let warning = document.getElementById("fixed-finish");
     warning.style.height = "0rem";
 }
 
+// This function clears all the styles applied during the edit mode and restores the default styles
 function clearStyles() {
+    
+    // Restores the edit button styles
     let editButton = document.getElementById("edit-menu");
     editButton.style.opacity = "1";
     editButton.style.pointerEvents = "initial";
@@ -103,6 +127,7 @@ function clearStyles() {
     editing = false;
 }
 
+//Function to enable editing of an item's fields
 function editItem(id) {
     edits.push(id);
     let { parent, name, price, description, allergens, vegatarian, calories } = getFields(id);
@@ -132,6 +157,7 @@ function editItem(id) {
     document.getElementById(`more-${id}`).style.width = "2rem";
 }
 
+// this function allows the upadtes of images within the web server 
 function updateImage(element, id) {
     console.log(element.files);
     if (!element.files || !element.files[0]) return;
@@ -158,6 +184,7 @@ function updateImage(element, id) {
     FR.readAsDataURL(file);
 }
 
+// this function save sthe edits made upon differnt elements within the web page
 function saveItem(id) {
     let { parent, name, price, description, vegatarian, calories, allergens } = getFields(id);
     let newItem = parent.classList.contains("temporary-item");
@@ -191,6 +218,7 @@ function saveItem(id) {
     postSave(item);
 }
 
+// this function resets all unsaved chages made to the items
 function resetItem(id) {
     console.log("Reset: ", id);
     let { parent, name, price, description, vegatarian, calories, allergens } = getFields(id);
@@ -217,6 +245,7 @@ function resetItem(id) {
     stopEditingItem(id);
 }
 
+// funtion allows for the deletion of items on the page
 function removeItem(id) {
     console.log("Delete: ", id);
     let { parent } = getFields(id);
@@ -275,6 +304,7 @@ function stopEditingItem(id) {
     document.getElementById(`more-${id}`).style.width = "0rem";
 }
 
+// this function allows to toggle specific filters within the menu, for example the vegitarian items
 function toggleVegatarian(e) {
     if (edits.length <= 0) return;
     if (e.dataset.veg === "true") {
@@ -423,6 +453,7 @@ function addNewItem(id) {
 
 let currentFocusedItem = null;
 
+//Shows the hiddent context of the items 
 function showContext(element) {
     if (currentFocusedItem) {
         if (currentFocusedItem.id === element.id) {
@@ -452,6 +483,7 @@ function showContext(element) {
     currentFocusedItem = element;
 }
 
+//the function allows you to hide the context of the elements
 function hideContext(element) {
     let context = document.getElementById("context-menu");
     context.style.opacity = "0";
