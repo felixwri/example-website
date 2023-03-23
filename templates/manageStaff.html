@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Manage Staff</title>
+
+        <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='staffNav.css')}}" />
+        <link rel="stylesheet" href="{{url_for('send_css', path='staffManage.css')}}" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-display">
+                <div id="nav-right">
+                    <a href="/" id="nav-title" class="staff link">Oaxaca</a>
+                </div>
+                <div id="nav-icons">
+                    <a href="/staff/" class="nav-page link">Home</a>
+                    <a href="/staff/orders" class="nav-page link">Orders</a>
+                    <a href="/staff/menu" class="nav-page link">Menu</a>
+                    <a href="/login" class="nav-page link">{{user_option}}</a>
+                </div>
+            </div>
+        </nav>
+
+        <main style="margin-top: 8rem">
+            <p class="title" style="text-align: center">Manage Staff</p>
+
+            <div style="margin-top: 2rem" class="row">
+                <p class="subtitle">Staff Members</p>
+                <div class="column">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                        </tr>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.type}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="column">
+                    <br />
+                    <canvas id="typeChart" style="width: 100px; max-width: 500px"></canvas>
+                </div>
+
+                <script>
+                    const users = JSON.parse(`{{ users | tojson}}`);
+
+                    var colours= ["#FF6422","#C8C8C8","#646464"];
+                    var types = ["Basic", "Kitchen", "Waiter"];
+                    var values = {{types}};
+
+                    new Chart("typeChart", {
+                        type: "pie",
+                        data: {
+                            labels: types,
+                            datasets: [{
+                                backgroundColor: colours,
+                                data: values
+                            }]
+                        }
+                    });
+                </script>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem">
+                <p class="subtitle">Register New Staff</p>
+
+                <form action="{{ url_for('manage_staff') }}" method="post" autocomplete="off">
+                    <div class="msg">{{msg}}</div>
+                    <div class="form-fields">
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="Username"
+                            id="username"
+                            name="username"
+                            required
+                        />
+                    </div>
+                    <br />
+                    <div class="form-fields">
+                        <input
+                            type="password"
+                            class="input"
+                            placeholder="Password"
+                            id="password"
+                            name="password"
+                            required
+                        />
+                    </div>
+                    <div class="register-button">
+                        <input id="register-button" type="submit" value="Register" />
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

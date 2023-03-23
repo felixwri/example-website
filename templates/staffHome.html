@@ -51,7 +51,9 @@
                             />
                         </svg>
 
-                        <a href="/basket" class="mobile-nav-page link">Basket</a>
+                        <a href="/staff/" class="mobile-nav-page link">Home</a>
+                        <a href="/staff/orders" class="mobile-nav-page link">Orders</a>
+                        <a href="/staff/menu" class="mobile-nav-page link">Menu</a>
                         <a href="/login" class="mobile-nav-page link">{{user_option}}</a>
                     </div>
                 </div>
@@ -76,17 +78,13 @@
             <div style="text-align: center; margin-top: 2rem">
                 <button class="button1" onclick="location.href='/staff/orders'">Incoming Orders</button>
                 <button class="button1" onclick="location.href='/staff/menu'">Edit Menu</button>
-                <button class="button1">Edit Order</button>
                 <button class="button1" onclick="location.href='/staff/upload'">Image Database</button>
+                <button class="button1" onclick="location.href='/staff/manage-staff'">Manage Staff</button>
             </div>
 
-            <ul id="callsList">
-             
-              </ul>
-
+            <ul id="callsList"></ul>
 
             <script src="{{url_for('send_js', path='staffHome.js')}}"></script>
-            
         </main>
     </body>
 </html>

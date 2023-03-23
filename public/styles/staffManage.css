@@ -1,0 +1,73 @@
+.title {
+  font-size: 2.5rem;
+  color: var(--primary-alt);
+  font-weight: bold;
+  transition: font-size 0.3s ease;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem 0rem;
+  text-align: center;
+
+  border-bottom: 3px solid black;
+
+  font-weight: bold;
+  transition: font-size 0.3s ease;
+}
+
+table {
+  width: 75%;
+}
+
+td,
+th {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 30px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+form {
+  height: 10rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 5px;
+
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0.5rem;
+}
+
+.input {
+  font-size: 1rem;
+}
+
+#register-button {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.msg {
+  color: grey;
+}

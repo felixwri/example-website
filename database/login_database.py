@@ -111,12 +111,66 @@ def existing_user(username):
 
 
 
+#users_table(id, type, username,password)
 def print_users():
     cursor = connection.cursor()
     try:
-        cursor.execute("SELECT * FROM users_table;")
-        print(cursor.fetchall())
+        user_list = []
+        cursor.execute("SELECT * FROM users_table")
+        users = cursor.fetchall()
+        for user in users:
+            #user_list += user[2]+ "\n" + user[1] + "\n"
+            user_list.append(user[2])
+            #user_list.append(user[1])
+            #print(user[1])
+            print(user[2])
+
+        print(user_list)
+        return user_list
+        #print(cursor.fetchall())
         
         cursor.close()
     except Exception as e:
         print(f"Error while printing users - {e}")
+
+def get_all_users():
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT * FROM users_table")
+        table = cursor.fetchall()
+        users = []
+        for user in table:
+            #print(user)
+            u = {
+                "id": user[0],
+                "type": user[1],
+                "name": user[2],
+                "password": user[3]
+            }
+            users.append(u)
+        #print(users)
+        cursor.close()
+        return users
+
+    except Exception as e:
+        print(f"Error while printing users - {e}")
+
+def get_user_types():
+    #basic, kitchen, waiter
+    users = get_all_users()
+    basic = 0
+    kitchen = 0
+    waiter = 0
+
+    for user in users:
+        if user.get("type") == "basic":
+            basic += 1
+        if user.get("type") == "kitchen":
+            kitchen += 1
+        if user.get("type") == "waiter":
+            waiter += 1
+
+    types =[basic, kitchen, waiter]
+    #print(types)
+
+    return types
