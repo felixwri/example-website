@@ -1,31 +1,32 @@
 .title {
-
-    font-size: 2.5rem;
-    color: var(--primary-alt);
-    font-weight: bold;
-    transition: font-size 0.3s ease;
+  font-size: 2.5rem;
+  color: var(--primary-alt);
+  font-weight: bold;
+  transition: font-size 0.3s ease;
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    margin: 1rem;
-    padding: 1rem 0rem;
-    text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem 0rem;
+  text-align: center;
 
-    border-bottom: 3px solid black;
+  border-bottom: 3px solid black;
 
-    font-weight: bold;
-    transition: font-size 0.3s ease;
+  font-weight: bold;
+  transition: font-size 0.3s ease;
 }
+
 table {
-    width:75%;
+  width: 75%;
 
 }
 
-td,th {
-    padding:5px;
-    border-bottom: 1px solid #ddd;
-    text-align:center;
+td,
+th {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 .column {
@@ -40,3 +41,10 @@ td,th {
   clear: both;
 }
 
+form {
+  height: 10rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}

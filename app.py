@@ -176,7 +176,8 @@ def upload_image():
     result = db.upload_image(json["image"])
 
     return jsonify(success = result["success"], url = result["url"])
-@app.route('/staff/manageStaff', methods=['GET', 'POST'])
+
+@app.route('/staff/manage-staff', methods=['GET', 'POST'])
 def manage_staff():
     if session.get('username') != 'staff':
         return jsonify(success= "false")
@@ -184,21 +185,33 @@ def manage_staff():
     if request.method == "GET":
         return render_template("manageStaff.html", users=db.get_all_users(), types=db.get_user_types(), user_option="Log Out")
 
-@app.route('/staff/manageStaff/register', methods=['GET', 'POST'])
-def register():
-    msg=""
+
     username = request.form['username']
     password = request.form['password']
 
     if db.existing_user(username):
-        return render_template("manageStaff.html", user_option="Log Out", msg="User already exists!")
+        msg = "User already exists!"
+        return render_template("manageStaff.html", 
+                               users=db.get_all_users(), 
+                               types=db.get_user_types(), 
+                               user_option="Log Out", 
+                               msg=msg)
+    
+    if db.password_strength(password):
+        db.add_user(username, password)
+        msg = "Registration successful!"
+        return render_template("manageStaff.html", 
+                                users=db.get_all_users(), 
+                                types=db.get_user_types(), 
+                                user_option="Log Out", 
+                                msg=msg)
     else:
-        if db.password_strength(password):
-            db.add_user(username, password)
-            return render_template("manageStaff.html", user_option="Log Out", msg="Registration successful!")
-        else:
-            return render_template("manageStaff.html", user_option="Log Out",
-                                   msg="Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit.")
+        msg = "Weak password! Make sure to have at least 8 characters, at least one capital letter, a lower case letter, a special character and a digit."
+        return render_template("manageStaff.html", 
+                                users=db.get_all_users(), 
+                                types=db.get_user_types(), 
+                                user_option="Log Out",
+                                msg=msg)
 
 
 # Content delivery routes
