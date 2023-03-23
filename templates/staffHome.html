@@ -84,7 +84,44 @@
 
             <ul id="callsList"></ul>
 
-            <script src="{{url_for('send_js', path='staffHome.js')}}"></script>
+            <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="{{url_for('send_js', path='statusPiChart.js')}}"></script> -->
+
+            <section id="active-tables">
+                <h2>Active tables</h2>
+                <div id="tables-nav">
+                    <div id="tables-in-use">Tables in use: 0</div>
+                    <div id="assign-new" onclick="assignNewTable()">Assign new table</div>
+                </div>
+                <div id="tables-container">
+                    {% if tables %} {% for table in tables %}
+                    <div class="table" data-id="{{ table.table_number }}" data-waiterID="{{ table.waiter_id }}">
+                        <div class="table-number">{{ table.table_number}}</div>
+                        <div class="table-waiter" data-waiter="{{ table.waiter_id }}"></div>
+                        <svg
+                            onclick="clearTable(this)"
+                            class="table-clear"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="48"
+                            width="48"
+                            viewBox="0 0 48 48"
+                        >
+                            <path
+                                d="M24 26.1 13.5 36.6q-.45.45-1.05.45-.6 0-1.05-.45-.45-.45-.45-1.05 0-.6.45-1.05L21.9 24 11.4 13.5q-.45-.45-.45-1.05 0-.6.45-1.05.45-.45 1.05-.45.6 0 1.05.45L24 21.9l10.5-10.5q.45-.45 1.05-.45.6 0 1.05.45.45.45.45 1.05 0 .6-.45 1.05L26.1 24l10.5 10.5q.45.45.45 1.05 0 .6-.45 1.05-.45.45-1.05.45-.6 0-1.05-.45Z"
+                            />
+                        </svg>
+                    </div>
+                    {% endfor %}{% endif %}
+                </div>
+            </section>
+
+            <script>
+                const name = `{{ name }}`;
+                const tables = JSON.parse(`{{ tables | tojson }}`);
+                let users = JSON.parse(`{{ users | tojson }}`);
+                if (users) users = users.result;
+            </script>
+            <script src="{{url_for('send_js', path='tables.js')}}"></script>
         </main>
     </body>
 </html>

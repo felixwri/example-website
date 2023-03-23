@@ -65,6 +65,7 @@ def login():
         password = request.form['password']
 
         if db.check_password(username, password):
+            session["name"] = username
             session['username'] = 'staff'
             session['loggedin'] = True
             return redirect('/staff/')
@@ -104,9 +105,34 @@ def get_order_status():
 def staff_home():
     if session.get('username') != 'staff':
         return redirect("/")
-    
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_users(), name=session.get("name"))
 
-    return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
+@app.route('/staff/add', methods=['POST'])
+def staff_add_table():
+    if session.get('username') != 'staff':
+        return redirect("/")
+
+    if request.method == 'POST':
+        all_table_numbers = db.get_taken_tables()
+        i = 0
+        while True:
+            if i not in all_table_numbers:
+                break
+            else:
+                i += 1
+
+        result = db.add_table(i)
+        return jsonify(result)
+    
+@app.route('/staff/clear', methods=['POST'])
+def staff_clear_table():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    
+    table_number = request.get_json()["id"]
+
+    result = db.delete_table(table_number)
+    return jsonify(result)
 
 @app.route('/staff/orders', methods=['GET'])
 def view_all_orders():

@@ -37,8 +37,13 @@ def add_table(table_number):
                 "INSERT INTO tables_table VALUES (%s, %s)",
                 (table_number, waiter_fewest_tables)
             )
+
+            connection.commit()
+
+            return {"success": True, "table_number": table_number, "waiter_id": waiter_fewest_tables}
     except Exception as e:
         print(f"Failed to add new table number {table_number} - {e}")
+        return {"success": False}
 
 def delete_table(table_number):
     try:
@@ -61,6 +66,14 @@ def get_tables():
                 }
                 for table in cursor.fetchall()
             ]
+    except Exception as e:
+        print(f"Failed to get tables - {e}")
+
+def get_taken_tables():
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM tables_table;")
+            return [table[0] for table in cursor.fetchall()]
     except Exception as e:
         print(f"Failed to get tables - {e}")
 

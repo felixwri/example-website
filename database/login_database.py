@@ -109,7 +109,29 @@ def existing_user(username):
     else:
         return False
 
+def get_user(id):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(f"SELECT * FROM users_table WHERE id = {id};")
+        result = cursor.fetchone()
+        cursor.close()
+        return {"success": True, "result": result}
+    
 
+    except Exception as e:
+        print(f"Error while getting users - {e}")
+
+def get_all_users():
+    cursor = connection.cursor()
+    try:
+        cursor.execute(f"SELECT id, type, username FROM users_table;")
+        result = cursor.fetchall()
+        cursor.close()
+        return {"success": True, "result": result}
+    
+
+    except Exception as e:
+        print(f"Error while getting users - {e}")
 
 #users_table(id, type, username,password)
 def print_users():
