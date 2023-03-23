@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{url_for('send_css', path='global.css')}}" />
     <link rel="stylesheet" href="{{url_for('send_css', path='staffNav.css')}}" />
     <link rel="stylesheet" href="{{url_for('send_css', path='staffManage.css')}}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 </head>
 <body>
@@ -28,13 +29,9 @@
     <main style="margin-top: 8rem">
         <p class="title" style="text-align: center">Manage Staff</p>
 
-        <div style="text-align: center; margin-top: 2rem">
-            <p class="subtitle" style="text-align: left">Active Staff</p>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 2rem">
-            <p class="subtitle" style="text-align: left">All Staff</p>
+        <div style="margin-top: 2rem" class="row">
+            <p class="subtitle">Staff Members</p>
+            <div class="column">
             <table>
                 <tr>
                     <th>ID</th>
@@ -49,9 +46,28 @@
                 </tr>
                 {% endfor %}
             </table>
+            </div>
+            <div class="column">
+                <canvas id="typeChart" style="width:100px; max-width:600px"></canvas>
+            </div>
 
             <script>
                 const users = JSON.parse(`{{ users | tojson}}`);
+
+                var colours= ["#FF6422","#C8C8C8","#646464"];
+                var types = ["Basic", "Kitchen", "Waiter"];
+                var values = {{types}};
+
+                new Chart("typeChart", {
+                    type: "pie",
+                    data: {
+                        labels: types,
+                        datasets: [{
+                            backgroundColor: colours,
+                            data: values
+                        }]
+                    }
+                });
             </script>
 
 
