@@ -198,16 +198,20 @@ label {
 }
 
 select {
-  width: 30%;
+  width: 49%;
   height: 30px;
-  margin-bottom: 20px;
-  background-color: #ddd;
-  border-radius: 5px;
+  background-color: white;
   outline: none;
+  border: white;
+  font-size: medium;
 }
 
 select:hover {
   cursor: pointer;
+}
+
+#cvv {
+  width: auto;
 }
 
 @media screen and (max-width: 1000px) {
