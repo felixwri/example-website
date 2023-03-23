@@ -86,8 +86,14 @@ def register():
 # Staff Pages
 
 
-@app.route('/staff/', methods=['GET', 'POST'])
+@app.route('/staff/', methods=['GET'])
 def staff_home():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_users(), name=session.get("name"))
+
+@app.route('/staff/add', methods=['POST'])
+def staff_add_table():
     if session.get('username') != 'staff':
         return redirect("/")
 
@@ -103,8 +109,15 @@ def staff_home():
         result = db.add_table(i)
         return jsonify(result)
     
+@app.route('/staff/clear', methods=['POST'])
+def staff_clear_table():
+    if session.get('username') != 'staff':
+        return redirect("/")
+    
+    table_number = request.get_json()["id"]
 
-    return render_template('staffHome.html', orders=db.get_orders(), tables=db.get_tables(), users=db.get_all_users(), name=session.get("name"))
+    result = db.delete_table(table_number)
+    return jsonify(result)
 
 @app.route('/staff/orders', methods=['GET'])
 @cross_origin(supports_credentials=True)

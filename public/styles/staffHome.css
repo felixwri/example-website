@@ -117,6 +117,22 @@
     align-items: center;
 }
 
+.table-clear {
+    position: relative;
+    left: calc(50% - 1rem);
+    bottom: -2rem;
+    width: 2rem;
+    height: 2rem;
+
+    transition: fill 0.3s ease;
+}
+
+.table-clear:hover {
+    fill: var(--primary-alt);
+    cursor: pointer;
+}
+
+
 .table-waiter {
     width: 100%;
     display: flex;
