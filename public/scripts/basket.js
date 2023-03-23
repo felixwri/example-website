@@ -86,6 +86,11 @@ function payment() {
     const overlay = document.getElementById('overlay');
     const warning = document.getElementById('warning');
     const cardNumber = document.getElementById('cardNumber');
+    const cvv = document.getElementById('cvv');
+
+    cvv.addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9]/g, '').substring(0, 3);
+    });
 
     cardNumber.addEventListener('input', function(){
         const input = cardNumber.value;
@@ -120,6 +125,8 @@ function payment() {
     payBtn.addEventListener('click', function() {
         overlay.style.display = 'none';
       });
+
+    
 
     
 
