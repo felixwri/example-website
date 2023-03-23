@@ -154,3 +154,23 @@ def get_all_users():
 
     except Exception as e:
         print(f"Error while printing users - {e}")
+
+def get_user_types():
+    #basic, kitchen, waiter
+    users = get_all_users()
+    basic = 0
+    kitchen = 0
+    waiter = 0
+
+    for user in users:
+        if user.get("type") == "basic":
+            basic += 1
+        if user.get("type") == "kitchen":
+            kitchen += 1
+        if user.get("type") == "waiter":
+            waiter += 1
+
+    types =[basic, kitchen, waiter]
+    #print(types)
+
+    return types

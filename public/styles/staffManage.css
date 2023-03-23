@@ -52,3 +52,15 @@
     background-color: var(--primary-alt);
     color: white;
 }
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+

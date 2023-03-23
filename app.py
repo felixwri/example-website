@@ -9,7 +9,7 @@ app.config["SECRET_KEY"] = secrets.token_hex(16)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 CORS(app, support_credentials=True)
- 
+
 
 @app.route('/')
 def home():
@@ -182,7 +182,7 @@ def manage_staff():
         return jsonify(success= "false")
 
     if request.method == "GET":
-        return render_template("manageStaff.html", users=db.get_all_users(), user_option="Log Out")
+        return render_template("manageStaff.html", users=db.get_all_users(), types=db.get_user_types(), user_option="Log Out")
 
 @app.route('/staff/manageStaff/register', methods=['GET', 'POST'])
 def register():
