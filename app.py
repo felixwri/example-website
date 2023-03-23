@@ -99,6 +99,9 @@ def payment():
 @app.route('/order-status', methods=['POST'])
 def get_order_status():
     reference = session.get("ordered")
+
+    if reference is None:
+        reference = request.get_json()["ref"]
     print(reference)
     if reference:
         return jsonify(db.get_order_status(reference))
