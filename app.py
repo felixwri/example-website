@@ -14,7 +14,11 @@ CORS(app, support_credentials=True, resource={r"/staff/upload": {"origins": "htt
 @app.route('/')
 def home():
     if 'loggedin' in session:
-        return render_template('staffHome.html', orders=db.get_orders(), user_option="Log Out")
+        return render_template('staffHome.html', 
+                               orders=db.get_orders(), 
+                               tables=db.get_tables(), 
+                               users=db.get_all_usernames(), 
+                               name=session.get("name"))
     else:
         return render_template('home.html', page_name="home", user_option="Log In")
 
