@@ -18,7 +18,8 @@ def home():
                                orders=db.get_orders(), 
                                tables=db.get_tables(), 
                                users=db.get_all_usernames(), 
-                               name=session.get("name"))
+                               name=session.get("name"),
+                               user_option="Log Out")
     else:
         return render_template('home.html', page_name="home", user_option="Log In")
 
@@ -45,15 +46,19 @@ def submit_order():
         for item in basket:
             items.append(item)
 
-        db.add_order(reference, items)
+        result_id = db.add_order(reference, items)
 
         session["ordered"] = reference
-        print(reference)
-        inSession = session.get("ordered")
-        print(inSession)
 
-        return jsonify(success = "true", reference=reference)
-    return jsonify(success = "false", reference = "Bad method")
+        return jsonify(success = True, reference=reference, id=result_id)
+    return jsonify(success = False, reference = "Bad method", id=None)
+
+@app.route('/delete-order', methods=['POST'])
+def delete_order():
+    order_id = request.get_json()['order_id']
+    if db.delete_order(order_id):
+        return jsonify(success = True)
+    return jsonify(success = False)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

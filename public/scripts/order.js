@@ -2,15 +2,16 @@ class Order {
     constructor(menu) {
         // This constructor method is used to initialize the Order object.
         // It takes a 'menu' parameter, which is an array of menu items.
-        
-        
-         // 'orderStarted' is a property that stores the time when the order was started.
+
+        // 'orderStarted' is a property that stores the time when the order was started.
         this.orderStarted = new Date();
 
-
-         // These properties are initialized to null, and will be set later on.
+        // These properties are initialized to null, and will be set later on.
 
         this.reference = null;
+
+        this.id = null;
+
         this.status = null;
 
         // 'items' is an array that will store the items that are added to the order.
@@ -19,7 +20,7 @@ class Order {
         // The 'menu' parameter is stored as a property of the object.
         this.menu = menu;
 
-         // 'total' is a property that will store the total price of the order.
+        // 'total' is a property that will store the total price of the order.
         this.total = 0;
 
         // The following lines of code check if there is an existing order in the browser's local storage.
@@ -28,6 +29,7 @@ class Order {
         if (cache) {
             this.items = cache.items;
             this.reference = cache.reference;
+            this.id = cache.id;
             this.status = cache.status;
         }
     }
@@ -115,6 +117,7 @@ class Order {
             JSON.stringify({
                 status: "pending",
                 reference: null,
+                id: null,
                 items: [],
                 quantity: 0,
                 total: 0,
@@ -122,15 +125,17 @@ class Order {
         );
     }
 
-    //sets the status and reference of the order to "ordered" and the provided reference, respectively. 
+    //sets the status and reference of the order to "ordered" and the provided reference, respectively.
     //It updates both the instance variable and the localStorage with the new values.
-    submitted(reference) {
+    submitted(reference, id) {
         let order = this.getStorage();
         order.status = "ordered";
         order.reference = reference;
+        order.id = id;
 
         this.status = "ordered";
         this.reference = reference;
+        this.id = id;
         localStorage.setItem("order", JSON.stringify(order));
     }
 
@@ -140,7 +145,7 @@ class Order {
         return order.reference;
     }
 
-    //retrieves the order object from the localStorage, parses it as JSON, and returns it. 
+    //retrieves the order object from the localStorage, parses it as JSON, and returns it.
     //If there is no object in the localStorage, it returns null.
     getStorage() {
         let order = localStorage.getItem("order");
@@ -180,6 +185,6 @@ class Order {
     }
 }
 
-//if the module object exists and exports the Order class if it does. 
+//if the module object exists and exports the Order class if it does.
 //This allows the module to be imported and used in other JavaScript files.
 if (typeof module !== "undefined") module.exports = Order;

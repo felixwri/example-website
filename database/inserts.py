@@ -78,7 +78,6 @@ def insert_into_menu(reset_table=False):
     db.add_item('Mini Quesadillas', quesadillas, 'Kids', 6.00, 320, True, 'Cheese', 'Oaxaca cheese and mozarella filled tortilla wraps, toasted and served with a sour cream.')
 
 def insert_admin_account():
-    db.add_user("test", "password1234#")
     db.add_user("admin", "@dmin123456")
     db.add_user("george", "george_Password123", user_type="waiter")
     db.add_user("lucas", "lucas_Password123", user_type="waiter")

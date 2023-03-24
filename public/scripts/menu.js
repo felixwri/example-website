@@ -37,7 +37,7 @@ function startOrder() {
     currentlyOrdering = true;
 }
 
-function cancelOrder() {
+async function cancelOrder() {
     if (!currentlyOrdering) return;
 
     // Remove styles and clear all data from the counters and local storge
@@ -46,10 +46,25 @@ function cancelOrder() {
         element.style.width = "0rem";
     }
 
-    order.clear();
     clearCounters();
     decreaseQuantity();
     decreasePrice();
+
+    console.log(order.reference);
+
+    const response = await fetch(`http://127.0.0.1:5000/delete-order`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ order_id: order.id }),
+    });
+
+    const content = await response.json();
+    console.log(content);
+
+    order.clear();
 
     document.documentElement.setAttribute("style", "--price-margin-right: 0rem");
 
