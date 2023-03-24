@@ -52,17 +52,21 @@ async function cancelOrder() {
 
     console.log(order.reference);
 
-    const response = await fetch(`http://127.0.0.1:5000/delete-order`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ order_id: order.id }),
-    });
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/delete-order`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ order_id: order.id }),
+        });
 
-    const content = await response.json();
-    console.log(content);
+        const content = await response.json();
+        console.log(content);
+    } catch (e) {
+        console.log(e);
+    }
 
     order.clear();
 

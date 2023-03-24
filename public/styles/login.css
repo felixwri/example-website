@@ -10,7 +10,7 @@ h2 {
   line-height: 1.2;
   display: block;
   text-align: center;
-  }
+}
 
 body {
   margin-top: 8rem;
@@ -52,7 +52,7 @@ body {
   padding-bottom: 54px;
 }
 
-#login-button {  
+#login-button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: white;
@@ -72,6 +72,16 @@ body {
   background-color: var(--primary);
   border-radius: 5px;
   border: 3px solid rgba(255, 255, 255, 0);
+
+  transition: background-color 0.3s ease;
+}
+
+#login-button:hover {
+  background-color: var(--primary-alt);
+}
+
+.form-fields>input {
+  border-radius: 5px;
 }
 
 #password-field {
@@ -146,8 +156,8 @@ button:hover {
   padding-top: 3px;
 
   box-shadow: 0 5px 30px 0px,
-  rgb(222, 94, 3),
-  rgb(124, 222, 3), 
-  rgb(3, 216, 222), 
-  rgb(225, 235, 31);
+    rgb(222, 94, 3),
+    rgb(124, 222, 3),
+    rgb(3, 216, 222),
+    rgb(225, 235, 31);
 }
