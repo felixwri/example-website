@@ -71,7 +71,11 @@ function toggleFilters() {
 }
 
 function setCounter(id, amount) {
+    console.log(id, amount);
     let counter = document.getElementById(`quantity-${id}`);
+
+    if (!counter) return false;
+
     let currentValue = parseInt(counter.innerText);
 
     if (currentValue + amount < 0) return false;
@@ -84,16 +88,13 @@ function setCounter(id, amount) {
 
 let popup = document.getElementById("popup");
 
-function openCallStaff(){
+function openCallStaff() {
     popup.classList.add("open-popup");
-
 }
 
-function closeCallStaff(){
+function closeCallStaff() {
     popup.classList.remove("open-popup");
-
 }
-
 
 function clearCounters() {
     let counters = document.getElementsByClassName("order-quantity");

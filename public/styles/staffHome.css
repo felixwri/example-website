@@ -42,6 +42,46 @@
     color: white;
 }
 
+#callsList {
+    margin: 2rem 5rem;
+}
+
+.call-item {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 1rem;
+    border: 3px solid var(--primary-alt);
+    border-radius: 5px;
+    text-align: center;
+
+
+}
+
+.delete-button {
+
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    padding: 5px;
+    background-color: #eee;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
+    margin-top: 1rem;
+
+}
+
+.call-text {
+    font-size: 1rem;
+}
+
+.box-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 
 /* -------------- */
 /* Tables Section */
