@@ -1,4 +1,11 @@
-# Team Project | Group 17
+# RHUL Team Project | Group 17
+**This is a team project surrounding a brief of a fullstack website called "Oaxaca".**
+
+**This project uses:**
+* HTML, CSS
+* JavaScript
+* Flask (Python)
+* Psycopy2 (Postgres API)
 
 ## Admin account
 
